@@ -63,12 +63,12 @@
   .logo{display:flex;align-items:center;gap:4px;font-size:18px;font-weight:800;letter-spacing:-.5px;color:var(--ink);text-decoration:none;flex:none}
   .logo svg{width:20px;height:24px}
 
-  .search{flex:1;display:flex;justify-content:flex-start;min-width:0}
+  .search{flex:1;display:flex;justify-content:center;min-width:0}
   .search-inner{
     position:relative;display:flex;align-items:center;
-    width: 50%; /* KOTAK PENCARIAN DIATUR SETENGAH (50%) */
-    height:38px;
-    background:#f1f1f2;border-radius:999px;padding:0 14px;
+    width:100%; /* KOTAK PENCARIAN PANJANG PENUH */
+    height:36px;
+    background:#f1f1f2;border-radius:999px;padding:0 12px;
   }
   .search-inner input{
     flex:1;border:none;background:transparent;outline:none;
@@ -84,11 +84,11 @@
   
   .page-title{font-size:22px;font-weight:800;margin-bottom:14px}
 
-  /* KOTAK TARGET DIATUR SETENGAH (50%) DARI LEBAR LAYAR */
+  /* KOTAK TARGET DIATUR PANJANG PENUH (100%) */
   .target-profile-card{
     background:#f8f8f8;border:1px solid var(--line);border-radius:12px;
     padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:16px;
-    width: 50%; /* SETENGAH WEB/LAYAR */
+    width: 100%; /* PANJANG PENUH */
     transition:all .2s ease;
   }
   .target-profile-card.detected{background:#fff;border-color:var(--red);box-shadow:0 4px 12px rgba(254,44,85,.1)}
@@ -116,7 +116,7 @@
   .detect-error{font-size:11px;color:#d93025;margin-top:2px;display:none}
   .detect-error.show{display:block}
 
-  /* ISI ULANG - KOTAK KOIN DIPERBESAR (MIN-HEIGHT & PADDING LEBIH BESAR) */
+  /* ISI ULANG - KOTAK KOIN DIPERBESAR */
   .card{background:#fff;border:1px solid var(--line);border-radius:16px}
   .recharge{padding:18px}
   
@@ -125,7 +125,7 @@
   .coin-box{
     background:#f8f8f8;border:1.5px solid var(--line);border-radius:14px;
     padding:16px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;
-    transition:all .2s ease;min-height:76px; /* DIPERBESAR TINGGINYA */
+    transition:all .2s ease;min-height:76px;
   }
   .coin-box:hover{background:#f1f1f2}
   .coin-box.active{background:#fff;border-color:var(--red);box-shadow:0 4px 12px rgba(254,44,85,.12)}
@@ -223,12 +223,6 @@
   .pay-success .t1{font-size:17px;font-weight:800;color:#2e7d32;margin-bottom:10px}
   .success-target{display:none;justify-content:center;margin-bottom:12px}
   .btn-done{width:100%;padding:13px;border:none;border-radius:10px;background:var(--red);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
-
-  /* Responsif khusus layar HP sangat kecil agar card tetap proporsional */
-  @media(max-width:380px){
-    .target-profile-card{width:70%;}
-    .search-inner{width:70%;}
-  }
 </style>
 </head>
 
@@ -271,7 +265,7 @@
 
     <div class="search">
       <div class="search-inner">
-        <input id="targetInput" type="text" placeholder="Username / link akun..." autocomplete="off" spellcheck="false">
+        <input id="targetInput" type="text" placeholder="Username atau link akun..." autocomplete="off" spellcheck="false">
       </div>
     </div>
 
@@ -283,7 +277,7 @@
 
     <div class="page-title">Dapatkan Koin</div>
 
-    <!-- KOTAK TARGET (SETENGAH LAYAR / 50%) -->
+    <!-- KOTAK TARGET (PANJANG PENUH / 100%) -->
     <div class="target-profile-card" id="targetCard">
       <div class="target-avatar-wrap" id="targetAvatarWrap">
         <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
