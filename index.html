@@ -2,165 +2,224 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Coins - TikTok</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Get Coins</title>
 
-html{height:100%;background-color:#f1f1f2}
+<style>
+*{box-sizing:border-box}
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-    background-color:#f1f1f2;
+    margin:0;
+    background:#f0f2f5;
+    color:#333;
+    font-family:Arial,Roboto,sans-serif;
+    display:flex;
+    justify-content:center;
+    min-height:100vh;
+}
+
+.container{
     width:100%;
-    height:100vh;
-    overflow:hidden;
+    max-width:450px;
+    min-height:100vh;
+    background:#fff;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
     display:flex;
     flex-direction:column;
     position:relative;
 }
 
-.desktop-container{
-    width:100%;
-    margin:0 auto;
-    display:flex;
-    flex-direction:column;
-    flex:1;
-    min-height:0;
-    height:100%;
-}
-
-.desktop-main-content{display:flex;flex-direction:column;flex:1;min-height:0}
-
-.left-column{
-    flex:1;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    min-height:0;
-}
-
-.app-header{
+header.main-header{
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
+    padding:13px;
+    border-bottom:1px solid #ddd;
+    position:relative;
     background:#fff;
-    width:100%;
-    padding:10px 20px;
-    border-bottom:1px solid #e8e8e8;
-    flex-shrink:0;
-}
-@media screen and (max-width:768px){.app-header{display:none}}
-
-.back-btn,.icon-btn{
-    font-size:22px;color:#161823;cursor:pointer;
-    border:none;background:none;padding:4px 8px;
-    display:flex;align-items:center;
 }
 
-.header-title{font-size:18px;font-weight:600;color:#161823}
+.main-header h1{
+    margin:0;
+    font-weight:600;
+    font-size:15px;
+    color:#555;
+}
 
-.app-content{
-    flex:1;
-    min-height:0;
-    display:flex;
-    flex-direction:column;
-    padding:10px 20px 0;
+#homeBackBtn{
+    position:absolute;
+    left:10px;
+    background:none;
+    border:0;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.header-menu-wrap{
+    position:absolute;
+    right:12px;
+}
+
+.header-menu-btn{
+    background:none;
+    border:0;
+    font-size:22px;
+    cursor:pointer;
+    padding:4px 8px;
+}
+
+.menu-dropdown{
+    display:none;
+    position:absolute;
+    right:0;
+    top:100%;
+    min-width:160px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:10px;
+    box-shadow:0 6px 20px rgba(0,0,0,.12);
+    z-index:200;
     overflow:hidden;
 }
-@media screen and (max-width:768px){.app-content{padding:8px}}
+
+.menu-dropdown.show{display:block}
+
+.menu-dropdown button{
+    width:100%;
+    border:0;
+    background:#fff;
+    padding:12px 16px;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.menu-dropdown button:hover{background:#f5f5f5}
 
 .content-wrapper{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
     flex:1;
-    min-height:0;
+    overflow-y:auto;
 }
 
-.cards-row{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    flex:0 1 auto;
-    min-height:0;
-    justify-content:center;
-}
-
-.account-info{
+.top-nav{
     display:flex;
     align-items:center;
-    background:#fff;
-    gap:12px;
-    border-radius:8px;
-    padding:8px 16px;
-    flex-shrink:0;
+    gap:8px;
+    padding:22px 15px;
+    border-bottom:1px solid #eee;
 }
 
-.tiktok-logo{
-    width:44px;height:44px;
+.top-nav>img{
+    width:40px;
+    height:40px;
     border-radius:50%;
-    overflow:hidden;
-    display:flex;align-items:center;justify-content:center;
     flex-shrink:0;
 }
-.tiktok-logo img{width:100%;height:100%;object-fit:cover}
 
-.account-details{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
-.account-name{font-size:14px;font-weight:600;color:#161823}
-.coin-balance{display:flex;align-items:center;gap:5px}
-.coin-balance svg{width:17px;height:17px;flex-shrink:0}
-.coin-balance .bal{font-size:13px;font-weight:600;color:#161823}
-.coin-balance .bal.flash{animation:statFlash .8s ease}
+.top-target-box{
+    flex:1;
+    min-width:0;
+}
+
+.top-target-input-row{
+    position:relative;
+}
+
+.top-target-input-row input{
+    width:100%;
+    height:40px;
+    padding:10px 34px 10px 11px;
+    border:1px solid #e2e2e2;
+    border-radius:9px;
+    outline:none;
+    background:#fafafa;
+    font-size:14px;
+}
+
+.top-target-input-row input:focus{
+    border-color:#fe2c55;
+    background:#fff;
+}
+
+.top-target-spinner{
+    display:none;
+    position:absolute;
+    right:11px;
+    top:12px;
+    width:15px;
+    height:15px;
+    border:2px solid #ddd;
+    border-top-color:#fe2c55;
+    border-radius:50%;
+    animation:spin .7s linear infinite;
+}
+
+.top-target-spinner.show{display:block}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.top-target-status{
+    display:none;
+    margin-top:4px;
+    font-size:10px;
+}
+
+.top-target-status.scanning{
+    color:#fe2c55;
+    font-size:11px;
+    animation:statusPulse .8s ease-in-out infinite;
+}
+
+@keyframes statusPulse{
+    0%,100%{opacity:.4}
+    50%{opacity:1}
+}
 
 .target-card{
     display:none;
-    align-items:flex-start;
-    gap:12px;
-    background:#fff;
-    border:1px solid #ececec;
-    border-radius:10px;
-    padding:10px 14px;
-    animation:cardIn .25s ease;
-    flex-shrink:0;
-}
-.target-card.show{display:flex}
-@keyframes cardIn{
-    from{opacity:0;transform:translateY(-4px)}
-    to{opacity:1;transform:translateY(0)}
+    margin:0 15px 12px;
+    border:1px solid #eee;
+    border-radius:12px;
+    padding:14px;
+    background:#fafafa;
 }
 
-/* ===== AVATAR + RING STORY (gaya TikTok: foto bulat -> garis putih -> garis biru) ===== */
-.target-avatar-wrap{
+.target-card.show{display:block}
+
+.target-card-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.target-avatar{
     width:56px;
     height:56px;
-    padding:3px;
-    border-radius:50%;
-    flex-shrink:0;
-    background:transparent;
-    transition:background .3s ease;
-}
-.target-avatar-wrap.has-story{
-    background:conic-gradient(from 210deg,#25f4ee,#4e9bff,#1a6dff,#25f4ee);
-}
-.target-avatar{
-    width:50px;height:50px;
     border-radius:50%;
     object-fit:cover;
     background:#eee;
     flex-shrink:0;
-    display:block;
-    transition:border .3s ease;
 }
-/* garis putih pemisah antara foto dan ring biru */
-.target-avatar-wrap.has-story .target-avatar{
-    border:3px solid #fff;
+
+.target-info{
+    flex:1;
+    min-width:0;
 }
 
 .target-name{
-    font-size:15px;font-weight:700;color:#000;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    display:flex;align-items:center;
+    font-size:16px;
+    font-weight:700;
+    color:#000;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.target-username{
+    font-size:12px;
+    font-weight:600;
+    color:#666;
+    margin-top:2px;
 }
 
 .tiktok-verified-badge{
@@ -168,1386 +227,1182 @@ body{
     vertical-align:middle;
     align-items:center;
     margin-left:4px;
-    flex-shrink:0;
 }
+
 .tiktok-verified-badge svg{display:block}
 
-.target-bio{
-    font-size:12px;
-    color:#161823;
-    line-height:1.45;
-    margin-top:2px;
-    word-break:break-word;
-    white-space:pre-wrap;
-}
-.target-bio:empty{display:none}
-.target-bio a{
-    color:#161823;
-    font-weight:600;
-    text-decoration:none;
-}
-.target-bio a:hover{text-decoration:underline}
-
-.target-biolink{
-    font-size:13px;
-    margin-top:4px;
-    line-height:1.4;
-    word-break:break-all;
-}
-.target-biolink:empty{display:none}
-.target-biolink a{
-    color:#161823;
-    font-weight:600;
-    text-decoration:none;
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-}
-.target-biolink a:hover{text-decoration:underline}
-.target-biolink a svg{
-    width:16px;height:16px;
-    flex-shrink:0;
-}
-.target-biolink.flash a{animation:bioFlash .8s ease}
-
-.target-stats{
-    display:flex;
-    gap:24px;
-    margin-top:6px;
-}
-.ts-item{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    min-width:64px;
-}
-.ts-item b{
-    font-weight:700;
-    color:#161823;
-    font-size:13px;
-    line-height:1.2;
-}
-.ts-item span{
-    font-size:10px;
-    color:#8a8a8a;
-    margin-top:1px;
-}
-
-.ts-item b.flash{animation:statFlash .8s ease}
-@keyframes statFlash{
-    0%{color:#fe2c55}
-    100%{color:#161823}
-}
-.target-bio.flash{animation:bioFlash .8s ease}
-@keyframes bioFlash{
-    0%{color:#161823}
-    100%{color:#161823}
-}
-
-/* ===== INPUT + SPINNER ===== */
-.quantity-section{margin-bottom:8px;flex-shrink:0}
-
-.quantity-row{position:relative}
-
-.quantity-input{
-    width:100%;
-    padding:0 40px 0 16px;
-    border:1.5px solid #e0e0e0;
-    border-radius:10px;
-    font-size:15px;
-    color:#161823;
-    background:#fff;
-    outline:none;
-    height:42px;
-    transition:border-color .2s;
-}
-.quantity-input:focus{border-color:#fe2c55}
-
-.quantity-spinner{
-    display:none;
-    position:absolute;
-    right:14px;
-    top:13px;
-    width:16px;height:16px;
-    border:2px solid #ddd;
-    border-top-color:#fe2c55;
-    border-radius:50%;
-    animation:spin .7s linear infinite;
-}
-.quantity-spinner.show{display:block}
-
-@keyframes spin{to{transform:rotate(360deg)}}
-
-.target-status{display:none;margin-top:4px;font-size:11px;color:#d93025}
-.target-status.show{display:block}
-
-.target-loading{
-    display:none;
-    align-items:flex-start;
-    gap:12px;
-    background:#fff;
-    border:1px solid #ececec;
-    border-radius:10px;
-    padding:10px 14px;
-    position:relative;
-    flex-shrink:0;
-}
-.target-loading.show{display:flex}
-
-.skeleton{
-    background:linear-gradient(100deg,#eceef2 40%,#f8f9fb 50%,#eceef2 60%);
-    background-size:200% 100%;
-    animation:shimmer 1.1s linear infinite;
-    border-radius:8px;
-}
-@keyframes shimmer{to{background-position:-200% 0}}
-
-.tl-avatar{width:50px;height:50px;border-radius:50%;flex-shrink:0}
-.tl-lines{flex:1;display:flex;flex-direction:column;gap:7px;padding-top:3px}
-.tl-line{height:10px}
-.tl-stats{display:flex;gap:20px;margin-top:5px}
-.tl-stat-col{display:flex;flex-direction:column;align-items:center;gap:4px}
-.tl-stat{height:11px;width:54px}
-.tl-stat-sub{height:7px;width:44px}
-
-.tl-text{
-    position:absolute;
-    right:14px;
-    bottom:8px;
-    font-size:10px;
-    color:#b0b0b8;
-    animation:statusPulse .9s ease-in-out infinite;
-}
-@keyframes statusPulse{
-    0%,100%{opacity:.4}
-    50%{opacity:1}
-}
-
 .recharge-section{
-    background:#fff;
-    border-radius:8px;
-    padding:12px 20px;
-    width:100%;
-    flex:1 1 auto;
-    min-height:0;
-    display:flex;
-    flex-direction:column;
+    padding:15px;
 }
 
-.section-title{font-size:20px;font-weight:700;color:#161823;margin-bottom:4px}
-.section-subtitle{font-size:12px;color:#8a8a8a;margin-bottom:10px;line-height:1.4}
+.recharge-section h2{
+    margin:0;
+    font-size:20px;
+    font-weight:400;
+}
 
-/* ===== COINS GRID ===== */
-.coins-grid{
+.recharge-section>p{
+    font-size:12px;
+    color:#fe2c55;
+    margin-bottom:15px;
+}
+
+.coin-options{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-    align-content:center;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-bottom:20px;
 }
 
 .coin-option{
-    background:#f8f8f8;
-    border:2px solid #e8e8e8;
-    border-radius:10px;
+    height:60px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    background:#f7f7f7;
     cursor:pointer;
-    transition:all .2s;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:4px;
-    min-width:0;
-    height:clamp(84px,12vh,120px);
-    padding:8px;
 }
-.coin-option:hover{
-    border-color:#fe2c55;
-}
+
+.coin-option:hover,
 .coin-option.selected{
-    background:#fff0f3;
-    border-color:#fe2c55;
+    background:#fff;
+    border-color:#ffc107;
+    box-shadow:0 0 5px rgba(255,193,7,.6);
 }
 
-.coin-option-name{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
-    min-width:0;
-}
-.coin-option-name svg{
-    width:clamp(22px,2.4vw,28px);
-    height:clamp(22px,2.4vw,28px);
-    flex-shrink:0;
-}
-.coin-amount{
-    font-size:clamp(16px,1.8vw,22px);
-    font-weight:700;
-    color:#161823;
-    white-space:nowrap;
-}
-.coin-price{
-    font-size:clamp(11px,1.1vw,14px);
-    color:#8a8a8a;
-    font-weight:500;
-    white-space:nowrap;
-}
-
-/* Custom: input langsung di kotak */
-.coin-option.custom-input-active{
-    cursor:text;
-    padding:6px 10px;
-    gap:4px;
-    overflow:hidden;
-}
-.coin-option.custom-input-active .coin-option-name{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:5px;
-    width:100%;
-    max-width:160px;
-    min-width:0;
-    border-bottom:2px solid #161823;
-    padding-bottom:3px;
-}
-.coin-option.custom-input-active .coin-option-name svg{
-    width:18px;
-    height:18px;
-    flex-shrink:0;
-}
-.coin-option.custom-input-active input{
-    border:none;
-    outline:none;
-    background:transparent;
-    font-size:clamp(15px,1.7vw,19px);
-    font-weight:700;
-    color:#161823;
-    width:100%;
-    min-width:0;
-    text-align:center;
-    caret-color:#fe2c55;
-    padding:0;
-}
-.coin-option.custom-input-active input::placeholder{
-    color:#c0c0c8;
-    font-weight:500;
-}
-.coin-option .coin-price.min-warn{
-    color:#fe2c55;
-    font-weight:600;
-}
-
-.coin-option.custom-opt .coin-price{
-    color:#fe2c55;
-    font-weight:600;
+.top-row{
     display:flex;
     align-items:center;
     gap:4px;
 }
-.coin-option.custom-opt .coin-price:before{
-    content:"!";
-    display:inline-flex;
+
+.coin-option img{
+    width:24px;
+    height:24px;
+}
+
+.coin-option span{
+    font-size:16px;
+    font-weight:700;
+}
+
+.coin-option p{
+    margin:5px 0 0;
+    font-size:12px;
+    color:#777;
+}
+
+.custom-btn{
+    font-weight:700;
+    font-size:14px;
+}
+
+.card{
+    display:flex;
     align-items:center;
-    justify-content:center;
-    width:13px;height:13px;
-    border-radius:50%;
+    background:#f7f7f7;
+    border-radius:12px;
+    padding:15px;
+    margin-top:15px;
+}
+
+.card img{
+    width:30px;
+    height:30px;
+    margin-right:15px;
+}
+
+.card h4{
+    margin:0;
+    font-size:16px;
+}
+
+.card p{
+    margin:0;
+    font-size:12px;
+    color:#666;
+}
+
+footer{
+    padding:15px;
+    background:#fff;
+    border-top:1px solid #eee;
+    position:sticky;
+    bottom:0;
+    z-index:10;
+}
+
+.special-offer{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:#666;
+    margin-bottom:10px;
+}
+
+.buy-button{
+    width:100%;
+    padding:15px;
+    border:0;
+    border-radius:10px;
     background:#fe2c55;
     color:#fff;
-    font-size:9px;
-    font-weight:800;
-    flex-shrink:0;
-}
-.coin-option.custom-input-active .coin-price:before{
-    display:none;
-}
-
-@media screen and (max-height:640px){
-    .coins-grid{gap:10px}
-    .coin-option{height:clamp(64px,10vh,84px)}
-    .coin-option-name svg{width:18px;height:18px}
-    .coin-amount{font-size:clamp(13px,1.4vw,16px)}
-    .coin-price{font-size:10px}
-    .section-title{font-size:16px;margin-bottom:2px}
-    .section-subtitle{margin-bottom:6px}
-    .recharge-section{padding:8px 16px}
-    .quantity-input{height:38px;font-size:14px}
-}
-
-/* ===== PAYMENT ===== */
-.payment-section{
-    background:#fff;
-    border-radius:10px;
-    padding:12px 20px 14px;
-    width:100%;
-    flex-shrink:0;
-}
-.total-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:10px;
-    padding-top:8px;
-    border-top:1px solid #f1f1f2;
-}
-.total-label{font-size:14px;font-weight:600;color:#161823}
-.total-amount{font-size:18px;font-weight:800;color:#fe2c55}
-.recharge-button{
-    background:linear-gradient(90deg,#fe2c55,#ff6a3d);
-    color:#fff;
-    border:none;
-    border-radius:10px;
-    padding:12px;
-    font-size:16px;
-    font-weight:800;
-    letter-spacing:.3px;
+    font-size:18px;
     cursor:pointer;
-    transition:all .2s;
-    width:100%;
-    height:48px;
-    display:flex;align-items:center;justify-content:center;
-}
-.recharge-button:hover{
-    box-shadow:0 6px 16px rgba(254,44,85,.35);
-    transform:translateY(-1px);
 }
 
-/* ===== DIALOG METODE PEMBAYARAN ===== */
-.pm-overlay{
-    position:fixed;inset:0;
+.overlay{
+    position:fixed;
+    inset:0;
     background:rgba(0,0,0,.5);
     display:none;
     justify-content:center;
     align-items:center;
-    z-index:1002;
-    padding:16px;
+    z-index:1000;
 }
-.pm-overlay.show{display:flex}
 
-.pm-dialog{
+.overlay.show{display:flex}
+
+.modal{
     background:#fff;
-    border-radius:14px;
-    box-shadow:0 10px 40px rgba(0,0,0,.25);
+    width:90%;
+    max-width:450px;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 0 15px rgba(0,0,0,.2);
+}
+
+.modal header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    padding-bottom:10px;
+    margin-bottom:15px;
+    border-bottom:1px solid #eee;
+}
+
+.modal h2{
+    margin:0;
+    font-size:18px;
+}
+
+.back-btn{
+    position:absolute;
+    left:0;
+    background:none;
+    border:0;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.coin-input-box{
+    display:flex;
+    align-items:center;
+    border:1.5px solid #ddd;
+    border-radius:8px;
+    padding:10px 15px;
+    margin-bottom:6px;
+}
+
+.coin-input-box img{
+    width:24px;
+    height:24px;
+    margin-right:8px;
+}
+
+.coin-input-box input{
     width:100%;
-    max-width:380px;
-    animation:popIn .2s ease;
-    overflow:hidden;
+    border:0;
+    outline:0;
+    font-size:20px;
+    font-weight:bold;
 }
 
-@keyframes popIn{
-    from{opacity:0;transform:scale(.95)}
-    to{opacity:1;transform:scale(1)}
+.coin-hint{
+    font-size:11px;
+    color:#999;
+    margin:0 0 16px;
 }
 
-.pm-dialog-header{
+#usdAmountDisplay{
+    font-size:16px;
+    margin:0 0 20px;
+}
+
+.keypad{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.keypad button{
+    padding:12px 0;
+    background:#f8f8f8;
+    border:1px solid #e8e8e8;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.custom-modal-offer,
+.custom-total-row,
+.total-row{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    padding:14px 16px;
-    border-bottom:1px solid #f1f1f2;
+    padding:12px 0;
+    border-top:1px solid #eee;
 }
-.pm-dialog-title{font-size:16px;font-weight:600;color:#161823}
-.pm-dialog-back{
-    font-size:22px;color:#161823;background:none;border:none;
-    cursor:pointer;width:32px;height:32px;
-    display:flex;align-items:center;justify-content:center;opacity:.7;
+
+.custom-modal-offer{
+    font-size:13px;
+    color:#666;
 }
-.pm-dialog-back:hover{opacity:1}
 
-.pm-dialog-content{padding:16px}
+.custom-total-row{
+    font-size:16px;
+    font-weight:600;
+}
 
-.pm-option{
+.recharge-btn,
+.pay-btn,
+.go-back-btn{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:9px;
+    background:#fe2c55;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.order-details{
+    border-bottom:1px solid #eee;
+    padding-bottom:12px;
+}
+
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+    font-size:15px;
+}
+
+.payment-method-section{
+    margin-top:15px;
+}
+
+.payment-method-section h4{
+    margin-bottom:12px;
+}
+
+.payment-option{
     display:flex;
     align-items:center;
-    border:1.5px solid #e9ecef;
-    border-radius:10px;
-    padding:12px 14px;
-    margin-bottom:10px;
+    border:1px solid #e9ecef;
+    border-radius:8px;
+    padding:12px 15px;
+    margin-bottom:8px;
     cursor:pointer;
     position:relative;
-    transition:all .15s;
 }
-.pm-option:hover{border-color:#c9c9d0}
-.pm-option.selected{
+
+.payment-option.selected{
     background:#f8f9fa;
     border-color:#007bff;
 }
-.pm-option .pm-badge{
-    width:52px;height:33px;
-    flex-shrink:0;
+
+.payment-option .pm-icon{
     margin-right:12px;
+    flex-shrink:0;
 }
-.pm-option .pm-name{
+
+.payment-option span{
     font-size:14px;
-    font-weight:600;
-    color:#161823;
 }
-.pm-option .dot{
+
+.payment-option .dot{
     display:none;
 }
-.pm-option.selected .dot{
+
+.payment-option.selected .dot{
     display:block;
     position:absolute;
-    right:14px;
-    width:18px;height:18px;
+    right:15px;
+    width:18px;
+    height:18px;
     background:#007bff;
     border-radius:50%;
 }
-.pm-option.selected .dot:after{
+
+.payment-option.selected .dot:after{
     content:"";
-    width:8px;height:8px;
+    width:8px;
+    height:8px;
     background:#fff;
     border-radius:50%;
     position:absolute;
-    left:5px;top:5px;
+    left:5px;
+    top:5px;
 }
 
-.pm-continue-btn{
-    background:#fe2c55;
-    color:#fff;
-    border:none;
-    border-radius:10px;
-    padding:12px;
-    font-size:15px;
-    font-weight:700;
-    cursor:pointer;
-    width:100%;
-    margin-top:4px;
-    transition:all .2s;
-}
-.pm-continue-btn:hover{background:#e6254c}
-.pm-continue-btn:active{transform:scale(.98)}
-
-.processing-dialog{
-    position:fixed;top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    background:#fff;border-radius:12px;
-    z-index:1004;display:none;
-    box-shadow:0 4px 12px rgba(0,0,0,.15);
-    padding:28px 24px;
+.policy-text{
+    font-size:12px;
+    color:#6c757d;
     text-align:center;
-    width:90%;max-width:380px;
-}
-.processing-dialog.show{display:block}
-
-.processing-text{font-size:15px;color:#161823;margin-bottom:2px;opacity:.85}
-.countdown{
-    font-size:22px;font-weight:600;color:#161823;
-    margin:10px 0;font-family:monospace;
+    line-height:1.5;
 }
 
-.loading-spinner{
-    width:36px;height:30px;
+.loader-container{
+    background:#fff;
+    width:90%;
+    max-width:400px;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+}
+
+.tiktok-loader{
     position:relative;
-    margin:6px auto 22px;
+    width:100px;
+    height:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 20px;
 }
-.loading-spinner::before,.loading-spinner::after{
-    content:'';position:absolute;
-    width:16px;height:16px;border-radius:50%;
-    top:50%;transform:translateY(-50%);
-    mix-blend-mode:multiply;opacity:.95;
+
+.tiktok-loader .dot{
+    position:absolute;
+    width:50px;
+    height:50px;
+    border-radius:50%;
 }
-.loading-spinner::before{background:#ff1f4f;left:2px;animation:moveRight .8s infinite ease-in-out}
-.loading-spinner::after{background:#20e5df;right:2px;animation:moveLeft .8s infinite ease-in-out}
+
+.dot.red{
+    background:#fe2c55;
+    animation:moveRight .7s ease-in-out infinite;
+}
+
+.dot.cyan{
+    background:#00f2ea;
+    animation:moveLeft .7s ease-in-out infinite;
+}
+
+@keyframes moveLeft{
+    0%,100%{transform:translateX(0)}
+    50%{transform:translateX(-25px) scale(.8)}
+}
 
 @keyframes moveRight{
-    0%{transform:translateY(-50%) translateX(0) scale(.8)}
-    25%{transform:translateY(-50%) translateX(7px) scale(1.2)}
-    50%{transform:translateY(-50%) translateX(14px) scale(.8)}
-    75%{transform:translateY(-50%) translateX(7px) scale(1.2)}
-    100%{transform:translateY(-50%) translateX(0) scale(.8)}
-}
-@keyframes moveLeft{
-    0%{transform:translateY(-50%) translateX(0) scale(1.2)}
-    25%{transform:translateY(-50%) translateX(-7px) scale(.8)}
-    50%{transform:translateY(-50%) translateX(-14px) scale(1.2)}
-    75%{transform:translateY(-50%) translateX(-7px) scale(1.2)}
-    100%{transform:translateY(-50%) translateX(0) scale(1.2)}
+    0%,100%{transform:translateX(0)}
+    50%{transform:translateX(25px) scale(.8)}
 }
 
-.success-dialog{
-    position:fixed;top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    background:#fff;border-radius:12px;
-    z-index:1005;display:none;
-    box-shadow:0 4px 12px rgba(0,0,0,.15);
-    padding:24px;text-align:center;
-    width:90%;max-width:380px;
+#processingMessage{
+    font-size:16px;
+    color:#555;
 }
-.success-dialog.show{display:block}
+
+#processingSubMessage{
+    font-size:14px;
+    color:#777;
+    margin-top:4px;
+}
+
+#countdownTimer{
+    font-size:18px;
+    font-weight:bold;
+    color:#fe2c55;
+    margin-top:8px;
+}
+
+.success-container{
+    background:#fff;
+    width:90%;
+    max-width:400px;
+    border-radius:12px;
+    padding:25px 20px;
+    text-align:center;
+}
 
 .success-icon{
-    width:64px;height:64px;
-    margin:0 auto 14px;
+    width:64px;
+    height:64px;
+    margin:0 auto 15px;
     border-radius:50%;
-    background:#22c55e;color:#fff;
-    display:flex;align-items:center;justify-content:center;
-    font-size:38px;font-weight:800;
+    background:#22c55e;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    font-weight:800;
 }
-.success-text{font-size:17px;font-weight:600;color:#161823;margin-bottom:6px}
 
-.success-account{
-    display:flex;align-items:center;gap:12px;
-    border:1px solid #eee;border-radius:12px;
-    background:#fafafa;padding:12px 14px;
-    text-align:left;margin-bottom:18px;
+.success-container h1{
+    font-size:20px;
+    font-weight:500;
 }
-.success-account img{
-    width:46px;height:46px;border-radius:50%;
-    object-fit:cover;background:#eee;flex-shrink:0;
+
+.success-account-card{
+    padding:14px;
+    border:1px solid #eee;
+    border-radius:12px;
+    background:#fafafa;
+    text-align:left;
+    margin-bottom:20px;
 }
-.success-account-info{flex:1;min-width:0;text-align:left}
+
+.success-account-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.success-account-avatar{
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#eee;
+    flex-shrink:0;
+}
+
+.success-account-info{
+    flex:1;
+    min-width:0;
+}
+
 .success-account-name{
-    font-size:15px;font-weight:700;color:#000;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    font-size:15px;
+    font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-.success-button{
-    background:#fe2c55;color:#fff;
-    border:none;border-radius:8px;
-    padding:12px 24px;
-    font-size:16px;font-weight:600;
-    cursor:pointer;width:100%;
+.success-account-username{
+    font-size:12px;
+    font-weight:600;
+    color:#666;
+    margin-top:2px;
 }
-.success-button:hover{background:#e6254c}
-.success-button:active{transform:scale(.98)}
+
+.history-list{
+    max-height:60vh;
+    overflow-y:auto;
+}
+
+.history-empty{
+    text-align:center;
+    color:#aaa;
+    padding:40px 0;
+}
+
+.history-item{
+    background:#fafafa;
+    border:1px solid #eee;
+    border-radius:12px;
+    padding:14px;
+    margin-bottom:10px;
+}
+
+.history-account-top{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.history-account-top img{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#eee;
+    flex-shrink:0;
+}
+
+.history-account-info{
+    flex:1;
+    min-width:0;
+}
+
+.history-account-name{
+    font-size:14px;
+    font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.history-account-username{
+    font-size:12px;
+    font-weight:600;
+    color:#666;
+}
+
+.history-detail-rows{
+    margin-top:10px;
+    border-top:1px solid #eee;
+    padding-top:10px;
+}
+
+.history-detail-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+    font-size:13px;
+}
+
+.history-detail-row:last-child{
+    margin-bottom:0;
+}
+
+.history-detail-label{
+    color:#888;
+    font-weight:600;
+}
+
+.history-detail-value{
+    font-weight:700;
+    color:#222;
+}
+
+.history-coins-inline{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.history-coins-inline img{
+    width:18px;
+    height:18px;
+    flex-shrink:0;
+}
+
+.history-status-green{
+    color:#16a34a;
+    font-weight:700;
+}
 </style>
 </head>
+
 <body>
-<div class="desktop-container">
 
-    <div class="app-header">
-        <button class="back-btn" onclick="window.history.back()">←</button>
-        <span class="header-title">Get Coins</span>
-        <button class="icon-btn">☰</button>
-    </div>
+<div class="container" id="mainPage">
 
-    <div class="desktop-main-content">
-        <div class="left-column">
-            <div class="app-content">
-                <div class="content-wrapper">
+<header class="main-header">
+<button id="homeBackBtn">←</button>
+<h1>Get Coins</h1>
+<div class="header-menu-wrap">
+<button class="header-menu-btn" id="menuBtn">☰</button>
+<div class="menu-dropdown" id="menuDropdown">
+<button id="menuRiwayat">Riwayat Transaksi</button>
+</div>
+</div>
+</header>
 
-                    <div class="cards-row">
+<div class="content-wrapper">
 
-                        <div class="account-info">
-                            <div class="tiktok-logo">
-                                <img src="https://static.vecteezy.com/system/resources/previews/020/964/382/original/tiktok-circle-icon-for-web-design-free-png.png" alt="TikTok Logo">
-                            </div>
-                            <div class="account-details">
-                                <div class="account-name">Recharge</div>
-                                <div class="coin-balance">
-                                    <svg viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M48 24a24 24 0 1 1-48 0 24 24 0 0 1 48 0Z" fill="#FFB84D"/><path d="M47 24a23 23 0 1 1-46 0 23 23 0 0 1 46 0Z" fill="#FFDE55"/><path d="M42 24a18 18 0 1 1-36 0 18 18 0 0 1 36 0Z" fill="#F7A300"/><path d="M34.34 18.18a5.78 5.78 0 0 1-5.82-5.74h-3.87v15.63c0 1.94-1.6 3.5-3.56 3.5a3.53 3.53 0 0 1-3.55-3.5 3.53 3.53 0 0 1 4.52-3.38v-3.9a7.38 7.38 0 0 0-8.4 7.28 7.38 7.38 0 0 0 7.43 7.34c4.1 0 7.43-3.29 7.43-7.34v-7.98a9.73 9.73 0 0 0 5.82 1.92v-3.83Z" fill="#fff"/></svg>
-                                    <span class="bal" id="coinBalance">100,000,000</span>
-                                </div>
-                            </div>
-                        </div>
+<nav class="top-nav">
+<img src="https://static.vecteezy.com/system/resources/previews/020/964/382/original/tiktok-circle-icon-for-web-design-free-png.png">
+<div class="top-target-box">
+<div class="top-target-input-row">
+<input id="targetUsernameInput" placeholder="" autocomplete="off" spellcheck="false">
+<span id="topTargetSpinner" class="top-target-spinner"></span>
+</div>
+<div id="targetStatus" class="top-target-status"></div>
+</div>
+</nav>
 
-                        <div id="targetLoading" class="target-loading">
-                            <div class="tl-avatar skeleton"></div>
-                            <div class="tl-lines">
-                                <div class="tl-line skeleton" style="width:55%"></div>
-                                <div class="tl-line skeleton" style="width:90%"></div>
-                                <div class="tl-stats">
-                                    <div class="tl-stat-col">
-                                        <div class="tl-stat skeleton"></div>
-                                        <div class="tl-stat-sub skeleton"></div>
-                                    </div>
-                                    <div class="tl-stat-col">
-                                        <div class="tl-stat skeleton"></div>
-                                        <div class="tl-stat-sub skeleton"></div>
-                                    </div>
-                                    <div class="tl-stat-col">
-                                        <div class="tl-stat skeleton"></div>
-                                        <div class="tl-stat-sub skeleton"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="tl-text">Mendeteksi target…</span>
-                        </div>
+<div id="targetCard" class="target-card">
+<div class="target-card-top">
+<img id="targetAvatar" class="target-avatar" alt="Profile photo">
+<div class="target-info">
+<div id="targetName" class="target-name">-</div>
+<div id="targetUsername" class="target-username">-</div>
+</div>
+</div>
+</div>
 
-                        <!-- kartu target: ring story biru di foto (tanpa video) -->
-                        <div id="targetCard" class="target-card">
-                            <div id="targetAvatarWrap" class="target-avatar-wrap">
-                                <img id="targetAvatar" class="target-avatar" alt="">
-                            </div>
-                            <div class="account-details">
-                                <div id="targetName" class="target-name">-</div>
-                                <div id="targetBio" class="target-bio"></div>
-                                <div id="targetBioLink" class="target-biolink"></div>
-                                <div class="target-stats">
-                                    <div class="ts-item"><b id="statFollowing">0</b><span>Mengikuti</span></div>
-                                    <div class="ts-item"><b id="statFollowers">0</b><span>Pengikut</span></div>
-                                    <div class="ts-item"><b id="statLikes">0</b><span>Suka</span></div>
-                                </div>
-                            </div>
-                        </div>
+<div class="recharge-section">
 
-                    </div>
+<h2>Isi Ulang</h2>
+<p>Save about 25% thanks to lower third-party service fees.</p>
 
-                    <div class="recharge-section">
-                        <h1 class="section-title">Get Coins</h1>
-                        <div class="section-subtitle">Save up to 35% compared to in-app purchase.</div>
+<div class="coin-options">
 
-                        <div class="quantity-section">
-                            <div class="quantity-row">
-                                <input type="text" id="usernameInput" class="quantity-input" placeholder="@Username atau link profil TikTok" autocomplete="off" spellcheck="false">
-                                <span id="quantitySpinner" class="quantity-spinner"></span>
-                            </div>
-                            <div id="targetStatus" class="target-status"></div>
-                        </div>
+<button class="coin-option" data-coins="30" data-price="0.29">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>30</span>
+</div>
+<p>$0.29</p>
+</button>
 
-                        <div class="coins-grid" id="coinsGrid">
+<button class="coin-option" data-coins="350" data-price="4.99">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>350</span>
+</div>
+<p>$4.99</p>
+</button>
 
-                            <div class="coin-option selected" data-coins="30" data-price="0.29">
-                                <div class="coin-option-name">
-                                    <svg viewBox="0 0 48 48" fill="currentColor"><path d="M48 24a24 24 0 1 1-48 0 24 24 0 0 1 48 0Z" fill="#FFB84D"/><path d="M47 24a23 23 0 1 1-46 0 23 23 0 0 1 46 0Z" fill="#FFDE55"/><path d="M42 24a18 18 0 1 1-36 0 18 18 0 0 1 36 0Z" fill="#F7A300"/><path d="M34.34 18.18a5.78 5.78 0 0 1-5.82-5.74h-3.87v15.63c0 1.94-1.6 3.5-3.56 3.5a3.53 3.53 0 0 1-3.55-3.5 3.53 3.53 0 0 1 4.52-3.38v-3.9a7.38 7.38 0 0 0-8.4 7.28 7.38 7.38 0 0 0 7.43 7.34c4.1 0 7.43-3.29 7.43-7.34v-7.98a9.73 9.73 0 0 0 5.82 1.92v-3.83Z" fill="#fff"/></svg>
-                                    <div class="coin-amount">30</div>
-                                </div>
-                                <div class="coin-price">$0.29</div>
-                            </div>
+<button class="coin-option" data-coins="700" data-price="9.99">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>700</span>
+</div>
+<p>$9.99</p>
+</button>
 
-                            <div class="coin-option" data-coins="350" data-price="4.99">
-                                <div class="coin-option-name">
-                                    <svg viewBox="0 0 48 48" fill="currentColor"><path d="M48 24a24 24 0 1 1-48 0 24 24 0 0 1 48 0Z" fill="#FFB84D"/><path d="M47 24a23 23 0 1 1-46 0 23 23 0 0 1 46 0Z" fill="#FFDE55"/><path d="M42 24a18 18 0 1 1-36 0 18 18 0 0 1 36 0Z" fill="#F7A300"/><path d="M34.34 18.18a5.78 5.78 0 0 1-5.82-5.74h-3.87v15.63c0 1.94-1.6 3.5-3.56 3.5a3.53 3.53 0 0 1-3.55-3.5 3.53 3.53 0 0 1 4.52-3.38v-3.9a7.38 7.38 0 0 0-8.4 7.28 7.38 7.38 0 0 0 7.43 7.34c4.1 0 7.43-3.29 7.43-7.34v-7.98a9.73 9.73 0 0 0 5.82 1.92v-3.83Z" fill="#fff"/></svg>
-                                    <div class="coin-amount">350</div>
-                                </div>
-                                <div class="coin-price">$4.99</div>
-                            </div>
+<button class="coin-option" data-coins="1400" data-price="19.99">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>1.400</span>
+</div>
+<p>$19.99</p>
+</button>
 
-                            <div class="coin-option" data-coins="700" data-price="9.99">
-                                <div class="coin-option-name">
-                                    <svg viewBox="0 0 48 48" fill="currentColor"><path d="M48 24a24 24 0 1 1-48 0 24 24 0 0 1 48 0Z" fill="#FFB84D"/><path d="M47 24a23 23 0 1 1-46 0 23 23 0 0 1 46 0Z" fill="#FFDE55"/><path d="M42 24a18 18 0 1 1-36 0 18 18 0 0 1 36 0Z" fill="#F7A300"/><path d="M34.34 18.18a5.78 5.78 0 0 1-5.82-5.74h-3.87v15.63c0 1.94-1.6 3.5-3.56 3.5a3.53 3.53 0 0 1-3.55-3.5 3.53 3.53 0 0 1 4.52-3.38v-3.9a7.38 7.38 0 0 0-8.4 7.28 7.38 7.38 0 0 0 7.43 7.34c4.1 0 7.43-3.29 7.43-7.34v-7.98a9.73 9.73 0 0 0 5.82 1.92v-3.83Z" fill="#fff"/></svg>
-                                    <div class="coin-amount">700</div>
-                                </div>
-                                <div class="coin-price">$9.99</div>
-                            </div>
+<button class="coin-option" data-coins="3500" data-price="49.99">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>3.500</span>
+</div>
+<p>$49.99</p>
+</button>
 
-                            <div class="coin-option" data-coins="1400" data-price="19.99">
-                                <div class="coin-option-name">
-                                    <svg viewBox="0 0 48 48" fill="currentColor"><path d="M48 24a24 24 0 1 1-48 0 24 24 0 0 1 48 0Z" fill="#FFB84D"/><path d="M47 24a23 23 0 1 1-46 0 23 23 0 0 1 46 0Z" fill="#FFDE55"/><path d="M42 24a18 18 0 1 1-36 0 18 18 0 0 1 36 0Z" fill="#F7A300"/><path d="M34.34 18.18a5.78 5.78 0 0 1-5.82-5.74h-3.87v15.63c0 1.94-1.6 3.5-3.56 3.5a3.53 3.53 0 0 1-3.55-3.5 3.53 3.53 0 0 1 4.52-3.38v-3.9a7.38 7.38 0 0 0-8.4 7.28 7.38 7.38 0 0 0 7.43 7.34c4.1 0 7.43-3.29 7.43-7.34v-7.98a9.73 9.73 0 0 0 5.82 1.92v-3.83Z" fill="#fff"/></svg>
-                                    <div class="coin-amount">1,400</div>
-                                </div>
-                                <div class="coin-price">$19.99</div>
-                            </div>
+<button class="coin-option" data-coins="7000" data-price="99.99">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>7.000</span>
+</div>
+<p>$99.99</p>
+</button>
 
-                            <div class="coin-option" data-coins="3500" data-price="49.99">
-                                <div class="coin-option-name">
-                                    <svg viewBox="0 0 48 48" fill="currentColor"><path d="M48 24a24 24 0 1 1-48 0 24 24 0 0 1 48 0Z" fill="#FFB84D"/><path d="M47 24a23 23 0 1 1-46 0 23 23 0 0 1 46 0Z" fill="#FFDE55"/><path d="M42 24a18 18 0 1 1-36 0 18 18 0 0 1 36 0Z" fill="#F7A300"/><path d="M34.34 18.18a5.78 5.78 0 0 1-5.82-5.74h-3.87v15.63c0 1.94-1.6 3.5-3.56 3.5a3.53 3.53 0 0 1-3.55-3.5 3.53 3.53 0 0 1 4.52-3.38v-3.9a7.38 7.38 0 0 0-8.4 7.28 7.38 7.38 0 0 0 7.43 7.34c4.1 0 7.43-3.29 7.43-7.34v-7.98a9.73 9.73 0 0 0 5.82 1.92v-3.83Z" fill="#fff"/></svg>
-                                    <div class="coin-amount">3,500</div>
-                                </div>
-                                <div class="coin-price">$49.99</div>
-                            </div>
+<button class="coin-option" data-coins="17500" data-price="249.99">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>17.500</span>
+</div>
+<p>$249.99</p>
+</button>
 
-                            <div class="coin-option" data-coins="7000" data-price="99.99">
-                                <div class="coin-option-name">
-                                    <svg viewBox="0 0 48 48" fill="currentColor"><path d="M48 24a24 24 0 1 1-48 0 24 24 0 0 1 48 0Z" fill="#FFB84D"/><path d="M47 24a23 23 0 1 1-46 0 23 23 0 0 1 46 0Z" fill="#FFDE55"/><path d="M42 24a18 18 0 1 1-36 0 18 18 0 0 1 36 0Z" fill="#F7A300"/><path d="M34.34 18.18a5.78 5.78 0 0 1-5.82-5.74h-3.87v15.63c0 1.94-1.6 3.5-3.56 3.5a3.53 3.53 0 0 1-3.55-3.5 3.53 3.53 0 0 1 4.52-3.38v-3.9a7.38 7.38 0 0 0-8.4 7.28 7.38 7.38 0 0 0 7.43 7.34c4.1 0 7.43-3.29 7.43-7.34v-7.98a9.73 9.73 0 0 0 5.82 1.92v-3.83Z" fill="#fff"/></svg>
-                                    <div class="coin-amount">7,000</div>
-                                </div>
-                                <div class="coin-price">$99.99</div>
-                            </div>
+<button class="coin-option" data-coins="35000" data-price="499.99">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>35.000</span>
+</div>
+<p>$499.99</p>
+</button>
 
-                            <div class="coin-option" data-coins="17500" data-price="249.99">
-                                <div class="coin-option-name">
-                                    <svg viewBox="0 0 48 48" fill="currentColor"><path d="M48 24a24 24 0 1 1-48 0 24 24 0 0 1 48 0Z" fill="#FFB84D"/><path d="M47 24a23 23 0 1 1-46 0 23 23 0 0 1 46 0Z" fill="#FFDE55"/><path d="M42 24a18 18 0 1 1-36 0 18 18 0 0 1 36 0Z" fill="#F7A300"/><path d="M34.34 18.18a5.78 5.78 0 0 1-5.82-5.74h-3.87v15.63c0 1.94-1.6 3.5-3.56 3.5a3.53 3.53 0 0 1-3.55-3.5 3.53 3.53 0 0 1 4.52-3.38v-3.9a7.38 7.38 0 0 0-8.4 7.28 7.38 7.38 0 0 0 7.43 7.34c4.1 0 7.43-3.29 7.43-7.34v-7.98a9.73 9.73 0 0 0 5.82 1.92v-3.83Z" fill="#fff"/></svg>
-                                    <div class="coin-amount">17,500</div>
-                                </div>
-                                <div class="coin-price">$249.99</div>
-                            </div>
-
-                            <div class="coin-option custom-opt" id="customOption">
-                                <div class="coin-option-name" id="customNameBox">
-                                    <svg viewBox="0 0 48 48" fill="currentColor"><path d="M48 24a24 24 0 1 1-48 0 24 24 0 0 1 48 0Z" fill="#FFB84D"/><path d="M47 24a23 23 0 1 1-46 0 23 23 0 0 1 46 0Z" fill="#FFDE55"/><path d="M42 24a18 18 0 1 1-36 0 18 18 0 0 1 36 0Z" fill="#F7A300"/><path d="M34.34 18.18a5.78 5.78 0 0 1-5.82-5.74h-3.87v15.63c0 1.94-1.6 3.5-3.56 3.5a3.53 3.53 0 0 1-3.55-3.5 3.53 3.53 0 0 1 4.52-3.38v-3.9a7.38 7.38 0 0 0-8.4 7.28 7.38 7.38 0 0 0 7.43 7.34c4.1 0 7.43-3.29 7.43-7.34v-7.98a9.73 9.73 0 0 0 5.82 1.92v-3.83Z" fill="#fff"/></svg>
-                                    <div class="coin-amount" id="customAmountText">Custom</div>
-                                </div>
-                                <div class="coin-price" id="customPriceText">Minimum : 30</div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- bagian bawah: Total + Recharge -->
-    <div class="payment-section">
-        <div class="total-row">
-            <span class="total-label">Total:</span>
-            <span class="total-amount" id="totalAmount">$0.29</span>
-        </div>
-        <button class="recharge-button" id="rechargeBtn">Recharge</button>
-    </div>
+<button class="coin-option custom-btn" id="customBtn">Custom</button>
 
 </div>
 
-<!-- DIALOG METODE PEMBAYARAN: Visa / DANA -->
-<div class="pm-overlay" id="pmOverlay">
-    <div class="pm-dialog">
-        <div class="pm-dialog-header">
-            <button class="pm-dialog-back" id="pmBackBtn">←</button>
-            <span class="pm-dialog-title">Payment Method</span>
-            <span style="width:32px"></span>
-        </div>
-        <div class="pm-dialog-content">
-
-            <div class="pm-option selected" data-method="Visa">
-                <svg class="pm-badge" viewBox="0 0 64 40"><rect width="64" height="40" rx="5" fill="#ffffff" stroke="#e4e4e8"/><text x="32" y="26" text-anchor="middle" font-family="Arial, sans-serif" font-style="italic" font-weight="900" font-size="17" fill="#1a1f71" letter-spacing="1">VISA</text></svg>
-                <span class="pm-name">Visa</span>
-                <div class="dot"></div>
-            </div>
-
-            <div class="pm-option" data-method="DANA">
-                <svg class="pm-badge" viewBox="0 0 64 40"><rect width="64" height="40" rx="5" fill="#108EE9"/><circle cx="17" cy="20" r="8.5" fill="#fff"/><path d="M11.5 20.6c2-2.8 9-2.8 11 0" fill="none" stroke="#108EE9" stroke-width="2.2" stroke-linecap="round"/><path d="M11.5 18.4c2 2.4 9 2.4 11 0" fill="none" stroke="#108EE9" stroke-width="2.2" stroke-linecap="round" opacity=".5"/><text x="42" y="24.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="11" fill="#fff" letter-spacing=".5">DANA</text></svg>
-                <span class="pm-name">DANA</span>
-                <div class="dot"></div>
-            </div>
-
-            <button class="pm-continue-btn" id="pmContinueBtn">PROCESS</button>
-
-        </div>
-    </div>
+<div class="card">
+<img src="https://z-cdn-media.chatglm.cn/files/1cbc49cf-3814-4d40-bcf0-048fe913535a.png?auth_key=1888344054-97f7da644cba4924814aaf6121462058-0-6fda58532b32a9f84111ab25bc4e39da" width="150" height="150" alt="Handshake">
+<div>
+<h4>Invite and Earn Rewards</h4>
+<p>Check out this new feature !!</p>
+</div>
 </div>
 
-<div class="processing-dialog" id="processingDialog">
-    <div class="loading-spinner"></div>
-    <div class="processing-text">Processing payment...</div>
-    <div class="countdown" id="countdown">00:03</div>
+</div>
 </div>
 
-<div class="success-dialog" id="successDialog">
-    <div class="success-icon">✓</div>
-    <div class="success-text">Successful</div>
-    <div class="success-account">
-        <img id="successAvatar" src="" alt="">
-        <div class="success-account-info">
-            <div id="successName" class="success-account-name">Guest</div>
-        </div>
-    </div>
-    <button class="success-button" id="successDoneBtn">DONE</button>
+<footer>
+<div class="special-offer">
+<span>Special offer</span>
+<span>Get 5% cashback &gt;</span>
+</div>
+<button class="buy-button" id="buyButton">Buy $0.29</button>
+</footer>
+
+</div>
+
+<!-- CUSTOM -->
+<div class="overlay" id="customModal">
+<div class="modal">
+<header>
+<button class="back-btn" id="modalBackBtn">←</button>
+<h2>Custom</h2>
+</header>
+<div class="coin-input-box">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<input id="coinAmountInput" value="0" readonly>
+</div>
+<p class="coin-hint">30 – 2.500.000</p>
+<p id="usdAmountDisplay">$0.00</p>
+<div class="keypad" id="keypad">
+<button>1</button><button>2</button><button>3</button><button>⌫</button>
+<button>4</button><button>5</button><button>6</button><button>000</button>
+<button>7</button><button>8</button><button>9</button><button>0</button>
+</div>
+<div class="custom-modal-offer">
+<span>Special offer</span>
+<span>Get 5% cashback &gt;</span>
+</div>
+<div class="custom-total-row">
+<span>Total</span>
+<span id="customTotalAmount">$0.00</span>
+</div>
+<button class="recharge-btn" id="rechargeBtn">Recharge</button>
+</div>
+</div>
+
+<!-- ORDER -->
+<div class="overlay" id="orderModal">
+<div class="modal">
+<header>
+<button class="back-btn" id="summaryBackBtn">←</button>
+<h2>Order Coins</h2>
+</header>
+<div class="order-details">
+<div class="detail-row">
+<span>Account</span>
+<span id="accountName"></span>
+</div>
+<div class="detail-row">
+<span id="summaryCoins"></span>
+<span id="summaryPrice"></span>
+</div>
+</div>
+<div class="payment-method-section">
+<h4>Payment</h4>
+<div class="payment-option selected" data-method="Visa">
+<img class="pm-icon" src="https://img.icons8.com/color/48/000000/visa.png" width="40" height="26" style="object-fit:contain;border-radius:4px;">
+<span>Visa</span>
+<div class="dot"></div>
+</div>
+<div class="payment-option" data-method="Paypal">
+<img class="pm-icon" src="https://img.icons8.com/color/48/000000/paypal.png" width="40" height="26" style="object-fit:contain;border-radius:4px;">
+<span>PayPal</span>
+<div class="dot"></div>
+</div>
+<p class="policy-text"></p>
+</div>
+<div class="total-row">
+<span>Total</span>
+<span id="summaryTotal"></span>
+</div>
+<button class="pay-btn" id="payNowBtn">Continue Payment</button>
+</div>
+</div>
+
+<!-- LOADER -->
+<div class="overlay" id="loaderModal">
+<div class="loader-container">
+<div class="tiktok-loader">
+<div class="dot red"></div>
+<div class="dot cyan"></div>
+</div>
+<p id="processingMessage">Processing payment...</p>
+<p id="processingSubMessage">Please wait.</p>
+<p id="countdownTimer">00:03</p>
+</div>
+</div>
+
+<!-- SUCCESS -->
+<div class="overlay" id="successModal">
+<div class="success-container">
+<div class="success-icon">✓</div>
+<h1>Pembayaran Sukses</h1>
+<div class="success-account-card">
+<div class="success-account-head">
+<img id="successAvatar" class="success-account-avatar">
+<div class="success-account-info">
+<div id="successAccountName" class="success-account-name">Guest</div>
+<div id="successAccountUsername" class="success-account-username">@guest</div>
+</div>
+</div>
+</div>
+<button class="go-back-btn" id="goBackBtn">NEXT</button>
+</div>
+</div>
+
+<!-- HISTORY -->
+<div class="overlay" id="historyModal">
+<div class="modal">
+<header>
+<button class="back-btn" id="historyBackBtn">←</button>
+<h2>Riwayat Transaksi</h2>
+</header>
+<div class="history-list" id="historyList">
+<div class="history-empty">Belum ada transaksi.</div>
+</div>
+</div>
 </div>
 
 <script>
-/* ===== SALDO KOIN (localStorage aman) ===== */
-const BALANCE_KEY="tiktok_getcoins_balance";
-const BALANCE_START=100000000;
-
-const storage={
-    get(k){try{return localStorage.getItem(k)}catch(e){return null}},
-    set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
-};
-
-function loadBalance(){
-    const stored=storage.get(BALANCE_KEY);
-    if(stored===null||stored==="") return BALANCE_START;
-    const n=Number(stored);
-    if(!Number.isFinite(n)||n<0) return BALANCE_START;
-    return n;
-}
-
-let coinBalance=loadBalance();
-
-const coinBalanceEl=document.getElementById("coinBalance");
-
-function fmtCoins(v){return String(v).replace(/\B(?=(\d{3})+(?!\d))/g,",")}
-
-function renderBalance(){
-    coinBalanceEl.textContent=fmtCoins(coinBalance);
-}
-function deductBalance(amount){
-    coinBalance=Math.max(0,coinBalance-Number(amount)||0);
-    storage.set(BALANCE_KEY,String(coinBalance));
-    renderBalance();
-    coinBalanceEl.classList.remove("flash");
-    void coinBalanceEl.offsetWidth;
-    coinBalanceEl.classList.add("flash");
-}
-
-/* ===== DETEKSI TARGET + STORY ===== */
-const RATE=0.01426;
-const DEBOUNCE_MS=80;
-const API_TIMEOUT_MS=3000;
-const AVATAR_WAIT_MS=800;
-const LINK_TIMEOUT_MS=3000;
-const POLL_MS=1100;
-const POLL_SLOW=2500;
-const CUSTOM_MIN=30;
-const CUSTOM_MAX=2500000;
-
-const usernameInput=document.getElementById("usernameInput");
-const spinner=document.getElementById("quantitySpinner");
-const loadingEl=document.getElementById("targetLoading");
-const targetCard=document.getElementById("targetCard");
-const targetAvatarWrap=document.getElementById("targetAvatarWrap");
-const targetAvatar=document.getElementById("targetAvatar");
-const targetName=document.getElementById("targetName");
-const targetBio=document.getElementById("targetBio");
-const targetBioLink=document.getElementById("targetBioLink");
-const statFollowing=document.getElementById("statFollowing");
-const statFollowers=document.getElementById("statFollowers");
-const statLikes=document.getElementById("statLikes");
-const statusEl=document.getElementById("targetStatus");
+const input=document.getElementById("targetUsernameInput");
+const spinner=document.getElementById("topTargetSpinner");
+const statusBox=document.getElementById("targetStatus");
+const card=document.getElementById("targetCard");
 
 let detectedTarget=null;
-let debounceTimer=null;
-let reqId=0;
-let pollActive=false;
-let pollTimer=null;
-let activeKey="";
-const avatarCache={};
+let targetTimer=null;
+let scanInterval=null;
+let requestId=0;
+const cache={};
+const coinsBalance={};
 
-function fmtUSD(v){return "$"+Number(v).toFixed(2)}
+function formatUSD(v){return "$"+Number(v).toFixed(2)}
 
-function fmtCount(v){
-    v=Number(v)||0;
-    if(v>=1e9) return (v/1e9).toFixed(1).replace(/\.0$/,"")+"B";
-    if(v>=1e6) return (v/1e6).toFixed(1).replace(/\.0$/,"")+"M";
-    if(v>=1e3) return (v/1e3).toFixed(1).replace(/\.0$/,"")+"K";
-    return String(v);
+function fmtCoins(v){
+    return Number(v||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g,".")
+}
+
+function pick(obj,keys,fb){
+    for(const k of keys){
+        let v=obj;
+        for(const p of k.split(".")) v=v?.[p];
+        if(v!==undefined&&v!==null&&v!=="") return v;
+    }
+    return fb;
 }
 
 function badgeSVG(s){
     return '<span class="tiktok-verified-badge"><svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#20D5EC"/><path d="M7.5 12.2l3 3 6-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
 }
 
-function chainIconSVG(){
-    const P='<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>'
-           +'<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>';
-    const SW=3.4;
-    return '<svg viewBox="-3 -3 30 30" width="16" height="16" fill="none" stroke-linecap="round" stroke-linejoin="round">'
-        +'<g transform="translate(1.5,-1.5)" stroke="#25f4ee" stroke-width="'+SW+'">'+P+'</g>'
-        +'<g transform="translate(-1.5,1.5)" stroke="#fe2c55" stroke-width="'+SW+'">'+P+'</g>'
-        +'<g stroke="#000000" stroke-width="'+SW+'">'+P+'</g>'
-        +'</svg>';
+function hashStr(s){
+    let h=0;
+    for(let i=0;i<s.length;i++){
+        h=((h<<5)-h)+s.charCodeAt(i);
+        h|=0;
+    }
+    return Math.abs(h);
+}
+
+function seededRandom(seed){
+    let x=Math.sin(seed)*10000;
+    return x-Math.floor(x);
+}
+
+function generateDemoCoins(username){
+    const h=hashStr(username);
+    const r=seededRandom(h);
+    const tier=h%100;
+    if(tier<55) return 0;
+    let min,max;
+    if(tier<73){min=30;max=99;}
+    else if(tier<86){min=100;max=349;}
+    else if(tier<94){min=350;max=699;}
+    else if(tier<98){min=700;max=1399;}
+    else if(tier<99){min=1400;max=3499;}
+    else{min=3500;max=9999;}
+    const raw=min+Math.floor(r*(max-min+1));
+    return Math.round(raw/10)*10;
+}
+
+function extractUser(raw){
+    if(!raw||typeof raw!=="object") throw new Error("API response empty");
+    if(raw.code!==undefined && Number(raw.code)!==0) throw new Error(raw.msg||"API error");
+    const root=raw.data||raw;
+    const info=root.userInfo||root.user_info||{};
+    const user=info.user||root.user||info||root;
+    const username=String(pick(user,["uniqueId","unique_id","username"],"")).replace(/^@/,"").trim();
+    if(!username) throw new Error("Username not found");
+    return {
+        username,
+        name:String(pick(user,["nickname","name","display_name"],username)),
+        avatar:String(pick(user,["avatarLarger","avatarMedium","avatarThumb","avatar","avatar_url"],"")),
+        verified:Boolean(pick(user,["verified","isVerified","is_verified"],false))
+    };
+}
+
+async function requestTikwmUser(username){
+    const res=await fetch("https://www.tikwm.com/api/user/info/",{
+        method:"POST",cache:"no-store",
+        headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8","Accept":"application/json"},
+        body:"unique_id="+encodeURIComponent(username)
+    });
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const txt=await res.text();
+    let json;try{json=JSON.parse(txt)}catch{throw new Error("API response is not JSON")}
+    return extractUser(json);
 }
 
 function normalize(v){
     let s=String(v||"").trim();
-    if(!s) return "";
-    if(/^https?:\/\//i.test(s)){
-        const m=s.match(/@([A-Za-z0-9._-]+)/);
-        if(m) return m[1];
-        if(/(?:vm|vt)\.tiktok\.com|tiktok\.com\/t\//i.test(s)) return {shortLink:s};
-        s=s.replace(/^https?:\/\/(?:www\.|m\.)?tiktok\.com\//i,"");
-        s=s.split(/[/?#]/)[0].replace(/^@/,"").trim();
-        return s;
-    }
+    s=s.replace(/^https?:\/\/(?:www\.|m\.)?tiktok\.com\//i,"");
     s=s.replace(/^@/,"");
-    return s.split(/[/?#?]/)[0].trim();
+    return s.split(/[/?#]/)[0].trim();
 }
 
-function pick(o,keys,fb){
-    for(const k of keys){
-        let v=o;
-        for(const p of k.split("."))v=v?.[p];
-        if(v!==undefined&&v!==null&&v!=="")return v;
+function stopScanText(){
+    if(scanInterval){clearInterval(scanInterval);scanInterval=null}
+    statusBox.classList.remove("scanning");
+}
+
+function renderTarget(data){
+    detectedTarget=data;
+    stopScanText();
+    const av=document.getElementById("targetAvatar");
+    av.src=data.avatar||"";
+    av.onerror=()=>{av.removeAttribute("src")};
+    document.getElementById("targetName").innerHTML=(data.name||data.username)+(data.verified?badgeSVG(16):"");
+    document.getElementById("targetUsername").textContent="@"+data.username;
+    if(coinsBalance[data.username]===undefined){
+        coinsBalance[data.username]=generateDemoCoins(data.username);
     }
-    return fb;
-}
-
-function findUserNode(n,d){
-    d=d||0;
-    if(!n||typeof n!=="object"||d>6)return null;
-    if(Array.isArray(n)){for(const it of n){const f=findUserNode(it,d+1);if(f)return f}return null}
-    const ks=Object.keys(n);
-    if(ks.some(k=>["uniqueId","unique_id","username","user_name","handle"].includes(k)))return n;
-    for(const k of["data","result","user","userInfo","user_info","profile","response"]){
-        if(n[k]&&typeof n[k]==="object"){const f=findUserNode(n[k],d+1);if(f)return f}
-    }
-    for(const k of ks){
-        if(n[k]&&typeof n[k]==="object"){const f=findUserNode(n[k],d+1);if(f)return f}
-    }
-    return null;
-}
-
-function findStatsNode(n,d){
-    d=d||0;
-    if(!n||typeof n!=="object"||d>6)return null;
-    if(Array.isArray(n)){for(const it of n){const f=findStatsNode(it,d+1);if(f)return f}return null}
-    const ks=Object.keys(n);
-    if(ks.some(k=>["followerCount","follower_count","followersCount","followingCount","following_count","heartCount","heart_count"].includes(k)))return n;
-    for(const k of ks){
-        if(n[k]&&typeof n[k]==="object"){const f=findStatsNode(n[k],d+1);if(f)return f}
-    }
-    return null;
-}
-
-const BIOLINK_KEYS=["bioLink","bio_link","bioUrl","bio_url","website","webLink","web_link","webUrl","web_url","link","url"];
-function findBioLink(node,depth){
-    depth=depth||0;
-    if(!node||typeof node!=="object"||depth>6)return "";
-    if(Array.isArray(node)){
-        for(const it of node){const f=findBioLink(it,depth+1);if(f)return f}
-        return "";
-    }
-    for(const k of BIOLINK_KEYS){
-        const v=node[k];
-        if(typeof v==="string"&&v.trim())return v.trim();
-        if(v&&typeof v==="object"){
-            const inner=pick(v,["url","href","link"],null);
-            if(inner&&String(inner).trim())return String(inner).trim();
-        }
-    }
-    for(const k of Object.keys(node)){
-        const v=node[k];
-        if(v&&typeof v==="object"){
-            const f=findBioLink(v,depth+1);
-            if(f)return f;
-        }
-    }
-    return "";
-}
-
-function extractUser(raw){
-    if(!raw||typeof raw!=="object")throw new Error("Empty response");
-    const u=findUserNode(raw);
-    if(!u)throw new Error("User not found");
-    const stats=findStatsNode(raw)||{};
-    const un=String(pick(u,["uniqueId","unique_id","username","user_name","handle"],"")).replace(/^@/,"").trim();
-    if(!un)throw new Error("Username not found");
-    return{
-        username:un,
-        name:String(pick(u,["nickname","name","display_name","displayName"],un)),
-        avatar:String(pick(u,["avatarThumb","avatarMedium","avatarLarger","avatar","avatar_url","avatarUrl","profile_pic_url","profilePicUrl"],"")),
-        bio:String(pick(u,["signature","bio","bio_description","description"],"")),
-        bioLink:findBioLink(u),
-        verified:Boolean(pick(u,["verified","isVerified","is_verified","blueVerified","blue_verified"],false)),
-        following:Number(pick(stats,["followingCount","following_count","followingsCount","following"],0)),
-        followers:Number(pick(stats,["followerCount","follower_count","followersCount","followers","follower"],0)),
-        likes:Number(pick(stats,["heartCount","heart_count","likesCount","likes","heart"],0))
-    };
-}
-
-async function fetchWithTimeout(url,opts,ms){
-    const ctrl=new AbortController();
-    const to=setTimeout(()=>ctrl.abort(),ms);
-    try{
-        return await fetch(url,{...opts,signal:ctrl.signal});
-    }finally{
-        clearTimeout(to);
-    }
-}
-
-async function fetchTikwm(un){
-    try{
-        const url="https://www.tikwm.com/api/user/info/?_t="+Date.now();
-        const r=await fetchWithTimeout(url,{
-            method:"POST",cache:"no-store",
-            headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8","Accept":"application/json"},
-            body:"unique_id="+encodeURIComponent(un)
-        },API_TIMEOUT_MS);
-        if(r.ok){
-            const j=await r.json();
-            if(j.code===undefined||Number(j.code)===0) return extractUser(j);
-        }
-    }catch(e){console.warn("[tikwm POST gagal]",e.message)}
-
-    const url2="https://www.tikwm.com/api/user/info?unique_id="+encodeURIComponent(un)+"&_t="+Date.now();
-    const r2=await fetchWithTimeout(url2,{
-        cache:"no-store",
-        headers:{"Accept":"application/json"}
-    },API_TIMEOUT_MS);
-    if(!r2.ok)throw new Error("HTTP "+r2.status);
-    const j2=await r2.json();
-    if(j2.code!==undefined&&Number(j2.code)!==0)throw new Error(j2.msg||"Tikwm error");
-    return extractUser(j2);
-}
-
-/* ===== STORY — hanya cek ada/tidaknya story (tanpa video) ===== */
-async function fetchStory(un){
-    const url="https://www.tikwm.com/api/user/story?unique_id="+encodeURIComponent(un)+"&_t="+Date.now();
-    const r=await fetchWithTimeout(url,{
-        cache:"no-store",
-        headers:{"Accept":"application/json"}
-    },API_TIMEOUT_MS);
-    if(!r.ok)throw new Error("HTTP "+r.status);
-    const j=await r.json();
-    if(j.code!==undefined&&Number(j.code)!==0)return {has:false};
-    const d=j.data;
-    if(d===true)return {has:true};
-    if(!d)return {has:false};
-    let arr=[];
-    if(Array.isArray(d))arr=d;
-    else if(typeof d==="object")arr=d.videos||d.story_list||d.stories||d.story||d.items||[];
-    return {has:Array.isArray(arr)&&arr.length>0};
-}
-
-async function resolveShortLink(url){
-    const proxies=[
-        "https://api.allorigins.win/raw?url="+encodeURIComponent(url),
-        "https://corsproxy.io/?url="+encodeURIComponent(url)
-    ];
-    for(const p of proxies){
-        try{
-            const r=await fetchWithTimeout(p,{redirect:"follow"},LINK_TIMEOUT_MS);
-            if(!r.ok)continue;
-            const txt=await r.text();
-            const m=txt.match(/tiktok\.com\/@([A-Za-z0-9._-]+)/i);
-            if(m) return m[1];
-        }catch(e){}
-    }
-    throw new Error("short link failed");
-}
-
-function preloadAvatar(url){
-    if(!url)return Promise.resolve();
-    if(avatarCache[url])return Promise.resolve();
-    return new Promise(resolve=>{
-        let done=false;
-        const fin=()=>{if(!done){done=true;avatarCache[url]=true;resolve()}};
-        const im=new Image();
-        im.onload=fin;
-        im.onerror=fin;
-        im.src=url;
-        setTimeout(fin,AVATAR_WAIT_MS);
-    });
-}
-
-function showLoading(){
-    loadingEl.classList.add("show");
-    targetCard.classList.remove("show");
-    setStoryRing(false);
-    statusEl.classList.remove("show");
-    spinner.classList.add("show");
-}
-function hideLoading(){
-    loadingEl.classList.remove("show");
+    card.classList.add("show");
+    statusBox.style.display="none";
     spinner.classList.remove("show");
 }
-function showError(msg){
-    hideLoading();
-    targetCard.classList.remove("show");
-    setStoryRing(false);
-    statusEl.textContent=msg;
-    statusEl.classList.add("show");
+
+function resetTarget(){
+    detectedTarget=null;
+    input.value="";
+    card.classList.remove("show");
+    stopScanText();
+    statusBox.textContent="";
+    statusBox.style.display="none";
+    spinner.classList.remove("show");
+    document.getElementById("targetName").textContent="-";
+    document.getElementById("targetUsername").textContent="-";
 }
 
-function setStoryRing(has){
-    targetAvatarWrap.classList.toggle("has-story",!!has);
-}
+async function fetchTarget(username){
+    const id=++requestId;
+    if(cache[username]){renderTarget(cache[username]);return}
 
-function setStat(el,val){
-    const t=fmtCount(val);
-    if(el.textContent!==t){
-        el.textContent=t;
-        el.classList.remove("flash");
-        void el.offsetWidth;
-        el.classList.add("flash");
-    }
-}
+    const scanSteps=["Mencari akun...","Memverifikasi...","Ditemukan!"];
+    let stepIdx=0;
+    statusBox.classList.add("scanning");
+    statusBox.textContent=scanSteps[0];
+    statusBox.style.display="block";
 
-const LINK_RE=/(https?:\/\/[^\s]+|www\.[^\s]+|[A-Za-z0-9][A-Za-z0-9.-]*\.[A-Za-z]{2,24}(?:\/[^\s]*)?|@[A-Za-z0-9._]{2,30})/gi;
-const BAD_TLD=new Set(["jpg","jpeg","png","gif","webp","bmp","svg","pdf","mp4","mp3","mov","avi","mkv","doc","docx","xls","xlsx","ppt","pptx","zip","rar","7z","apk","exe","csv","wav","ogg","webm","txt","ics"]);
-
-function isBadDomainToken(tok){
-    let host=tok;
-    if(/^https?:\/\//i.test(tok)){
-        try{host=new URL(tok).hostname}catch(e){return false}
-    }else if(/^www\./i.test(tok)){
-        host=tok.slice(4).split(/[/?#]/)[0];
-    }else if(tok.startsWith("@")){
-        return false;
-    }else{
-        host=tok.split(/[/?#]/)[0];
-    }
-    const parts=host.split(".").filter(Boolean);
-    if(parts.length<2)return true;
-    return BAD_TLD.has(parts[parts.length-1].toLowerCase());
-}
-
-function renderBio(text){
-    targetBio.textContent="";
-    const t=String(text||"").trim();
-    if(!t)return;
-
-    LINK_RE.lastIndex=0;
-    let last=0,m;
-    while((m=LINK_RE.exec(t))!==null){
-        const tok=m[0];
-        const prev=m.index>0?t[m.index-1]:"";
-        if(tok.startsWith("@")&&/[A-Za-z0-9._%+-]/.test(prev)){continue}
-        if(!tok.startsWith("@")&&isBadDomainToken(tok)){continue}
-
-        if(m.index>last){
-            targetBio.appendChild(document.createTextNode(t.slice(last,m.index)));
+    scanInterval=setInterval(()=>{
+        stepIdx++;
+        if(stepIdx<scanSteps.length){
+            statusBox.textContent=scanSteps[stepIdx];
         }
+    },300);
 
-        let href=null;
-        if(/^https?:\/\//i.test(tok)) href=tok;
-        else if(/^www\./i.test(tok)) href="https://"+tok;
-        else if(tok.startsWith("@")) href="https://www.tiktok.com/"+tok.slice(1);
-        else href="https://"+tok;
-
-        const trail=(tok.match(/[.,;:!?)\]}'"…]+$/)||[""])[0];
-        const cleanHref=href.slice(0,href.length-trail.length);
-        const cleanLabel=tok.slice(0,tok.length-trail.length);
-
-        const a=document.createElement("a");
-        a.href=cleanHref;
-        a.target="_blank";
-        a.rel="noopener noreferrer nofollow";
-        a.textContent=cleanLabel;
-        targetBio.appendChild(a);
-
-        if(trail)targetBio.appendChild(document.createTextNode(trail));
-        last=m.index+tok.length;
-    }
-    if(last<t.length){
-        targetBio.appendChild(document.createTextNode(t.slice(last)));
-    }
-}
-
-function renderBioLink(url){
-    targetBioLink.textContent="";
-    const u=String(url||"").trim();
-    if(!u)return;
-    let href=u;
-    if(!/^https?:\/\//i.test(href))href="https://"+href;
-
-    const a=document.createElement("a");
-    a.href=href;
-    a.target="_blank";
-    a.rel="noopener noreferrer nofollow";
-    a.innerHTML=chainIconSVG();
-    a.appendChild(document.createTextNode(u));
-    targetBioLink.appendChild(a);
-}
-
-function render(d){
-    detectedTarget=d;
-    hideLoading();
-    statusEl.classList.remove("show");
-    targetAvatar.src=d.avatar||"";
-    targetName.textContent=d.name;
-    if(d.verified)targetName.insertAdjacentHTML("beforeend",badgeSVG(15));
-    renderBio(d.bio);
-    renderBioLink(d.bioLink);
-    setStat(statFollowing,d.following);
-    setStat(statFollowers,d.followers);
-    setStat(statLikes,d.likes);
-    targetCard.classList.add("show");
-}
-
-/* ===== POLLING STORY (ring biru muncul kalau target posting story) ===== */
-function stopStoryPoll(){
-    pollActive=false;
-    clearTimeout(pollTimer);
-}
-function startStoryPoll(un){
-    stopStoryPoll();
-    pollActive=true;
-    let n=0;
-    const tick=async()=>{
-        if(!pollActive)return;
-        n++;
-        try{
-            const s=await fetchStory(un);
-            if(!pollActive)return;
-            if(detectedTarget&&detectedTarget.username===un){
-                detectedTarget.hasStory=s.has;
-                setStoryRing(s.has);
-            }
-        }catch(e){}
-        if(pollActive)pollTimer=setTimeout(tick,n<6?POLL_MS:POLL_SLOW);
-    };
-    pollTimer=setTimeout(tick,POLL_MS);
-}
-
-async function detectTarget(un){
-    const myId=++reqId;
-    if(!un){showError("Masukkan username yang valid");return}
-    activeKey=String(un).toLowerCase();
-    showLoading();
     try{
-        const d=await fetchTikwm(un);
-        if(myId!==reqId)return;
-        await preloadAvatar(d.avatar);
-        if(myId!==reqId)return;
-        render(d);
-        startStoryPoll(d.username);
+        const data=await requestTikwmUser(username);
+        if(id!==requestId){stopScanText();return}
+        cache[username]=data;
+        renderTarget(data);
     }catch(e){
-        if(myId!==reqId)return;
-        showError("Target tidak ditemukan. Cek lagi username atau link-nya.");
+        if(id!==requestId){stopScanText();return}
+        stopScanText();
+        spinner.classList.remove("show");
+        card.classList.remove("show");
+        statusBox.textContent=e.message||"Failed to fetch account data";
+        statusBox.style.color="#d93025";
+        statusBox.style.display="block";
     }
 }
 
-usernameInput.addEventListener("input",()=>{
-    clearTimeout(debounceTimer);
-    const raw=usernameInput.value.trim();
-    if(!raw){
-        reqId++;
-        stopStoryPoll();
-        detectedTarget=null;
-        hideLoading();
-        targetCard.classList.remove("show");
-        setStoryRing(false);
-        statusEl.classList.remove("show");
-        return;
-    }
+function detectTarget(){
+    const un=normalize(input.value);
+    if(!un){resetTarget();return}
+    clearTimeout(targetTimer);
     spinner.classList.add("show");
-    debounceTimer=setTimeout(()=>{
-        let un=normalize(raw);
-        if(typeof un==="object"){
-            resolveShortLink(un.shortLink)
-                .then(r=>detectTarget(r))
-                .catch(()=>showError("Gagal membaca short link. Coba tempel link lengkapnya."));
-        }else{
-            detectTarget(un);
-        }
-    },DEBOUNCE_MS);
-});
-
-/* ===== PILIHAN KOIN ===== */
-const coinsGrid=document.getElementById("coinsGrid");
-const customOption=document.getElementById("customOption");
-const customNameBox=document.getElementById("customNameBox");
-const customAmountText=document.getElementById("customAmountText");
-const customPriceText=document.getElementById("customPriceText");
-const totalAmount=document.getElementById("totalAmount");
-const rechargeBtn=document.getElementById("rechargeBtn");
-
-let selectedCoins=30;
-let selectedPrice=0.29;
-let customInput=null;
-
-function updateTotal(){
-    totalAmount.textContent=fmtUSD(selectedPrice);
+    statusBox.textContent="";
+    statusBox.style.color="#888";
+    statusBox.style.display="block";
+    card.classList.remove("show");
+    stopScanText();
+    targetTimer=setTimeout(()=>{fetchTarget(un)},500);
 }
 
-function selectOption(opt){
-    removeCustomInput();
-    document.querySelectorAll(".coin-option").forEach(o=>o.classList.remove("selected"));
-    opt.classList.add("selected");
-    selectedCoins=Number(opt.dataset.coins);
-    selectedPrice=Number(opt.dataset.price);
-    updateTotal();
-}
+input.addEventListener("input",detectTarget);
+input.addEventListener("paste",()=>{setTimeout(detectTarget,50)});
 
-function removeCustomInput(){
-    if(customInput){
-        customInput.remove();
-        customInput=null;
-    }
-    customOption.classList.remove("custom-input-active");
-    customAmountText.style.display="";
-    customPriceText.textContent="Minimum : 30";
-    customPriceText.classList.remove("min-warn");
-}
+/* COINS */
+const coinOpts=document.querySelectorAll(".coin-option:not(.custom-btn)");
+let selCoins=30,selPrice=0.29;
+document.querySelector('.coin-option[data-coins="30"]').classList.add("selected");
 
-coinsGrid.querySelectorAll(".coin-option:not(.custom-opt)").forEach(opt=>{
-    opt.addEventListener("click",()=>selectOption(opt));
-});
+function setBuyText(){document.getElementById("buyButton").textContent="Buy "+formatUSD(selPrice)}
 
-customOption.addEventListener("click",()=>{
-    if(customInput){customInput.focus();return}
-    document.querySelectorAll(".coin-option").forEach(o=>o.classList.remove("selected"));
-    customOption.classList.add("selected");
-    customOption.classList.add("custom-input-active");
-    customAmountText.style.display="none";
-    customPriceText.textContent="Min 30 • $0.01426 / koin";
-    customPriceText.classList.remove("min-warn");
-    selectedCoins=0;selectedPrice=0;
-    updateTotal();
-
-    customInput=document.createElement("input");
-    customInput.type="text";
-    customInput.inputMode="numeric";
-    customInput.placeholder="Jumlah koin";
-    customNameBox.appendChild(customInput);
-    setTimeout(()=>customInput.focus(),50);
-
-    customInput.addEventListener("input",()=>{
-        const raw=customInput.value.replace(/[^\d]/g,"");
-        customInput.value=raw;
-        const n=Number(raw||0);
-        if(raw===""){
-            customPriceText.textContent="Min 30 • $0.01426 / koin";
-            customPriceText.classList.remove("min-warn");
-            selectedCoins=0;selectedPrice=0;
-        }else if(n<CUSTOM_MIN){
-            customPriceText.textContent="Minimum : "+CUSTOM_MIN;
-            customPriceText.classList.add("min-warn");
-            selectedCoins=0;selectedPrice=0;
-        }else if(n>CUSTOM_MAX){
-            customPriceText.textContent="Maksimum : "+fmtCoins(CUSTOM_MAX);
-            customPriceText.classList.add("min-warn");
-            selectedCoins=0;selectedPrice=0;
-        }else{
-            customPriceText.textContent=fmtUSD(n*RATE);
-            customPriceText.classList.remove("min-warn");
-            selectedCoins=n;selectedPrice=n*RATE;
-        }
-        updateTotal();
-    });
-    customInput.addEventListener("click",e=>e.stopPropagation());
-});
-
-/* ===== PEMBAYARAN ===== */
-const pmOverlay=document.getElementById("pmOverlay");
-const pmBackBtn=document.getElementById("pmBackBtn");
-const pmContinueBtn=document.getElementById("pmContinueBtn");
-const processingDialog=document.getElementById("processingDialog");
-const countdownEl=document.getElementById("countdown");
-const successDialog=document.getElementById("successDialog");
-const successAvatar=document.getElementById("successAvatar");
-const successName=document.getElementById("successName");
-const successDoneBtn=document.getElementById("successDoneBtn");
-
-rechargeBtn.addEventListener("click",()=>{
-    if(!detectedTarget){
-        statusEl.textContent="Deteksi target dulu sebelum recharge";
-        statusEl.classList.add("show");
-        usernameInput.focus();
-        return;
-    }
-    if(selectedCoins<=0){
-        statusEl.textContent="Masukkan jumlah koin yang valid";
-        statusEl.classList.add("show");
-        return;
-    }
-    statusEl.classList.remove("show");
-    pmOverlay.classList.add("show");
-});
-
-document.querySelectorAll(".pm-option").forEach(opt=>{
-    opt.addEventListener("click",()=>{
-        document.querySelectorAll(".pm-option").forEach(o=>o.classList.remove("selected"));
-        opt.classList.add("selected");
+coinOpts.forEach(o=>{
+    o.addEventListener("click",()=>{
+        coinOpts.forEach(x=>x.classList.remove("selected"));
+        o.classList.add("selected");
+        selCoins=Number(o.dataset.coins);
+        selPrice=Number(o.dataset.price);
+        setBuyText();
     });
 });
 
-pmBackBtn.addEventListener("click",()=>pmOverlay.classList.remove("show"));
-pmOverlay.addEventListener("click",e=>{
-    if(e.target===pmOverlay)pmOverlay.classList.remove("show");
+/* CUSTOM */
+const coinInput=document.getElementById("coinAmountInput");
+const usdDisp=document.getElementById("usdAmountDisplay");
+const totDisp=document.getElementById("customTotalAmount");
+let customRaw="";
+
+function fmtNum(v){return v?fmtCoins(v):"0"}
+
+function clampCustom(){
+    let n=Number(customRaw)||0;
+    if(n>2500000) customRaw="2500000";
+    coinInput.value=fmtNum(customRaw);
+    const c=Number(customRaw)||0;
+    const u=c*0.01426;
+    usdDisp.textContent=formatUSD(u);
+    totDisp.textContent=formatUSD(u);
+}
+
+document.getElementById("customBtn").addEventListener("click",()=>{
+    customRaw="";coinInput.value="0";usdDisp.textContent="$0.00";totDisp.textContent="$0.00";
+    document.getElementById("customModal").classList.add("show");
+});
+document.getElementById("modalBackBtn").addEventListener("click",()=>{document.getElementById("customModal").classList.remove("show")});
+
+document.getElementById("keypad").addEventListener("click",e=>{
+    const b=e.target.closest("button");if(!b) return;
+    const v=b.textContent.trim();
+    if(v==="⌫") customRaw=customRaw.slice(0,-1);
+    else if(v==="000"){if(customRaw.length>0) customRaw+="000"}
+    else if(/^\d$/.test(v)){if(customRaw.length<9) customRaw+=v}
+    clampCustom();
 });
 
-pmContinueBtn.addEventListener("click",()=>{
-    pmOverlay.classList.remove("show");
-    processingDialog.classList.add("show");
-    let s=3;
-    countdownEl.textContent="00:0"+s;
-    const iv=setInterval(()=>{
-        s--;
-        if(s<=0){
-            clearInterval(iv);
-            processingDialog.classList.remove("show");
-            successAvatar.src=detectedTarget?detectedTarget.avatar:"";
-            successName.textContent=detectedTarget?detectedTarget.name:"Guest";
-            successDialog.classList.add("show");
-        }else{
-            countdownEl.textContent="00:0"+s;
+document.getElementById("rechargeBtn").addEventListener("click",()=>{
+    const c=Number(customRaw)||0;
+    if(c<30){alert("Minimum coins is 30.");return}
+    if(c>2500000){alert("Maximum coins is 2.500.000.");return}
+    selCoins=c;selPrice=Math.round(c*0.01426*100)/100;
+    coinOpts.forEach(o=>o.classList.remove("selected"));setBuyText();
+    document.getElementById("customModal").classList.remove("show");
+});
+
+/* ORDER */
+const orderModal=document.getElementById("orderModal");
+document.getElementById("buyButton").addEventListener("click",()=>{
+    if(!detectedTarget){alert("Masukkan username target terlebih dahulu!");return}
+    document.getElementById("accountName").textContent="@"+detectedTarget.username;
+    document.getElementById("summaryCoins").textContent=fmtCoins(selCoins)+" Coins";
+    document.getElementById("summaryPrice").textContent=formatUSD(selPrice);
+    document.getElementById("summaryTotal").textContent=formatUSD(selPrice);
+    orderModal.classList.add("show");
+});
+document.getElementById("summaryBackBtn").addEventListener("click",()=>{orderModal.classList.remove("show")});
+
+document.querySelectorAll(".payment-option").forEach(o=>{
+    o.addEventListener("click",()=>{
+        document.querySelectorAll(".payment-option").forEach(x=>x.classList.remove("selected"));
+        o.classList.add("selected");
+    });
+});
+
+/* PAYMENT — loading 3 detik */
+document.getElementById("payNowBtn").addEventListener("click",()=>{
+    orderModal.classList.remove("show");
+    document.getElementById("loaderModal").classList.add("show");
+
+    let seconds=3;
+    document.getElementById("countdownTimer").textContent="00:0"+seconds;
+    document.getElementById("processingMessage").textContent="Processing payment...";
+    document.getElementById("processingSubMessage").textContent="";
+
+    const timer=setInterval(()=>{
+        seconds--;
+        document.getElementById("countdownTimer").textContent="00:0"+seconds;
+
+        if(seconds<=0){
+            clearInterval(timer);
+            document.getElementById("loaderModal").classList.remove("show");
+            showPaymentSuccess();
         }
     },1000);
 });
 
-successDoneBtn.addEventListener("click",()=>{
-    successDialog.classList.remove("show");
-    if(selectedCoins>0){
-        deductBalance(selectedCoins);
-    }
+function showPaymentSuccess(){
+    if(!detectedTarget) return;
+
+    document.getElementById("successAvatar").src=detectedTarget.avatar||"";
+    document.getElementById("successAccountName").innerHTML=
+        (detectedTarget.name||detectedTarget.username)+(detectedTarget.verified?badgeSVG(15):"");
+    document.getElementById("successAccountUsername").textContent="@"+detectedTarget.username;
+
+    const un=detectedTarget.username;
+    coinsBalance[un]=(coinsBalance[un]||0)+selCoins;
+
+    transactionHistory.unshift({
+        username:detectedTarget.username,
+        name:detectedTarget.name,
+        avatar:detectedTarget.avatar,
+        verified:detectedTarget.verified,
+        coins:coinsBalance[un],
+        price:selPrice
+    });
+    if(transactionHistory.length>50) transactionHistory.pop();
+
+    document.getElementById("successModal").classList.add("show");
+}
+
+document.getElementById("goBackBtn").addEventListener("click",()=>{
+    document.getElementById("successModal").classList.remove("show");
+    resetTarget();
 });
 
-renderBalance();
+/* HISTORY */
+let transactionHistory=[];
+
+const coinImg="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a";
+
+function openHistory(){
+    const list=document.getElementById("historyList");
+    list.innerHTML="";
+    if(!transactionHistory.length){
+        list.innerHTML='<div class="history-empty">Belum ada transaksi.</div>';
+    }else{
+        transactionHistory.forEach(tx=>{
+            const d=document.createElement("div");d.className="history-item";
+            d.innerHTML=`
+            <div class="history-account-top">
+                <img src="${tx.avatar||""}">
+                <div class="history-account-info">
+                    <div class="history-account-name">
+                        ${tx.name||tx.username}${tx.verified?badgeSVG(14):""}
+                    </div>
+                    <div class="history-account-username">@${tx.username}</div>
+                </div>
+            </div>
+            <div class="history-detail-rows">
+                <div class="history-detail-row">
+                    <span class="history-detail-label">Coins</span>
+                    <span class="history-detail-value">
+                        <span class="history-coins-inline"><img src="${coinImg}"> ${fmtCoins(tx.coins)}</span>
+                    </span>
+                </div>
+                <div class="history-detail-row">
+                    <span class="history-detail-label">Harga</span>
+                    <span class="history-detail-value">${formatUSD(tx.price)}</span>
+                </div>
+                <div class="history-detail-row">
+                    <span class="history-detail-label">Status</span>
+                    <span class="history-status-green">Suksesful</span>
+                </div>
+            </div>`;
+            list.appendChild(d);
+        });
+    }
+    document.getElementById("historyModal").classList.add("show");
+}
+
+document.getElementById("menuBtn").addEventListener("click",e=>{e.stopPropagation();document.getElementById("menuDropdown").classList.toggle("show")});
+document.addEventListener("click",()=>{document.getElementById("menuDropdown").classList.remove("show")});
+document.getElementById("menuRiwayat").addEventListener("click",openHistory);
+document.getElementById("historyBackBtn").addEventListener("click",()=>{document.getElementById("historyModal").classList.remove("show")});
+document.getElementById("homeBackBtn").addEventListener("click",resetTarget);
+
+setBuyText();
 </script>
+
 </body>
 </html>
