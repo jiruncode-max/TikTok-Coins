@@ -13,17 +13,16 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   
-  /* FULL LAYAR OTOMATIS MENYESUAIKAN SEMUA UKURAN HP */
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
     color:var(--ink);background:#fff;margin:0;padding:0;
-    overflow:hidden; /* Mencegah scroll ganda di body */
+    overflow:hidden;
   }
   
   .phone-frame{
     width: 100vw;
     height: 100vh;
-    height: 100dvh; /* Pas di layar HP dari atas sampai bawah */
+    height: 100dvh;
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -64,11 +63,12 @@
   .logo{display:flex;align-items:center;gap:4px;font-size:18px;font-weight:800;letter-spacing:-.5px;color:var(--ink);text-decoration:none;flex:none}
   .logo svg{width:20px;height:24px}
 
-  .search{flex:1;display:flex;justify-content:center;min-width:0}
+  .search{flex:1;display:flex;justify-content:flex-start;min-width:0}
   .search-inner{
     position:relative;display:flex;align-items:center;
-    width:100%;height:36px;
-    background:#f1f1f2;border-radius:999px;padding:0 12px;
+    width: 50%; /* KOTAK PENCARIAN DIATUR SETENGAH (50%) */
+    height:38px;
+    background:#f1f1f2;border-radius:999px;padding:0 14px;
   }
   .search-inner input{
     flex:1;border:none;background:transparent;outline:none;
@@ -84,11 +84,12 @@
   
   .page-title{font-size:22px;font-weight:800;margin-bottom:14px}
 
-  /* KOTAK TARGET */
+  /* KOTAK TARGET DIATUR SETENGAH (50%) DARI LEBAR LAYAR */
   .target-profile-card{
     background:#f8f8f8;border:1px solid var(--line);border-radius:12px;
     padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:16px;
-    width:100%;transition:all .2s ease;
+    width: 50%; /* SETENGAH WEB/LAYAR */
+    transition:all .2s ease;
   }
   .target-profile-card.detected{background:#fff;border-color:var(--red);box-shadow:0 4px 12px rgba(254,44,85,.1)}
   
@@ -115,46 +116,46 @@
   .detect-error{font-size:11px;color:#d93025;margin-top:2px;display:none}
   .detect-error.show{display:block}
 
-  /* ISI ULANG - GRID 2 KOLOM */
+  /* ISI ULANG - KOTAK KOIN DIPERBESAR (MIN-HEIGHT & PADDING LEBIH BESAR) */
   .card{background:#fff;border:1px solid var(--line);border-radius:16px}
-  .recharge{padding:16px}
+  .recharge{padding:18px}
   
-  .coin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .coin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 
   .coin-box{
-    background:#f8f8f8;border:1px solid var(--line);border-radius:12px;
-    padding:10px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;
-    transition:all .2s ease;min-height:60px;
+    background:#f8f8f8;border:1.5px solid var(--line);border-radius:14px;
+    padding:16px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;
+    transition:all .2s ease;min-height:76px; /* DIPERBESAR TINGGINYA */
   }
   .coin-box:hover{background:#f1f1f2}
-  .coin-box.active{background:#fff;border-color:var(--red);box-shadow:0 4px 10px rgba(254,44,85,.1)}
+  .coin-box.active{background:#fff;border-color:var(--red);box-shadow:0 4px 12px rgba(254,44,85,.12)}
 
-  .coin-left{width:30px;height:30px;border-radius:50%;background:rgba(254,44,85,.08);display:flex;align-items:center;justify-content:center;flex:none}
-  .coin-left img{width:16px;height:16px}
+  .coin-left{width:38px;height:38px;border-radius:50%;background:rgba(254,44,85,.08);display:flex;align-items:center;justify-content:center;flex:none}
+  .coin-left img{width:20px;height:20px}
 
   .coin-info{flex:1;min-width:0}
-  .coin-line{font-size:13px;font-weight:700;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .coin-sub{font-size:11px;color:var(--gray);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .coin-line{font-size:15px;font-weight:800;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .coin-sub{font-size:12.5px;color:var(--gray);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
   .custom-input{
-    width:100%;padding:4px 6px;font-size:12px;
+    width:100%;padding:6px 8px;font-size:13px;
     background:#fff;border:1px solid rgba(22,24,35,.25);border-radius:6px;outline:none;margin-top:2px;
   }
   .custom-input:focus{border-color:var(--red)}
-  .custom-hint{display:none;margin-top:2px;font-size:9.5px;color:#d93025;font-weight:600}
+  .custom-hint{display:none;margin-top:2px;font-size:10px;color:#d93025;font-weight:600}
 
-  .total-row{display:flex;align-items:center;justify-content:space-between;margin-top:18px;font-size:15px;border-top:1px solid var(--line);padding-top:14px}
-  .total-row b{font-size:18px;font-weight:800;color:var(--red)}
+  .total-row{display:flex;align-items:center;justify-content:space-between;margin-top:20px;font-size:16px;border-top:1px solid var(--line);padding-top:16px}
+  .total-row b{font-size:20px;font-weight:800;color:var(--red)}
 
-  .action-row{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+  .action-row{display:flex;flex-direction:column;gap:12px;margin-top:16px}
   .btn-recharge{
-    width:100%;padding:14px 20px;font-size:15px;font-weight:700;color:#fff;
-    background:rgba(254,44,85,.4);border:none;border-radius:10px;cursor:not-allowed;
+    width:100%;padding:15px 20px;font-size:16px;font-weight:700;color:#fff;
+    background:rgba(254,44,85,.4);border:none;border-radius:12px;cursor:not-allowed;
   }
   .btn-recharge:not(:disabled){background:var(--red);cursor:pointer}
   .btn-recharge:not(:disabled):hover{background:var(--red-hover)}
 
-  .secure{display:inline-flex;align-items:center;gap:6px;border:1.2px solid #4caf50;border-radius:999px;padding:4px 10px;background:#fff;align-self:center}
+  .secure{display:inline-flex;align-items:center;gap:6px;border:1.2px solid #4caf50;border-radius:999px;padding:5px 12px;background:#fff;align-self:center}
   .secure svg{width:14px;height:14px}
   .secure-text{display:flex;flex-direction:column;line-height:1.15}
   .secure-text b{font-size:10.5px}
@@ -222,6 +223,12 @@
   .pay-success .t1{font-size:17px;font-weight:800;color:#2e7d32;margin-bottom:10px}
   .success-target{display:none;justify-content:center;margin-bottom:12px}
   .btn-done{width:100%;padding:13px;border:none;border-radius:10px;background:var(--red);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+
+  /* Responsif khusus layar HP sangat kecil agar card tetap proporsional */
+  @media(max-width:380px){
+    .target-profile-card{width:70%;}
+    .search-inner{width:70%;}
+  }
 </style>
 </head>
 
@@ -264,7 +271,7 @@
 
     <div class="search">
       <div class="search-inner">
-        <input id="targetInput" type="text" placeholder="Username atau link akun..." autocomplete="off" spellcheck="false">
+        <input id="targetInput" type="text" placeholder="Username / link akun..." autocomplete="off" spellcheck="false">
       </div>
     </div>
 
@@ -276,7 +283,7 @@
 
     <div class="page-title">Dapatkan Koin</div>
 
-    <!-- KOTAK TARGET -->
+    <!-- KOTAK TARGET (SETENGAH LAYAR / 50%) -->
     <div class="target-profile-card" id="targetCard">
       <div class="target-avatar-wrap" id="targetAvatarWrap">
         <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
