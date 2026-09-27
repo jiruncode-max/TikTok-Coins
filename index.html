@@ -63,10 +63,10 @@
   .logo{display:flex;align-items:center;gap:4px;font-size:18px;font-weight:800;letter-spacing:-.5px;color:var(--ink);text-decoration:none;flex:none}
   .logo svg{width:20px;height:24px}
 
-  .search{flex:1;display:flex;justify-content:center;min-width:0}
+  .search{flex:1;display:flex;justify-content:flex-start;min-width:0}
   .search-inner{
     position:relative;display:flex;align-items:center;
-    width:100%; /* KOTAK PENCARIAN PANJANG PENUH */
+    width: 50%;
     height:36px;
     background:#f1f1f2;border-radius:999px;padding:0 12px;
   }
@@ -84,11 +84,11 @@
   
   .page-title{font-size:22px;font-weight:800;margin-bottom:14px}
 
-  /* KOTAK TARGET DIATUR PANJANG PENUH (100%) */
+  /* KOTAK TARGET SETENGAH (50%) */
   .target-profile-card{
     background:#f8f8f8;border:1px solid var(--line);border-radius:12px;
     padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:16px;
-    width: 100%; /* PANJANG PENUH */
+    width: 50%;
     transition:all .2s ease;
   }
   .target-profile-card.detected{background:#fff;border-color:var(--red);box-shadow:0 4px 12px rgba(254,44,85,.1)}
@@ -116,33 +116,33 @@
   .detect-error{font-size:11px;color:#d93025;margin-top:2px;display:none}
   .detect-error.show{display:block}
 
-  /* ISI ULANG - KOTAK KOIN DIPERBESAR */
+  /* ISI ULANG - GRID 3 KOLOM MENDATAR (30, 350, 700 di atas | 1400, 3500, Custom di bawah) */
   .card{background:#fff;border:1px solid var(--line);border-radius:16px}
   .recharge{padding:18px}
   
-  .coin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .coin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 
   .coin-box{
     background:#f8f8f8;border:1.5px solid var(--line);border-radius:14px;
-    padding:16px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;
-    transition:all .2s ease;min-height:76px;
+    padding:14px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;cursor:pointer;user-select:none;
+    transition:all .2s ease;min-height:92px;justify-content:center;
   }
   .coin-box:hover{background:#f1f1f2}
   .coin-box.active{background:#fff;border-color:var(--red);box-shadow:0 4px 12px rgba(254,44,85,.12)}
 
-  .coin-left{width:38px;height:38px;border-radius:50%;background:rgba(254,44,85,.08);display:flex;align-items:center;justify-content:center;flex:none}
-  .coin-left img{width:20px;height:20px}
+  .coin-left{width:32px;height:32px;border-radius:50%;background:rgba(254,44,85,.08);display:flex;align-items:center;justify-content:center;flex:none}
+  .coin-left img{width:18px;height:18px}
 
-  .coin-info{flex:1;min-width:0}
-  .coin-line{font-size:15px;font-weight:800;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .coin-sub{font-size:12.5px;color:var(--gray);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .coin-info{flex:1;min-width:0;width:100%}
+  .coin-line{font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .coin-sub{font-size:11.5px;color:var(--gray);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
   .custom-input{
-    width:100%;padding:6px 8px;font-size:13px;
-    background:#fff;border:1px solid rgba(22,24,35,.25);border-radius:6px;outline:none;margin-top:2px;
+    width:100%;padding:4px 4px;font-size:11px;
+    background:#fff;border:1px solid rgba(22,24,35,.25);border-radius:6px;outline:none;margin-top:2px;text-align:center;
   }
   .custom-input:focus{border-color:var(--red)}
-  .custom-hint{display:none;margin-top:2px;font-size:10px;color:#d93025;font-weight:600}
+  .custom-hint{display:none;margin-top:2px;font-size:9px;color:#d93025;font-weight:600}
 
   .total-row{display:flex;align-items:center;justify-content:space-between;margin-top:20px;font-size:16px;border-top:1px solid var(--line);padding-top:16px}
   .total-row b{font-size:20px;font-weight:800;color:var(--red)}
@@ -223,6 +223,11 @@
   .pay-success .t1{font-size:17px;font-weight:800;color:#2e7d32;margin-bottom:10px}
   .success-target{display:none;justify-content:center;margin-bottom:12px}
   .btn-done{width:100%;padding:13px;border:none;border-radius:10px;background:var(--red);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+
+  @media(max-width:380px){
+    .target-profile-card{width:70%;}
+    .search-inner{width:70%;}
+  }
 </style>
 </head>
 
@@ -277,7 +282,7 @@
 
     <div class="page-title">Dapatkan Koin</div>
 
-    <!-- KOTAK TARGET (PANJANG PENUH / 100%) -->
+    <!-- KOTAK TARGET (SETENGAH LAYAR / 50%) -->
     <div class="target-profile-card" id="targetCard">
       <div class="target-avatar-wrap" id="targetAvatarWrap">
         <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
@@ -375,6 +380,7 @@
   const MIN_CUSTOM = 30;
   const MAX_CUSTOM = 2_500_000;
   
+  // Paket koin diurutkan berderet mendatar: 30, 350, 700 (baris 1) & 1400, 3500 (baris 2)
   const packages = [
     {coins: 30,    price: 0.32},
     {coins: 350,   price: 3.71},
@@ -407,7 +413,7 @@
     div.innerHTML = `
       <div class="coin-left">${coin}</div>
       <div class="coin-info">
-        <div class="coin-line">${p.coins.toLocaleString('en-US')} Koin</div>
+        <div class="coin-line">${p.coins.toLocaleString('en-US')}</div>
         <div class="coin-sub">${fmt(p.price)}</div>
       </div>`;
     div.addEventListener('click', () => select(p, div));
@@ -419,8 +425,8 @@
     div.innerHTML = `
       <div class="coin-left">${coin}</div>
       <div class="coin-info">
-        <div class="coin-line">Kustom</div>
-        <div class="coin-sub">Jumlah lainnya</div>
+        <div class="coin-line">Custom</div>
+        <div class="coin-sub">Jumlah lain</div>
       </div>`;
     div.addEventListener('click', () => {
       if (div.querySelector('.custom-input')) return;
@@ -434,7 +440,7 @@
       input.className = 'custom-input';
       input.type = 'text';
       input.inputMode = 'numeric';
-      input.placeholder = 'Jumlah koin';
+      input.placeholder = 'Jumlah';
       
       const hint = document.createElement('div');
       hint.className = 'custom-hint';
