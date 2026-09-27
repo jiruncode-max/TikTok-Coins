@@ -13,26 +13,22 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   
-  /* FULL LAYAR 9:16 TANPA BINGKAI GARIS DI LUAR */
+  /* FULL LAYAR OTOMATIS MENYESUAIKAN SEMUA UKURAN HP */
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    color:var(--ink);background:#fff;min-height:100vh;
-    display:flex;justify-content:center;align-items:center;padding:0;
+    color:var(--ink);background:#fff;margin:0;padding:0;
+    overflow:hidden; /* Mencegah scroll ganda di body */
   }
   
   .phone-frame{
-    width:100%;max-width:430px;min-height:100vh;background:#fff;
-    display:flex;flex-direction:column;position:relative;
-    overflow-y:auto;
-  }
-
-  @media(min-width:431px){
-    .phone-frame{
-      height:100vh;
-      max-height:920px;
-      box-shadow:0 0 25px rgba(0,0,0,.15);
-      border-radius:0;
-    }
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh; /* Pas di layar HP dari atas sampai bawah */
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-y: auto;
   }
 
   /* BROWSER CHROME */
@@ -171,7 +167,7 @@
     z-index:10;
   }
 
-  /* MODAL PEMBAYARAN - MUNCUL DI TENGAH LAYAR */
+  /* MODAL PEMBAYARAN - DI TENGAH LAYAR */
   .overlay{
     position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:100;
     display:none;align-items:center;justify-content:center;padding:20px;
@@ -378,7 +374,6 @@
   const MIN_CUSTOM = 30;
   const MAX_CUSTOM = 2_500_000;
   
-  // Paket koin sesuai permintaan: 30, 350, 700, 1.400, 3.500 dan Custom
   const packages = [
     {coins: 30,    price: 0.32},
     {coins: 350,   price: 3.71},
