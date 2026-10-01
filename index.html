@@ -42,6 +42,8 @@ header.main-header{
 .main-header h1{
     margin:0;
     font-weight:600;
+    font-size:15px;
+    color:#555;
 }
 
 #homeBackBtn{
@@ -51,26 +53,6 @@ header.main-header{
     border:0;
     font-size:20px;
     cursor:pointer;
-}
-
-.arrow-bounce{
-    display:inline-flex;
-    gap:5px;
-    font-size:28px;
-}
-
-.arrow-bounce span{
-    display:inline-block;
-    animation:arrowDrop 1s ease-in-out infinite;
-}
-
-.arrow-bounce span:nth-child(1){color:#fe2c55}
-.arrow-bounce span:nth-child(2){color:#25f4ee;animation-delay:.12s}
-.arrow-bounce span:nth-child(3){color:#ffc107;animation-delay:.24s}
-
-@keyframes arrowDrop{
-    0%,100%{transform:translateY(0);opacity:1}
-    50%{transform:translateY(10px);opacity:.35}
 }
 
 .header-menu-wrap{
@@ -182,12 +164,23 @@ header.main-header{
     font-size:10px;
 }
 
+.top-target-status.scanning{
+    color:#fe2c55;
+    font-size:11px;
+    animation:statusPulse .8s ease-in-out infinite;
+}
+
+@keyframes statusPulse{
+    0%,100%{opacity:.4}
+    50%{opacity:1}
+}
+
 .target-card{
     display:none;
     margin:0 15px 12px;
     border:1px solid #eee;
     border-radius:12px;
-    padding:12px;
+    padding:14px;
     background:#fafafa;
 }
 
@@ -196,7 +189,7 @@ header.main-header{
 .target-card-top{
     display:flex;
     align-items:center;
-    gap:11px;
+    gap:12px;
 }
 
 .target-avatar{
@@ -205,61 +198,35 @@ header.main-header{
     border-radius:50%;
     object-fit:cover;
     background:#eee;
+    flex-shrink:0;
+}
+
+.target-info{
+    flex:1;
+    min-width:0;
 }
 
 .target-name{
     font-size:16px;
     font-weight:700;
     color:#000;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .target-username{
     font-size:12px;
     font-weight:600;
-    color:#000;
+    color:#666;
     margin-top:2px;
-}
-
-.target-bio{
-    font-size:12px;
-    font-weight:600;
-    color:#000;
-    margin:10px 0 8px;
-    line-height:1.4;
-    white-space:pre-line;
-}
-
-.target-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:6px;
-}
-
-.target-stat{
-    background:#fff;
-    border-radius:8px;
-    padding:9px 4px;
-    text-align:center;
-}
-
-.target-stat b{
-    display:block;
-    font-size:15px;
-    color:#000;
-}
-
-.target-stat span{
-    display:block;
-    font-size:10px;
-    color:#000;
-    margin-top:4px;
-    font-weight:700;
 }
 
 .tiktok-verified-badge{
     display:inline-flex;
     vertical-align:middle;
     align-items:center;
+    margin-left:4px;
 }
 
 .tiktok-verified-badge svg{display:block}
@@ -281,15 +248,13 @@ header.main-header{
 }
 
 .coin-options{
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
     gap:8px;
     margin-bottom:20px;
 }
 
 .coin-option{
-    width:calc(33.33% - 6px);
     height:60px;
     border:1px solid #ddd;
     border-radius:6px;
@@ -361,32 +326,6 @@ header.main-header{
     color:#666;
 }
 
-.tiktok-brand{
-    text-align:center;
-    font-size:12px;
-    color:#ccc;
-    margin-top:20px;
-}
-
-.tiktok-brand img{
-    height:15px;
-    vertical-align:middle;
-}
-
-.payment-logos{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    margin:20px 0;
-}
-
-.payment-logos img{
-    width:30px;
-    height:25px;
-    object-fit:contain;
-    opacity:.7;
-}
-
 footer{
     padding:15px;
     background:#fff;
@@ -434,16 +373,6 @@ footer{
     border-radius:20px;
     padding:20px;
     box-shadow:0 0 15px rgba(0,0,0,.2);
-}
-
-.modal-content-bottom{
-    background:#fff;
-    width:100%;
-    max-width:450px;
-    border-radius:20px 20px 0 0;
-    padding:20px;
-    position:absolute;
-    bottom:0;
 }
 
 .modal header{
@@ -553,15 +482,6 @@ footer{
     cursor:pointer;
 }
 
-.secure-payment{
-    background:#e8f5e9;
-    color:#388e3c;
-    padding:12px;
-    border-radius:8px;
-    text-align:center;
-    margin-bottom:15px;
-}
-
 .order-details{
     border-bottom:1px solid #eee;
     padding-bottom:12px;
@@ -598,8 +518,9 @@ footer{
     border-color:#007bff;
 }
 
-.payment-option svg{
+.payment-option .pm-icon{
     margin-right:12px;
+    flex-shrink:0;
 }
 
 .payment-option span{
@@ -692,12 +613,14 @@ footer{
 #processingSubMessage{
     font-size:14px;
     color:#777;
+    margin-top:4px;
 }
 
 #countdownTimer{
     font-size:18px;
     font-weight:bold;
     color:#fe2c55;
+    margin-top:8px;
 }
 
 .success-container{
@@ -729,7 +652,7 @@ footer{
 }
 
 .success-account-card{
-    padding:12px;
+    padding:14px;
     border:1px solid #eee;
     border-radius:12px;
     background:#fafafa;
@@ -740,7 +663,7 @@ footer{
 .success-account-head{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:12px;
 }
 
 .success-account-avatar{
@@ -749,43 +672,27 @@ footer{
     border-radius:50%;
     object-fit:cover;
     background:#eee;
+    flex-shrink:0;
+}
+
+.success-account-info{
+    flex:1;
+    min-width:0;
 }
 
 .success-account-name{
     font-size:15px;
     font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .success-account-username{
     font-size:12px;
     font-weight:600;
+    color:#666;
     margin-top:2px;
-}
-
-.success-account-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:6px;
-    margin-top:10px;
-}
-
-.success-account-stat{
-    text-align:center;
-    background:#fff;
-    border-radius:8px;
-    padding:7px 3px;
-}
-
-.success-account-stat b{
-    display:block;
-    font-size:13px;
-}
-
-.success-account-stat span{
-    display:block;
-    font-size:9px;
-    margin-top:2px;
-    font-weight:700;
 }
 
 .history-list{
@@ -819,40 +726,70 @@ footer{
     border-radius:50%;
     object-fit:cover;
     background:#eee;
+    flex-shrink:0;
+}
+
+.history-account-info{
+    flex:1;
+    min-width:0;
 }
 
 .history-account-name{
     font-size:14px;
     font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .history-account-username{
     font-size:12px;
     font-weight:600;
+    color:#666;
 }
 
-.history-account-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:6px;
+.history-detail-rows{
     margin-top:10px;
+    border-top:1px solid #eee;
+    padding-top:10px;
 }
 
-.history-account-stat{
-    background:#fff;
-    border-radius:8px;
-    padding:8px 4px;
-    text-align:center;
-}
-
-.history-account-stat b{
-    display:block;
+.history-detail-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
     font-size:13px;
 }
 
-.history-account-stat span{
-    display:block;
-    font-size:9px;
+.history-detail-row:last-child{
+    margin-bottom:0;
+}
+
+.history-detail-label{
+    color:#888;
+    font-weight:600;
+}
+
+.history-detail-value{
+    font-weight:700;
+    color:#222;
+}
+
+.history-coins-inline{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.history-coins-inline img{
+    width:18px;
+    height:18px;
+    flex-shrink:0;
+}
+
+.history-status-green{
+    color:#16a34a;
     font-weight:700;
 }
 </style>
@@ -864,18 +801,11 @@ footer{
 
 <header class="main-header">
 <button id="homeBackBtn">←</button>
-
-<h1 class="arrow-bounce">
-<span>⬇</span>
-<span>⬇</span>
-<span>⬇</span>
-</h1>
-
+<h1>Get Coins</h1>
 <div class="header-menu-wrap">
 <button class="header-menu-btn" id="menuBtn">☰</button>
-
 <div class="menu-dropdown" id="menuDropdown">
-<button id="menuRiwayat">📋 &nbsp; تاريخ</button>
+<button id="menuRiwayat">Riwayat Transaksi</button>
 </div>
 </div>
 </header>
@@ -883,425 +813,236 @@ footer{
 <div class="content-wrapper">
 
 <nav class="top-nav">
-
 <img src="https://static.vecteezy.com/system/resources/previews/020/964/382/original/tiktok-circle-icon-for-web-design-free-png.png">
-
 <div class="top-target-box">
-
 <div class="top-target-input-row">
-<input
-id="targetUsernameInput"
-placeholder=""
-autocomplete="off"
-spellcheck="false"
->
+<input id="targetUsernameInput" placeholder="" autocomplete="off" spellcheck="false">
 <span id="topTargetSpinner" class="top-target-spinner"></span>
 </div>
-
 <div id="targetStatus" class="top-target-status"></div>
-
 </div>
 </nav>
 
 <div id="targetCard" class="target-card">
-
 <div class="target-card-top">
-
-<img id="targetAvatar" class="target-avatar" alt="Foto profil">
-
-<div>
+<img id="targetAvatar" class="target-avatar" alt="Profile photo">
+<div class="target-info">
 <div id="targetName" class="target-name">-</div>
 <div id="targetUsername" class="target-username">-</div>
 </div>
-
-</div>
-
-<div id="targetBio" class="target-bio"></div>
-
-<div class="target-stats">
-
-<div class="target-stat">
-<b id="targetFollowing">-</b>
-<span>التالي</span>
-</div>
-
-<div class="target-stat">
-<b id="targetFollowers">-</b>
-<span>المتابعون</span>
-</div>
-
-<div class="target-stat">
-<b id="targetLikes">-</b>
-<span>الإعجابات</span>
-</div>
-
 </div>
 </div>
 
 <div class="recharge-section">
 
-<h2>قابل لإعادة التعبئة</h2>
-
-<p>
-وفّر حوالي 25% بفضل انخفاض رسوم الخدمة التي تقدمها أطراف خارجية.
-</p>
+<h2>Isi Ulang</h2>
+<p>Save about 25% thanks to lower third-party service fees.</p>
 
 <div class="coin-options">
 
-<button class="coin-option" data-coins="30" data-price="0.31">
+<button class="coin-option" data-coins="30" data-price="0.29">
 <div class="top-row">
-<img src="https://tikpopular.com/wp-content/coins.png">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
 <span>30</span>
 </div>
-<p>0.31 دولار</p>
+<p>$0.29</p>
 </button>
 
-<button class="coin-option" data-coins="350" data-price="3.65">
+<button class="coin-option" data-coins="350" data-price="4.99">
 <div class="top-row">
-<img src="https://tikpopular.com/wp-content/coins.png">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
 <span>350</span>
 </div>
-<p>3.65 دولار</p>
+<p>$4.99</p>
 </button>
 
-<button class="coin-option" data-coins="700" data-price="7.25">
+<button class="coin-option" data-coins="700" data-price="9.99">
 <div class="top-row">
-<img src="https://tikpopular.com/wp-content/coins.png">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
 <span>700</span>
 </div>
-<p>7.25 دولار</p>
+<p>$9.99</p>
 </button>
 
-<button class="coin-option" data-coins="1400" data-price="14.49">
+<button class="coin-option" data-coins="1400" data-price="19.99">
 <div class="top-row">
-<img src="https://tikpopular.com/wp-content/coins.png">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
 <span>1.400</span>
 </div>
-<p>14.49 دولاراً</p>
+<p>$19.99</p>
 </button>
 
-<button class="coin-option" data-coins="3500" data-price="36.20">
+<button class="coin-option" data-coins="3500" data-price="49.99">
 <div class="top-row">
-<img src="https://tikpopular.com/wp-content/coins.png">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
 <span>3.500</span>
 </div>
-<p>36.20 دولاراً</p>
+<p>$49.99</p>
 </button>
 
-<button class="coin-option custom-btn" id="customBtn">
-خاص
+<button class="coin-option" data-coins="7000" data-price="99.99">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>7.000</span>
+</div>
+<p>$99.99</p>
 </button>
+
+<button class="coin-option" data-coins="17500" data-price="249.99">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>17.500</span>
+</div>
+<p>$249.99</p>
+</button>
+
+<button class="coin-option" data-coins="35000" data-price="499.99">
+<div class="top-row">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
+<span>35.000</span>
+</div>
+<p>$499.99</p>
+</button>
+
+<button class="coin-option custom-btn" id="customBtn">Custom</button>
 
 </div>
 
 <div class="card">
-<img src="https://img.icons8.com/ios-filled/50/000000/handshake.png">
+<img src="https://z-cdn-media.chatglm.cn/files/1cbc49cf-3814-4d40-bcf0-048fe913535a.png?auth_key=1888344054-97f7da644cba4924814aaf6121462058-0-6fda58532b32a9f84111ab25bc4e39da" width="150" height="150" alt="Handshake">
 <div>
-<h4>ادعُ واحصل على مكافآت</h4>
-<p>اطلع على هذه الميزة الجديدة!</p>
+<h4>Invite and Earn Rewards</h4>
+<p>Check out this new feature !!</p>
 </div>
-</div>
-
-<div class="card">
-<img src="https://img.icons8.com/?size=100&id=iCwcOoy8tOGw&format=png&color=000000">
-<div>
-<p>أضف هذه الصفحة إلى شاشة الهاتف الرئيسية لسهولة الوصول إليها بنقرة واحدة فقط.</p>
-</div>
-</div>
-
-<div class="tiktok-brand">
-<img src="https://img.icons8.com/ios-filled/50/000000/tiktok.png">
-تيك توك
-</div>
-
-<div class="payment-logos">
-
-<img src="https://img.icons8.com/color/48/000000/visa.png">
-
-<img src="https://img.icons8.com/color/48/000000/mastercard.png">
-
-<img src="https://img.icons8.com/color/48/000000/paypal.png">
-
-<img src="https://img.icons8.com/?size=100&id=77188&format=png&color=000000">
-
 </div>
 
 </div>
 </div>
 
 <footer>
-
 <div class="special-offer">
-<span>عروض خاصة</span>
-<span>احصل على استرداد نقدي بنسبة 5% &gt;</span>
+<span>Special offer</span>
+<span>Get 5% cashback &gt;</span>
 </div>
-
-<button class="buy-button" id="buyButton">
-اشترِ مقابل 0.31 دولار
-</button>
-
+<button class="buy-button" id="buyButton">Buy $0.29</button>
 </footer>
 
 </div>
 
-
 <!-- CUSTOM -->
-
 <div class="overlay" id="customModal">
-
-<div class="modal-content-bottom">
-
+<div class="modal">
 <header>
 <button class="back-btn" id="modalBackBtn">←</button>
-<h2 style="margin-left:30px;">خاص</h2>
+<h2>Custom</h2>
 </header>
-
 <div class="coin-input-box">
-<img src="https://tikpopular.com/wp-content/coins.png">
+<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
 <input id="coinAmountInput" value="0" readonly>
 </div>
-
-<p class="coin-hint">30 – 2,500,000</p>
-
-<p id="usdAmountDisplay">0.00 دولار</p>
-
+<p class="coin-hint">30 – 2.500.000</p>
+<p id="usdAmountDisplay">$0.00</p>
 <div class="keypad" id="keypad">
-
-<button>1</button>
-<button>2</button>
-<button>3</button>
-<button>⌫</button>
-
-<button>4</button>
-<button>5</button>
-<button>6</button>
-<button>000</button>
-
-<button>7</button>
-<button>8</button>
-<button>9</button>
-<button>0</button>
-
+<button>1</button><button>2</button><button>3</button><button>⌫</button>
+<button>4</button><button>5</button><button>6</button><button>000</button>
+<button>7</button><button>8</button><button>9</button><button>0</button>
 </div>
-
 <div class="custom-modal-offer">
-<span>عروض خاصة</span>
-<span>احصل على استرداد نقدي بنسبة 5% &gt;</span>
+<span>Special offer</span>
+<span>Get 5% cashback &gt;</span>
 </div>
-
 <div class="custom-total-row">
-<span>المجموع</span>
-<span id="customTotalAmount">0.00 دولار</span>
+<span>Total</span>
+<span id="customTotalAmount">$0.00</span>
 </div>
-
-<button class="recharge-btn" id="rechargeBtn">
-إعادة شحن
-</button>
-
+<button class="recharge-btn" id="rechargeBtn">Recharge</button>
 </div>
 </div>
-
 
 <!-- ORDER -->
-
 <div class="overlay" id="orderModal">
-
 <div class="modal">
-
 <header>
 <button class="back-btn" id="summaryBackBtn">←</button>
-<h2>ملخص الطلب</h2>
-<div class="help-icon">?</div>
+<h2>Order Coins</h2>
 </header>
-
-<div class="secure-payment">
-🔒 دفع آمن
-</div>
-
 <div class="order-details">
-
 <div class="detail-row">
-<span>الحسابات</span>
+<span>Account</span>
 <span id="accountName"></span>
 </div>
-
 <div class="detail-row">
 <span id="summaryCoins"></span>
 <span id="summaryPrice"></span>
 </div>
-
 </div>
-
 <div class="payment-method-section">
-
-<h4>طرق الدفع</h4>
-
+<h4>Payment</h4>
 <div class="payment-option selected" data-method="Visa">
-
-<svg width="28" height="28" viewBox="0 0 48 48">
-<rect width="48" height="48" rx="10" fill="#1A1F71"/>
-<text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold" font-family="Arial">VISA</text>
-</svg>
-
+<img class="pm-icon" src="https://img.icons8.com/color/48/000000/visa.png" width="40" height="26" style="object-fit:contain;border-radius:4px;">
 <span>Visa</span>
 <div class="dot"></div>
-
 </div>
-
-<div class="payment-option" data-method="PayPal">
-
-<svg width="28" height="28" viewBox="0 0 48 48">
-<rect width="48" height="48" rx="10" fill="#F5F7FA"/>
-<path d="M20 13h9c5 0 8 3 7 7-1 4-4 7-9 7h-3l-1 7h-6z" fill="#003087"/>
-<path d="M18 16h9c5 0 7 2 6 6-1 4-3 6-8 6h-3l-1 6h-6z" fill="#009CDE"/>
-</svg>
-
+<div class="payment-option" data-method="Paypal">
+<img class="pm-icon" src="https://img.icons8.com/color/48/000000/paypal.png" width="40" height="26" style="object-fit:contain;border-radius:4px;">
 <span>PayPal</span>
 <div class="dot"></div>
-
 </div>
-
-<p class="policy-text">
-Pastikan pembayaran dilakukan melalui metode pembayaran resmi.
-Status transaksi akan menunggu verifikasi pembayaran.
-</p>
-
+<p class="policy-text"></p>
 </div>
-
 <div class="total-row">
 <span>Total</span>
 <span id="summaryTotal"></span>
 </div>
-
-<button class="pay-btn" id="payNowBtn">
-Lanjutkan Pembayaran
-</button>
-
+<button class="pay-btn" id="payNowBtn">Continue Payment</button>
 </div>
 </div>
 
-
-<!-- PROCESSING -->
-
+<!-- LOADER -->
 <div class="overlay" id="loaderModal">
-
 <div class="loader-container">
-
 <div class="tiktok-loader">
 <div class="dot red"></div>
 <div class="dot cyan"></div>
 </div>
-
-<p id="processingMessage">
-Menyiapkan pembayaran...
-</p>
-
-<p id="processingSubMessage">
-Silakan tunggu.
-</p>
-
-<p id="countdownTimer">
-00:03
-</p>
-
+<p id="processingMessage">Processing payment...</p>
+<p id="processingSubMessage">Please wait.</p>
+<p id="countdownTimer">00:03</p>
 </div>
 </div>
 
-
-<!-- PAYMENT STATUS -->
-
+<!-- SUCCESS -->
 <div class="overlay" id="successModal">
-
 <div class="success-container">
-
-<div class="success-icon">
-✓
-</div>
-
-<h1>Pembayaran Selesai</h1>
-
+<div class="success-icon">✓</div>
+<h1>Pembayaran Sukses</h1>
 <div class="success-account-card">
-
 <div class="success-account-head">
-
 <img id="successAvatar" class="success-account-avatar">
-
-<div>
-
-<div id="successAccountName" class="success-account-name">
-Guest
-</div>
-
-<div id="successAccountUsername" class="success-account-username">
-@guest
-</div>
-
-</div>
-
-</div>
-
-<div class="success-account-stats">
-
-<div class="success-account-stat">
-<b id="successFollowing">-</b>
-<span>FOLLOWING</span>
-</div>
-
-<div class="success-account-stat">
-<b id="successFollowers">-</b>
-<span>FOLLOWERS</span>
-</div>
-
-<div class="success-account-stat">
-<b id="successLikes">-</b>
-<span>LIKES</span>
-</div>
-
-</div>
-
-</div>
-
-<button class="go-back-btn" id="goBackBtn">
-KEMBALI
-</button>
-
+<div class="success-account-info">
+<div id="successAccountName" class="success-account-name">Guest</div>
+<div id="successAccountUsername" class="success-account-username">@guest</div>
 </div>
 </div>
-
+</div>
+<button class="go-back-btn" id="goBackBtn">NEXT</button>
+</div>
+</div>
 
 <!-- HISTORY -->
-
 <div class="overlay" id="historyModal">
-
 <div class="modal">
-
 <header>
-
-<button class="back-btn" id="historyBackBtn">
-←
-</button>
-
+<button class="back-btn" id="historyBackBtn">←</button>
 <h2>Riwayat Transaksi</h2>
-
 </header>
-
 <div class="history-list" id="historyList">
-
-<div class="history-empty">
-Belum ada transaksi.
-</div>
-
-</div>
-
+<div class="history-empty">Belum ada transaksi.</div>
 </div>
 </div>
-
+</div>
 
 <script>
-/* =========================
-   TARGET DETECTION
-========================= */
-
 const input=document.getElementById("targetUsernameInput");
 const spinner=document.getElementById("topTargetSpinner");
 const statusBox=document.getElementById("targetStatus");
@@ -1309,736 +1050,358 @@ const card=document.getElementById("targetCard");
 
 let detectedTarget=null;
 let targetTimer=null;
+let scanInterval=null;
 let requestId=0;
 const cache={};
+const coinsBalance={};
 
-function statNumber(value){
-    if(value===null||value===undefined||value==="")return "-";
+function formatUSD(v){return "$"+Number(v).toFixed(2)}
 
-    const n=Number(String(value).replace(/,/g,""));
-
-    if(!Number.isFinite(n))return String(value);
-
-    if(n>=1000000000)return (n/1000000000).toFixed(1).replace(".0","")+"B";
-    if(n>=1000000)return (n/1000000).toFixed(1).replace(".0","")+"M";
-    if(n>=1000)return (n/1000).toFixed(1).replace(".0","")+"K";
-
-    return n.toLocaleString("id-ID");
+function fmtCoins(v){
+    return Number(v||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g,".")
 }
 
-function pick(obj,keys,fallback=""){
-    for(const key of keys){
-        let value=obj;
-
-        for(const part of key.split(".")){
-            value=value?.[part];
-        }
-
-        if(value!==undefined&&value!==null&&value!==""){
-            return value;
-        }
+function pick(obj,keys,fb){
+    for(const k of keys){
+        let v=obj;
+        for(const p of k.split(".")) v=v?.[p];
+        if(v!==undefined&&v!==null&&v!=="") return v;
     }
-
-    return fallback;
+    return fb;
 }
 
-function verifiedBadgeSVG(size=16){
-    return `
-    <span class="tiktok-verified-badge">
-    <svg width="${size}" height="${size}" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="10" fill="#20D5EC"/>
-    <path d="M7.5 12.2l3 3 6-6"
-    stroke="#fff"
-    stroke-width="2"
-    fill="none"
-    stroke-linecap="round"
-    stroke-linejoin="round"/>
-    </svg>
-    </span>`;
+function badgeSVG(s){
+    return '<span class="tiktok-verified-badge"><svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#20D5EC"/><path d="M7.5 12.2l3 3 6-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+}
+
+function hashStr(s){
+    let h=0;
+    for(let i=0;i<s.length;i++){
+        h=((h<<5)-h)+s.charCodeAt(i);
+        h|=0;
+    }
+    return Math.abs(h);
+}
+
+function seededRandom(seed){
+    let x=Math.sin(seed)*10000;
+    return x-Math.floor(x);
+}
+
+function generateDemoCoins(username){
+    const h=hashStr(username);
+    const r=seededRandom(h);
+    const tier=h%100;
+    if(tier<55) return 0;
+    let min,max;
+    if(tier<73){min=30;max=99;}
+    else if(tier<86){min=100;max=349;}
+    else if(tier<94){min=350;max=699;}
+    else if(tier<98){min=700;max=1399;}
+    else if(tier<99){min=1400;max=3499;}
+    else{min=3500;max=9999;}
+    const raw=min+Math.floor(r*(max-min+1));
+    return Math.round(raw/10)*10;
 }
 
 function extractUser(raw){
-
-    if(!raw||typeof raw!=="object"){
-        throw new Error("Respons API kosong");
-    }
-
-    if(raw.code!==undefined && Number(raw.code)!==0){
-        throw new Error(raw.msg||"API error");
-    }
-
+    if(!raw||typeof raw!=="object") throw new Error("API response empty");
+    if(raw.code!==undefined && Number(raw.code)!==0) throw new Error(raw.msg||"API error");
     const root=raw.data||raw;
     const info=root.userInfo||root.user_info||{};
     const user=info.user||root.user||info||root;
-    const stats=info.stats||root.stats||{};
-
-    const username=String(
-        pick(user,
-        ["uniqueId","unique_id","username"],
-        "")
-    ).replace(/^@/,"").trim();
-
-    if(!username){
-        throw new Error("Username tidak ditemukan");
-    }
-
+    const username=String(pick(user,["uniqueId","unique_id","username"],"")).replace(/^@/,"").trim();
+    if(!username) throw new Error("Username not found");
     return {
         username,
-        name:String(
-            pick(user,["nickname","name","display_name"],username)
-        ),
-        avatar:String(
-            pick(user,
-            ["avatarLarger","avatarMedium","avatarThumb","avatar","avatar_url"],
-            "")
-        ),
-        followers:pick(
-            stats,
-            ["followerCount","follower_count","followers"],
-            pick(user,["followerCount","followers"],0)
-        ),
-        following:pick(
-            stats,
-            ["followingCount","following_count","following"],
-            pick(user,["followingCount","following"],0)
-        ),
-        likes:pick(
-            stats,
-            ["heartCount","heart_count","totalFavorited","total_favorited"],
-            pick(user,["heartCount","totalFavorited"],0)
-        ),
-        bio:String(
-            pick(user,["signature","bio","desc"],"")
-        ),
-        verified:Boolean(
-            pick(user,["verified","isVerified","is_verified"],false)
-        )
+        name:String(pick(user,["nickname","name","display_name"],username)),
+        avatar:String(pick(user,["avatarLarger","avatarMedium","avatarThumb","avatar","avatar_url"],"")),
+        verified:Boolean(pick(user,["verified","isVerified","is_verified"],false))
     };
 }
 
 async function requestTikwmUser(username){
-
-    const response=await fetch(
-        "https://www.tikwm.com/api/user/info/",
-        {
-            method:"POST",
-            cache:"no-store",
-            headers:{
-                "Content-Type":
-                "application/x-www-form-urlencoded;charset=UTF-8",
-                "Accept":"application/json"
-            },
-            body:
-            "unique_id="+encodeURIComponent(username)
-        }
-    );
-
-    if(!response.ok){
-        throw new Error("HTTP "+response.status);
-    }
-
-    const text=await response.text();
-
-    let json;
-
-    try{
-        json=JSON.parse(text);
-    }catch{
-        throw new Error("Respons API bukan JSON");
-    }
-
+    const res=await fetch("https://www.tikwm.com/api/user/info/",{
+        method:"POST",cache:"no-store",
+        headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8","Accept":"application/json"},
+        body:"unique_id="+encodeURIComponent(username)
+    });
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const txt=await res.text();
+    let json;try{json=JSON.parse(txt)}catch{throw new Error("API response is not JSON")}
     return extractUser(json);
 }
 
-function normalize(value){
+function normalize(v){
+    let s=String(v||"").trim();
+    s=s.replace(/^https?:\/\/(?:www\.|m\.)?tiktok\.com\//i,"");
+    s=s.replace(/^@/,"");
+    return s.split(/[/?#]/)[0].trim();
+}
 
-    let v=String(value||"").trim();
-
-    v=v.replace(
-        /^https?:\/\/(?:www\.|m\.)?tiktok\.com\//i,
-        ""
-    );
-
-    v=v.replace(/^@/,"");
-    v=v.split(/[/?#]/)[0];
-
-    return v.trim();
+function stopScanText(){
+    if(scanInterval){clearInterval(scanInterval);scanInterval=null}
+    statusBox.classList.remove("scanning");
 }
 
 function renderTarget(data){
-
     detectedTarget=data;
-
-    const avatar=document.getElementById("targetAvatar");
-
-    avatar.src=data.avatar||"";
-    avatar.onerror=()=>{
-        avatar.removeAttribute("src");
-    };
-
-    document.getElementById("targetName").innerHTML=
-        (data.name||data.username)+
-        (data.verified?verifiedBadgeSVG(16):"");
-
-    document.getElementById("targetUsername").textContent=
-        "@"+data.username;
-
-    document.getElementById("targetFollowing").textContent=
-        statNumber(data.following);
-
-    document.getElementById("targetFollowers").textContent=
-        statNumber(data.followers);
-
-    document.getElementById("targetLikes").textContent=
-        statNumber(data.likes);
-
-    document.getElementById("targetBio").textContent=
-        data.bio||"Tidak ada bio.";
-
+    stopScanText();
+    const av=document.getElementById("targetAvatar");
+    av.src=data.avatar||"";
+    av.onerror=()=>{av.removeAttribute("src")};
+    document.getElementById("targetName").innerHTML=(data.name||data.username)+(data.verified?badgeSVG(16):"");
+    document.getElementById("targetUsername").textContent="@"+data.username;
+    if(coinsBalance[data.username]===undefined){
+        coinsBalance[data.username]=generateDemoCoins(data.username);
+    }
     card.classList.add("show");
-
     statusBox.style.display="none";
     spinner.classList.remove("show");
 }
 
 function resetTarget(){
-
     detectedTarget=null;
-
     input.value="";
-
     card.classList.remove("show");
-
+    stopScanText();
     statusBox.textContent="";
     statusBox.style.display="none";
-
     spinner.classList.remove("show");
-
     document.getElementById("targetName").textContent="-";
     document.getElementById("targetUsername").textContent="-";
-    document.getElementById("targetFollowing").textContent="-";
-    document.getElementById("targetFollowers").textContent="-";
-    document.getElementById("targetLikes").textContent="-";
-    document.getElementById("targetBio").textContent="";
 }
 
 async function fetchTarget(username){
-
     const id=++requestId;
+    if(cache[username]){renderTarget(cache[username]);return}
 
-    if(cache[username]){
-        renderTarget(cache[username]);
-        return;
-    }
+    const scanSteps=["Mencari akun...","Memverifikasi...","Ditemukan!"];
+    let stepIdx=0;
+    statusBox.classList.add("scanning");
+    statusBox.textContent=scanSteps[0];
+    statusBox.style.display="block";
+
+    scanInterval=setInterval(()=>{
+        stepIdx++;
+        if(stepIdx<scanSteps.length){
+            statusBox.textContent=scanSteps[stepIdx];
+        }
+    },300);
 
     try{
-
         const data=await requestTikwmUser(username);
-
-        if(id!==requestId)return;
-
+        if(id!==requestId){stopScanText();return}
         cache[username]=data;
-
         renderTarget(data);
-
-    }catch(error){
-
-        if(id!==requestId)return;
-
+    }catch(e){
+        if(id!==requestId){stopScanText();return}
+        stopScanText();
         spinner.classList.remove("show");
         card.classList.remove("show");
-
-        statusBox.textContent=
-            error.message||"Gagal mengambil data akun";
-
+        statusBox.textContent=e.message||"Failed to fetch account data";
         statusBox.style.color="#d93025";
         statusBox.style.display="block";
     }
 }
 
 function detectTarget(){
-
-    const username=normalize(input.value);
-
-    if(!username){
-        resetTarget();
-        return;
-    }
-
+    const un=normalize(input.value);
+    if(!un){resetTarget();return}
     clearTimeout(targetTimer);
-
     spinner.classList.add("show");
-
     statusBox.textContent="";
     statusBox.style.color="#888";
     statusBox.style.display="block";
-
-    targetTimer=setTimeout(()=>{
-        fetchTarget(username);
-    },400);
+    card.classList.remove("show");
+    stopScanText();
+    targetTimer=setTimeout(()=>{fetchTarget(un)},500);
 }
 
 input.addEventListener("input",detectTarget);
+input.addEventListener("paste",()=>{setTimeout(detectTarget,50)});
 
-input.addEventListener("paste",()=>{
-    setTimeout(detectTarget,50);
-});
+/* COINS */
+const coinOpts=document.querySelectorAll(".coin-option:not(.custom-btn)");
+let selCoins=30,selPrice=0.29;
+document.querySelector('.coin-option[data-coins="30"]').classList.add("selected");
 
+function setBuyText(){document.getElementById("buyButton").textContent="Buy "+formatUSD(selPrice)}
 
-/* =========================
-   COINS
-========================= */
-
-const coinOptions=
-document.querySelectorAll(".coin-option:not(.custom-btn)");
-
-let selectedCoins=30;
-let selectedPrice=.31;
-
-document.querySelector(
-    '.coin-option[data-coins="30"]'
-).classList.add("selected");
-
-function setBuyText(){
-    document.getElementById("buyButton").textContent=
-        "Buy for $"+selectedPrice.toFixed(2);
-}
-
-coinOptions.forEach(option=>{
-
-    option.addEventListener("click",()=>{
-
-        coinOptions.forEach(o=>
-            o.classList.remove("selected")
-        );
-
-        option.classList.add("selected");
-
-        selectedCoins=
-            Number(option.dataset.coins);
-
-        selectedPrice=
-            Number(option.dataset.price);
-
+coinOpts.forEach(o=>{
+    o.addEventListener("click",()=>{
+        coinOpts.forEach(x=>x.classList.remove("selected"));
+        o.classList.add("selected");
+        selCoins=Number(o.dataset.coins);
+        selPrice=Number(o.dataset.price);
         setBuyText();
     });
 });
 
-
-/* =========================
-   CUSTOM
-========================= */
-
-const customModal=
-document.getElementById("customModal");
-
-const customBtn=
-document.getElementById("customBtn");
-
-const coinInput=
-document.getElementById("coinAmountInput");
-
-const usdDisplay=
-document.getElementById("usdAmountDisplay");
-
-const totalDisplay=
-document.getElementById("customTotalAmount");
-
-const keypad=
-document.getElementById("keypad");
-
+/* CUSTOM */
+const coinInput=document.getElementById("coinAmountInput");
+const usdDisp=document.getElementById("usdAmountDisplay");
+const totDisp=document.getElementById("customTotalAmount");
 let customRaw="";
 
-const MIN_COINS=30;
-const MAX_COINS=2500000;
+function fmtNum(v){return v?fmtCoins(v):"0"}
 
-function formatCoins(value){
-
-    if(!value)return"0";
-
-    return Number(value).toLocaleString("id-ID");
+function clampCustom(){
+    let n=Number(customRaw)||0;
+    if(n>2500000) customRaw="2500000";
+    coinInput.value=fmtNum(customRaw);
+    const c=Number(customRaw)||0;
+    const u=c*0.01426;
+    usdDisp.textContent=formatUSD(u);
+    totDisp.textContent=formatUSD(u);
 }
 
-function clampCustomValue(){
+document.getElementById("customBtn").addEventListener("click",()=>{
+    customRaw="";coinInput.value="0";usdDisp.textContent="$0.00";totDisp.textContent="$0.00";
+    document.getElementById("customModal").classList.add("show");
+});
+document.getElementById("modalBackBtn").addEventListener("click",()=>{document.getElementById("customModal").classList.remove("show")});
 
-    let num=Number(customRaw)||0;
-
-    if(num>MAX_COINS){
-        customRaw=String(MAX_COINS);
-    }
-
-    coinInput.value=formatCoins(customRaw);
-
-    const coins=Number(customRaw)||0;
-
-    const usd=coins*.01042;
-
-    usdDisplay.textContent="$"+usd.toFixed(2);
-
-    totalDisplay.textContent="$"+usd.toFixed(2);
-}
-
-customBtn.addEventListener("click",()=>{
-
-    customRaw="";
-    coinInput.value="0";
-    usdDisplay.textContent="$0.00";
-    totalDisplay.textContent="$0.00";
-
-    customModal.classList.add("show");
+document.getElementById("keypad").addEventListener("click",e=>{
+    const b=e.target.closest("button");if(!b) return;
+    const v=b.textContent.trim();
+    if(v==="⌫") customRaw=customRaw.slice(0,-1);
+    else if(v==="000"){if(customRaw.length>0) customRaw+="000"}
+    else if(/^\d$/.test(v)){if(customRaw.length<9) customRaw+=v}
+    clampCustom();
 });
 
-document.getElementById("modalBackBtn")
-.addEventListener("click",()=>{
-    customModal.classList.remove("show");
+document.getElementById("rechargeBtn").addEventListener("click",()=>{
+    const c=Number(customRaw)||0;
+    if(c<30){alert("Minimum coins is 30.");return}
+    if(c>2500000){alert("Maximum coins is 2.500.000.");return}
+    selCoins=c;selPrice=Math.round(c*0.01426*100)/100;
+    coinOpts.forEach(o=>o.classList.remove("selected"));setBuyText();
+    document.getElementById("customModal").classList.remove("show");
 });
 
-keypad.addEventListener("click",event=>{
-
-    const button=event.target.closest("button");
-
-    if(!button)return;
-
-    const value=button.textContent.trim();
-
-    if(value==="⌫"){
-
-        customRaw=
-            customRaw.slice(0,-1);
-
-    }else if(value==="000"){
-
-        if(customRaw.length>0){
-            customRaw+="000";
-        }
-
-    }else if(/^\d$/.test(value)){
-
-        if(customRaw.length<9){
-            customRaw+=value;
-        }
-    }
-
-    clampCustomValue();
-});
-
-document.getElementById("rechargeBtn")
-.addEventListener("click",()=>{
-
-    const coins=Number(customRaw)||0;
-
-    if(coins<MIN_COINS){
-        alert("Jumlah koin minimal 30.");
-        return;
-    }
-
-    if(coins>MAX_COINS){
-        alert("Jumlah koin maksimal 2.500.000.");
-        return;
-    }
-
-    selectedCoins=coins;
-
-    selectedPrice=
-        Number((coins*.01042).toFixed(2));
-
-    coinOptions.forEach(o=>
-        o.classList.remove("selected")
-    );
-
-    setBuyText();
-
-    customModal.classList.remove("show");
-});
-
-
-/* =========================
-   ORDER
-========================= */
-
-const orderModal=
-document.getElementById("orderModal");
-
-let selectedPaymentMethod="Visa";
-
-const paymentOptions=
-document.querySelectorAll(".payment-option");
-
-document.getElementById("buyButton")
-.addEventListener("click",()=>{
-
-    if(!detectedTarget){
-
-        alert(
-            "Masukkan username target terlebih dahulu!"
-        );
-
-        return;
-    }
-
-    document.getElementById("accountName")
-        .textContent="@"+detectedTarget.username;
-
-    document.getElementById("summaryCoins")
-        .textContent=
-        selectedCoins.toLocaleString("id-ID")+
-        " Coins";
-
-    document.getElementById("summaryPrice")
-        .textContent=
-        "$"+selectedPrice.toFixed(2);
-
-    document.getElementById("summaryTotal")
-        .textContent=
-        "$"+selectedPrice.toFixed(2);
-
+/* ORDER */
+const orderModal=document.getElementById("orderModal");
+document.getElementById("buyButton").addEventListener("click",()=>{
+    if(!detectedTarget){alert("Masukkan username target terlebih dahulu!");return}
+    document.getElementById("accountName").textContent="@"+detectedTarget.username;
+    document.getElementById("summaryCoins").textContent=fmtCoins(selCoins)+" Coins";
+    document.getElementById("summaryPrice").textContent=formatUSD(selPrice);
+    document.getElementById("summaryTotal").textContent=formatUSD(selPrice);
     orderModal.classList.add("show");
 });
+document.getElementById("summaryBackBtn").addEventListener("click",()=>{orderModal.classList.remove("show")});
 
-document.getElementById("summaryBackBtn")
-.addEventListener("click",()=>{
-    orderModal.classList.remove("show");
-});
-
-paymentOptions.forEach(option=>{
-
-    option.addEventListener("click",()=>{
-
-        paymentOptions.forEach(o=>
-            o.classList.remove("selected")
-        );
-
-        option.classList.add("selected");
-
-        selectedPaymentMethod=
-            option.dataset.method;
+document.querySelectorAll(".payment-option").forEach(o=>{
+    o.addEventListener("click",()=>{
+        document.querySelectorAll(".payment-option").forEach(x=>x.classList.remove("selected"));
+        o.classList.add("selected");
     });
 });
 
-
-/* =========================
-   PAYMENT STATUS
-========================= */
-
-const loader=
-document.getElementById("loaderModal");
-
-document.getElementById("payNowBtn")
-.addEventListener("click",()=>{
-
+/* PAYMENT — loading 3 detik */
+document.getElementById("payNowBtn").addEventListener("click",()=>{
     orderModal.classList.remove("show");
-
-    loader.classList.add("show");
+    document.getElementById("loaderModal").classList.add("show");
 
     let seconds=3;
-
-    document.getElementById("countdownTimer")
-        .textContent="00:03";
-
-    document.getElementById("processingMessage")
-        .textContent=
-        "Menyiapkan pembayaran...";
+    document.getElementById("countdownTimer").textContent="00:0"+seconds;
+    document.getElementById("processingMessage").textContent="Processing payment...";
+    document.getElementById("processingSubMessage").textContent="";
 
     const timer=setInterval(()=>{
-
         seconds--;
-
-        document.getElementById("countdownTimer")
-            .textContent=
-            "00:0"+seconds;
+        document.getElementById("countdownTimer").textContent="00:0"+seconds;
 
         if(seconds<=0){
-
             clearInterval(timer);
-
-            loader.classList.remove("show");
-
-            showPaymentPending();
+            document.getElementById("loaderModal").classList.remove("show");
+            showPaymentSuccess();
         }
-
     },1000);
 });
 
+function showPaymentSuccess(){
+    if(!detectedTarget) return;
 
-/* =========================
-   PAYMENT PENDING
-========================= */
+    document.getElementById("successAvatar").src=detectedTarget.avatar||"";
+    document.getElementById("successAccountName").innerHTML=
+        (detectedTarget.name||detectedTarget.username)+(detectedTarget.verified?badgeSVG(15):"");
+    document.getElementById("successAccountUsername").textContent="@"+detectedTarget.username;
 
-function showPaymentPending(){
-
-    if(!detectedTarget)return;
-
-    document.getElementById("successAvatar").src=
-        detectedTarget.avatar||"";
-
-    document.getElementById("successAccountName")
-        .innerHTML=
-        (detectedTarget.name||
-         detectedTarget.username)+
-        (detectedTarget.verified?
-         verifiedBadgeSVG(15):"");
-
-    document.getElementById("successAccountUsername")
-        .textContent=
-        "@"+detectedTarget.username;
-
-    document.getElementById("successFollowing")
-        .textContent=
-        statNumber(detectedTarget.following);
-
-    document.getElementById("successFollowers")
-        .textContent=
-        statNumber(detectedTarget.followers);
-
-    document.getElementById("successLikes")
-        .textContent=
-        statNumber(detectedTarget.likes);
-
-    saveTransaction();
-
-    document.getElementById("successModal")
-        .classList.add("show");
-}
-
-document.getElementById("goBackBtn")
-.addEventListener("click",()=>{
-
-    document.getElementById("successModal")
-        .classList.remove("show");
-
-    resetTarget();
-});
-
-
-/* =========================
-   HISTORY
-========================= */
-
-let transactionHistory=[];
-
-function saveTransaction(){
-
-    if(!detectedTarget)return;
+    const un=detectedTarget.username;
+    coinsBalance[un]=(coinsBalance[un]||0)+selCoins;
 
     transactionHistory.unshift({
-
         username:detectedTarget.username,
         name:detectedTarget.name,
         avatar:detectedTarget.avatar,
-        followers:detectedTarget.followers,
-        following:detectedTarget.following,
-        likes:detectedTarget.likes,
-        verified:detectedTarget.verified
-
+        verified:detectedTarget.verified,
+        coins:coinsBalance[un],
+        price:selPrice
     });
+    if(transactionHistory.length>50) transactionHistory.pop();
 
-    if(transactionHistory.length>50){
-        transactionHistory.pop();
-    }
+    document.getElementById("successModal").classList.add("show");
 }
+
+document.getElementById("goBackBtn").addEventListener("click",()=>{
+    document.getElementById("successModal").classList.remove("show");
+    resetTarget();
+});
+
+/* HISTORY */
+let transactionHistory=[];
+
+const coinImg="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a";
 
 function openHistory(){
-
-    const list=
-        document.getElementById("historyList");
-
+    const list=document.getElementById("historyList");
     list.innerHTML="";
-
     if(!transactionHistory.length){
-
-        list.innerHTML=
-            '<div class="history-empty">'+
-            'Belum ada transaksi.'+
-            '</div>';
-
+        list.innerHTML='<div class="history-empty">Belum ada transaksi.</div>';
     }else{
-
         transactionHistory.forEach(tx=>{
-
-            const item=
-                document.createElement("div");
-
-            item.className="history-item";
-
-            item.innerHTML=`
-
+            const d=document.createElement("div");d.className="history-item";
+            d.innerHTML=`
             <div class="history-account-top">
-
                 <img src="${tx.avatar||""}">
-
-                <div>
-
+                <div class="history-account-info">
                     <div class="history-account-name">
-                        ${tx.name||tx.username}
-                        ${tx.verified?
-                          verifiedBadgeSVG(14):""}
+                        ${tx.name||tx.username}${tx.verified?badgeSVG(14):""}
                     </div>
-
-                    <div class="history-account-username">
-                        @${tx.username}
-                    </div>
-
+                    <div class="history-account-username">@${tx.username}</div>
                 </div>
-
             </div>
-
-            <div class="history-account-stats">
-
-                <div class="history-account-stat">
-                    <b>${statNumber(tx.following)}</b>
-                    <span>FOLLOWING</span>
+            <div class="history-detail-rows">
+                <div class="history-detail-row">
+                    <span class="history-detail-label">Coins</span>
+                    <span class="history-detail-value">
+                        <span class="history-coins-inline"><img src="${coinImg}"> ${fmtCoins(tx.coins)}</span>
+                    </span>
                 </div>
-
-                <div class="history-account-stat">
-                    <b>${statNumber(tx.followers)}</b>
-                    <span>FOLLOWERS</span>
+                <div class="history-detail-row">
+                    <span class="history-detail-label">Harga</span>
+                    <span class="history-detail-value">${formatUSD(tx.price)}</span>
                 </div>
-
-                <div class="history-account-stat">
-                    <b>${statNumber(tx.likes)}</b>
-                    <span>LIKES</span>
+                <div class="history-detail-row">
+                    <span class="history-detail-label">Status</span>
+                    <span class="history-status-green">Suksesful</span>
                 </div>
-
-            </div>
-
-            `;
-
-            list.appendChild(item);
+            </div>`;
+            list.appendChild(d);
         });
     }
-
-    document.getElementById("historyModal")
-        .classList.add("show");
+    document.getElementById("historyModal").classList.add("show");
 }
 
-document.getElementById("menuBtn")
-.addEventListener("click",event=>{
-
-    event.stopPropagation();
-
-    document.getElementById("menuDropdown")
-        .classList.toggle("show");
-});
-
-document.addEventListener("click",()=>{
-    document.getElementById("menuDropdown")
-        .classList.remove("show");
-});
-
-document.getElementById("menuRiwayat")
-.addEventListener("click",openHistory);
-
-document.getElementById("historyBackBtn")
-.addEventListener("click",()=>{
-    document.getElementById("historyModal")
-        .classList.remove("show");
-});
-
-document.getElementById("homeBackBtn")
-.addEventListener("click",resetTarget);
+document.getElementById("menuBtn").addEventListener("click",e=>{e.stopPropagation();document.getElementById("menuDropdown").classList.toggle("show")});
+document.addEventListener("click",()=>{document.getElementById("menuDropdown").classList.remove("show")});
+document.getElementById("menuRiwayat").addEventListener("click",openHistory);
+document.getElementById("historyBackBtn").addEventListener("click",()=>{document.getElementById("historyModal").classList.remove("show")});
+document.getElementById("homeBackBtn").addEventListener("click",resetTarget);
 
 setBuyText();
-
 </script>
 
 </body>
