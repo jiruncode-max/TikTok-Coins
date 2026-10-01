@@ -2,1959 +2,268 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Get Coins</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiktok Wallet</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-
-body{
-    margin:0;
-    background:#f0f2f5;
-    color:#333;
-    font-family:Arial,Roboto,sans-serif;
-    display:flex;
-    justify-content:center;
-    min-height:100vh;
-}
-
-.container{
-    width:100%;
-    max-width:450px;
-    min-height:100vh;
-    background:#fff;
-    box-shadow:0 0 10px rgba(0,0,0,.1);
-    display:flex;
-    flex-direction:column;
-    position:relative;
-}
-
-header.main-header{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:13px;
-    border-bottom:1px solid #ddd;
-    position:relative;
-    background:#fff;
-}
-
-.main-header h1{
-    margin:0;
-    font-weight:600;
-}
-
-#homeBackBtn{
-    position:absolute;
-    left:10px;
-    background:none;
-    border:0;
-    font-size:20px;
-    cursor:pointer;
-}
-
-/* ===== GIFT SLIDESHOW ===== */
-.gift-slideshow{
-    position:relative;
-    width:280px;
-    height:44px;
-    overflow:hidden;
-}
-
-.gift-slide{
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    opacity:0;
-    transform:translateY(20px) scale(.85);
-    transition:all .5s cubic-bezier(.4,0,.2,1);
-    pointer-events:none;
-}
-
-.gift-slide.active{
-    opacity:1;
-    transform:translateY(0) scale(1);
-    pointer-events:auto;
-}
-
-.gift-slide.exit{
-    opacity:0;
-    transform:translateY(-20px) scale(.85);
-}
-
-.gift-img{
-    width:34px;
-    height:34px;
-    object-fit:contain;
-    display:inline-block;
-    animation:giftFloat 1.4s ease-in-out infinite;
-    filter:drop-shadow(0 2px 4px rgba(0,0,0,.18));
-    flex-shrink:0;
-}
-
-.gift-slide:nth-child(2) .gift-img{animation-delay:.25s}
-.gift-slide:nth-child(3) .gift-img{animation-delay:.5s}
-.gift-slide:nth-child(4) .gift-img{animation-delay:.75s}
-
-@keyframes giftFloat{
-    0%,100%{transform:translateY(0) scale(1)}
-    30%{transform:translateY(-4px) scale(1.08)}
-    70%{transform:translateY(2px) scale(.97)}
-}
-
-.gift-arrow{
-    color:#fe2c55;
-    font-size:20px;
-    font-weight:700;
-    flex-shrink:0;
-    margin:0 14px;
-    animation:arrowPulse 1.2s ease-in-out infinite;
-}
-
-@keyframes arrowPulse{
-    0%,100%{transform:translateX(0);opacity:1}
-    25%{transform:translateX(5px);opacity:.7}
-    75%{transform:translateX(-5px);opacity:.7}
-}
-
-.gift-coin-row{
-    display:flex;
-    align-items:center;
-    gap:5px;
-    flex-shrink:0;
-}
-
-.gift-coin-img{
-    width:20px;
-    height:20px;
-}
-
-.gift-coin-num{
-    font-size:16px;
-    font-weight:800;
-    color:#333;
-}
-
-.header-menu-wrap{
-    position:absolute;
-    right:12px;
-}
-
-.header-menu-btn{
-    background:none;
-    border:0;
-    font-size:22px;
-    cursor:pointer;
-    padding:4px 8px;
-}
-
-.menu-dropdown{
-    display:none;
-    position:absolute;
-    right:0;
-    top:100%;
-    min-width:160px;
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:10px;
-    box-shadow:0 6px 20px rgba(0,0,0,.12);
-    z-index:200;
-    overflow:hidden;
-}
-
-.menu-dropdown.show{display:block}
-
-.menu-dropdown button{
-    width:100%;
-    border:0;
-    background:#fff;
-    padding:12px 16px;
-    text-align:left;
-    cursor:pointer;
-    font-size:14px;
-}
-
-.menu-dropdown button:hover{background:#f5f5f5}
-
-.content-wrapper{
-    flex:1;
-    overflow-y:auto;
-}
-
-.top-nav{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:22px 15px;
-    border-bottom:1px solid #eee;
-}
-
-.top-nav>img{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    flex-shrink:0;
-}
-
-.top-target-box{
-    flex:1;
-    min-width:0;
-}
-
-.top-target-input-row{
-    position:relative;
-}
-
-.top-target-input-row input{
-    width:100%;
-    height:40px;
-    padding:10px 34px 10px 11px;
-    border:1px solid #e2e2e2;
-    border-radius:9px;
-    outline:none;
-    background:#fafafa;
-    font-size:14px;
-}
-
-.top-target-input-row input:focus{
-    border-color:#fe2c55;
-    background:#fff;
-}
-
-.top-target-spinner{
-    display:none;
-    position:absolute;
-    right:11px;
-    top:12px;
-    width:15px;
-    height:15px;
-    border:2px solid #ddd;
-    border-top-color:#fe2c55;
-    border-radius:50%;
-    animation:spin .7s linear infinite;
-}
-
-.top-target-spinner.show{display:block}
-
+:root{--bg:#f5f5f5;--card:#fff;--fg:#161823;--muted:#8a8b91;--accent:#fe2c55;--ad:#e0264b;--border:#e8e8e8;--tbg:#f0f0f0;--tact:#161823;--ok:#25d366;--sh:0 1px 3px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;display:flex;justify-content:center}
+.A{width:100%;max-width:420px;min-height:100vh;background:var(--bg);position:relative;overflow-x:hidden}
+header{background:var(--card);display:flex;align-items:center;justify-content:space-between;padding:14px 16px;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border)}
+.bb{font-size:22px;font-weight:600;cursor:pointer;color:var(--fg);width:32px;display:flex;align-items:center;justify-content:center}
+.bb:active{opacity:.5}
+header h1{font-size:17px;font-weight:700;letter-spacing:-.2px}
+.mb{font-size:20px;font-weight:700;cursor:pointer;color:var(--muted);letter-spacing:1px}
+.tc{background:var(--card);padding:0 16px;padding-top:16px}
+.tabs{display:flex;border-radius:10px;overflow:hidden;background:var(--tbg)}
+.tab{flex:1;text-align:center;padding:12px 8px;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .25s;display:flex;flex-direction:column;gap:4px;user-select:none}
+.tab.on{background:var(--tact);color:#fff;border-radius:10px}
+.tab span{font-size:11px;font-weight:700;opacity:.85}
+.bs{background:var(--card);padding:24px 16px 20px;text-align:center}
+.bt{font-size:13px;color:var(--muted);font-weight:500;margin-bottom:6px}
+.ba{display:flex;align-items:baseline;justify-content:center;gap:2px}
+.ba .c{font-size:16px;font-weight:600;color:var(--muted)}
+.ba .i{font-size:36px;font-weight:900;letter-spacing:-1px;line-height:1}
+.ba .d{font-size:18px;font-weight:700;color:var(--muted)}
+.acts{display:flex;gap:10px;padding:16px;background:var(--card)}
+.btn{flex:1;padding:13px 16px;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit}
+.bp{background:var(--accent);color:#fff}
+.bp:hover{background:var(--ad);transform:scale(1.02)}
+.bp:active{transform:scale(.98)}
+.bs2{background:var(--tbg);color:var(--fg)}
+.bs2:hover{background:#e4e4e4}
+.li{padding:16px;background:var(--card);margin-top:10px}
+.lr{display:flex;justify-content:space-between;align-items:center;font-size:12.5px}
+.lr span:first-child{color:var(--muted);font-weight:600}
+.lv{font-weight:800;color:var(--fg)}
+.ll{display:block;margin-top:10px;font-size:12.5px;color:var(--fg);font-weight:600;text-decoration:none}
+.ll:hover{color:var(--accent)}
+.ts{padding:16px;margin-top:10px;background:var(--card);min-height:200px}
+.th{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.tht{font-size:15px;font-weight:700}
+.clr{font-size:12px;color:var(--accent);font-weight:600;cursor:pointer;padding:4px 10px;border-radius:6px}
+.tfr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.ms{display:flex;align-items:center;gap:6px;background:var(--tbg);padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;position:relative}
+.ms svg{width:10px;height:10px}
+.mst{display:flex;align-items:baseline;gap:4px}
+.mst .y{color:var(--muted);font-weight:500}
+.ss{display:flex;gap:14px}
+.si{font-size:12px;display:flex;align-items:center;gap:3px}
+.sl{color:var(--muted);font-weight:500}
+.sv{font-weight:700}
+.tl{display:flex;flex-direction:column}
+.es{text-align:center;color:var(--muted);font-size:13px;padding:40px 0;font-weight:500}
+.ti{display:flex;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);gap:12px}
+.ti:last-child{border-bottom:none}
+.tx{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tx.o{background:rgba(254,44,85,.1);color:var(--accent)}
+.tx.n{background:rgba(37,211,102,.1);color:var(--ok)}
+.ta{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.td{flex:1}
+.tt{font-size:13px;font-weight:600}
+.te{font-size:11px;color:var(--muted);margin-top:2px}
+.tm{font-size:13px;font-weight:700;text-align:right}
+.tm.o{color:var(--fg)}
+.tm.n{color:var(--ok)}
+.tb2{padding:16px}
+.st{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;margin-bottom:10px;color:var(--muted)}
+.mg{color:var(--accent);font-weight:600;cursor:pointer}
+.cd{background:var(--card);border-radius:12px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--sh)}
+.pm{display:flex;align-items:center;gap:12px;cursor:pointer}
+.mi{width:36px;height:36px;background:var(--fg);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
+.mn{flex:1;font-size:13px;font-weight:600}
+.mn span{color:var(--muted);font-weight:400;font-size:12px}
+.ig{display:flex;align-items:center;gap:8px;padding:4px}
+.ig input{flex:1;border:none;outline:none;font-size:14px;font-family:inherit;font-weight:500;padding:10px 12px;background:transparent;color:var(--fg)}
+.ig input::placeholder{color:#c0c0c0}
+.bp2{background:var(--tbg);border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;color:var(--fg);cursor:pointer;font-family:inherit;text-transform:uppercase}
+.bp2:hover{background:#e4e4e4}
+.upc{display:flex;align-items:center;gap:12px}
+.pa{width:52px;height:52px;border-radius:50%;object-fit:cover;background:var(--tbg);border:2.5px solid var(--border);flex-shrink:0}
+.pi{flex:1;min-width:0}
+.pn{font-size:16px;font-weight:800;color:var(--fg);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pv{background:#20d5ec;color:#fff;font-size:9px;font-weight:800;width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.pl{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
+.ps{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.msp{width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite}
+.pnf{font-size:12px;color:var(--accent);font-weight:600}
+.tah{font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:10px}
+.air{display:flex;align-items:center;gap:6px}
+.air span{font-size:14px;font-weight:700;color:var(--muted)}
+.air input{flex:1;border:none;outline:none;font-size:24px;font-weight:800;font-family:inherit;color:var(--fg);background:transparent;min-width:0}
+.air input::placeholder{color:#ddd}
+.ba2{background:var(--tbg);border:none;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--fg)}
+.ba2:hover{background:#e4e4e4}
+.em{color:var(--accent);font-size:11.5px;font-weight:600;margin-top:8px;display:none}
+.em.sh{display:block}
+.er{font-size:20px;font-weight:800;color:var(--fg);margin-top:4px}
+.sf{display:flex;justify-content:space-between;align-items:center;padding:12px 4px;font-size:12.5px}
+.tos{font-size:11px;color:var(--muted);padding:8px 4px;line-height:1.6}
+.tos .r{color:var(--accent);font-weight:600}
+.btd{width:100%;padding:14px;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:not-allowed;font-family:inherit;background:#e0e0e0;color:#aaa;margin-top:8px;transition:all .2s}
+.bte{background:var(--accent)!important;color:#fff!important;cursor:pointer!important}
+.bte:hover{background:var(--ad)!important}
+.mo{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:999;display:flex;align-items:flex-end;justify-content:center;animation:fi .2s ease}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@keyframes su{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.mc{background:var(--card);border-radius:16px 16px 0 0;padding:24px 20px 32px;width:100%;max-width:420px;animation:su .3s ease}
+.mh{font-size:17px;font-weight:700;margin-bottom:20px;text-align:center}
+.dr{display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-size:13px;border-bottom:1px solid var(--border)}
+.dr:last-of-type{border-bottom:none}
+.dr span:first-child{color:var(--muted);font-weight:500}
+.dv{font-weight:700}
+.dr.t .dv{color:var(--fg);font-size:15px}
+.ma{margin-top:20px}
+.ma .btn{width:100%;padding:14px}
+.mpr{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}
+.mpr img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+.mpi{flex:1}
+.mpn{font-size:13px;font-weight:700}
+.mpid{font-size:11px;color:var(--muted)}
+.lo{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.sp{width:36px;height:36px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-.top-target-status{
-    display:none;
-    margin-top:4px;
-    font-size:10px;
-}
-
-.target-card{
-    display:none;
-    margin:12px 15px;
-    border:1px solid #eee;
-    border-radius:12px;
-    padding:12px;
-    background:#fafafa;
-}
-
-.target-card.show{display:block}
-
-.target-card-top{
-    display:flex;
-    align-items:center;
-    gap:11px;
-}
-
-.target-avatar{
-    width:56px;
-    height:56px;
-    border-radius:50%;
-    object-fit:cover;
-    background:#eee;
-}
-
-.target-name{
-    font-size:16px;
-    font-weight:700;
-    color:#000;
-}
-
-.target-username{
-    font-size:12px;
-    font-weight:600;
-    color:#000;
-    margin-top:2px;
-}
-
-.tiktok-verified-badge{
-    display:inline-flex;
-    vertical-align:middle;
-    align-items:center;
-}
-
-.tiktok-verified-badge svg{display:block}
-
-.recharge-section{
-    padding:15px;
-}
-
-.recharge-section h2{
-    margin:0;
-    font-size:20px;
-    font-weight:400;
-}
-
-.recharge-section>p{
-    font-size:12px;
-    color:#fe2c55;
-    margin-bottom:15px;
-}
-
-.coin-options{
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:20px;
-}
-
-.coin-option{
-    width:calc(33.33% - 6px);
-    height:60px;
-    border:1px solid #ddd;
-    border-radius:6px;
-    background:#f7f7f7;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-}
-
-.coin-option:hover,
-.coin-option.selected{
-    background:#fff;
-    border-color:#ffc107;
-    box-shadow:0 0 5px rgba(255,193,7,.6);
-}
-
-.top-row{
-    display:flex;
-    align-items:center;
-    gap:4px;
-}
-
-.coin-option img{
-    width:24px;
-    height:24px;
-}
-
-.coin-option span{
-    font-size:16px;
-    font-weight:700;
-}
-
-.coin-option p{
-    margin:5px 0 0;
-    font-size:12px;
-    color:#777;
-}
-
-.custom-btn{
-    font-weight:700;
-    font-size:14px;
-}
-
-.card{
-    display:flex;
-    align-items:center;
-    background:#f7f7f7;
-    border-radius:12px;
-    padding:15px;
-    margin-top:15px;
-}
-
-.card img{
-    width:30px;
-    height:30px;
-    margin-right:15px;
-}
-
-.card h4{
-    margin:0;
-    font-size:16px;
-}
-
-.card p{
-    margin:0;
-    font-size:12px;
-    color:#666;
-}
-
-.payment-logos{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    margin:20px 0;
-}
-
-.payment-logos img{
-    width:30px;
-    height:25px;
-    object-fit:contain;
-    opacity:.7;
-}
-
-footer{
-    padding:15px;
-    background:#fff;
-    border-top:1px solid #eee;
-    position:sticky;
-    bottom:0;
-    z-index:10;
-}
-
-.special-offer{
-    display:flex;
-    justify-content:space-between;
-    font-size:12px;
-    color:#666;
-    margin-bottom:10px;
-}
-
-.buy-button{
-    width:100%;
-    padding:15px;
-    border:0;
-    border-radius:10px;
-    background:#fe2c55;
-    color:#fff;
-    font-size:18px;
-    cursor:pointer;
-}
-
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.5);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:1000;
-}
-
-.overlay.show{display:flex}
-
-.modal{
-    background:#fff;
-    width:90%;
-    max-width:450px;
-    border-radius:20px;
-    padding:20px;
-    box-shadow:0 0 15px rgba(0,0,0,.2);
-}
-
-.modal-content-bottom{
-    background:#fff;
-    width:100%;
-    max-width:450px;
-    border-radius:20px 20px 0 0;
-    padding:20px;
-    position:absolute;
-    bottom:0;
-}
-
-.modal header{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    padding-bottom:10px;
-    margin-bottom:15px;
-    border-bottom:1px solid #eee;
-}
-
-.modal h2{
-    margin:0;
-    font-size:18px;
-}
-
-.back-btn{
-    position:absolute;
-    left:0;
-    background:none;
-    border:0;
-    font-size:22px;
-    cursor:pointer;
-}
-
-.coin-input-box{
-    display:flex;
-    align-items:center;
-    border:1.5px solid #ddd;
-    border-radius:8px;
-    padding:10px 15px;
-    margin-bottom:6px;
-}
-
-.coin-input-box img{
-    width:24px;
-    height:24px;
-    margin-right:8px;
-}
-
-.coin-input-box input{
-    width:100%;
-    border:0;
-    outline:0;
-    font-size:20px;
-    font-weight:bold;
-}
-
-.coin-hint{
-    font-size:11px;
-    color:#999;
-    margin:0 0 16px;
-}
-
-#usdAmountDisplay{
-    font-size:16px;
-    margin:0 0 20px;
-}
-
-.keypad{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:8px;
-    margin-bottom:15px;
-}
-
-.keypad button{
-    padding:12px 0;
-    background:#f8f8f8;
-    border:1px solid #e8e8e8;
-    border-radius:6px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.custom-modal-offer,
-.custom-total-row,
-.total-row{
-    display:flex;
-    justify-content:space-between;
-    padding:12px 0;
-    border-top:1px solid #eee;
-}
-
-.custom-modal-offer{
-    font-size:13px;
-    color:#666;
-}
-
-.custom-total-row{
-    font-size:16px;
-    font-weight:600;
-}
-
-.recharge-btn,
-.pay-btn,
-.go-back-btn{
-    width:100%;
-    padding:14px;
-    border:0;
-    border-radius:9px;
-    background:#fe2c55;
-    color:#fff;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-}
-
-.secure-payment{
-    background:#e8f5e9;
-    color:#388e3c;
-    padding:12px;
-    border-radius:8px;
-    text-align:center;
-    margin-bottom:15px;
-}
-
-.order-details{
-    border-bottom:1px solid #eee;
-    padding-bottom:12px;
-}
-
-.detail-row{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:10px;
-    font-size:15px;
-}
-
-.payment-method-section{
-    margin-top:15px;
-}
-
-.payment-method-section h4{
-    margin-bottom:12px;
-}
-
-.payment-option{
-    display:flex;
-    align-items:center;
-    border:1px solid #e9ecef;
-    border-radius:8px;
-    padding:12px 15px;
-    margin-bottom:8px;
-    cursor:pointer;
-    position:relative;
-}
-
-.payment-option.selected{
-    background:#f8f9fa;
-    border-color:#007bff;
-}
-
-.payment-option svg,
-.payment-option img{
-    width:28px;
-    height:28px;
-    margin-right:12px;
-    object-fit:contain;
-}
-
-.payment-option span{
-    font-size:14px;
-}
-
-.payment-option .dot{
-    display:none;
-}
-
-.payment-option.selected .dot{
-    display:block;
-    position:absolute;
-    right:15px;
-    width:18px;
-    height:18px;
-    background:#007bff;
-    border-radius:50%;
-}
-
-.payment-option.selected .dot:after{
-    content:"";
-    width:8px;
-    height:8px;
-    background:#fff;
-    border-radius:50%;
-    position:absolute;
-    left:5px;
-    top:5px;
-}
-
-.policy-text{
-    font-size:12px;
-    color:#6c757d;
-    text-align:center;
-    line-height:1.5;
-}
-
-.loader-container{
-    background:#fff;
-    width:90%;
-    max-width:400px;
-    border-radius:20px;
-    padding:30px;
-    text-align:center;
-}
-
-.tiktok-loader{
-    position:relative;
-    width:100px;
-    height:50px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:0 auto 20px;
-}
-
-.tiktok-loader .dot{
-    position:absolute;
-    width:50px;
-    height:50px;
-    border-radius:50%;
-}
-
-.dot.red{
-    background:#fe2c55;
-    animation:moveRight .7s ease-in-out infinite;
-}
-
-.dot.cyan{
-    background:#00f2ea;
-    animation:moveLeft .7s ease-in-out infinite;
-}
-
-@keyframes moveLeft{
-    0%,100%{transform:translateX(0)}
-    50%{transform:translateX(-25px) scale(.8)}
-}
-
-@keyframes moveRight{
-    0%,100%{transform:translateX(0)}
-    50%{transform:translateX(25px) scale(.8)}
-}
-
-#processingMessage{
-    font-size:16px;
-    color:#555;
-}
-
-#processingSubMessage{
-    font-size:14px;
-    color:#777;
-}
-
-#countdownTimer{
-    font-size:18px;
-    font-weight:bold;
-    color:#fe2c55;
-}
-
-.success-container{
-    background:#fff;
-    width:90%;
-    max-width:400px;
-    border-radius:12px;
-    padding:25px 20px;
-    text-align:center;
-}
-
-.success-icon{
-    width:64px;
-    height:64px;
-    margin:0 auto 15px;
-    border-radius:50%;
-    background:#22c55e;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:38px;
-    font-weight:800;
-}
-
-.success-container h1{
-    font-size:20px;
-    font-weight:500;
-}
-
-.success-account-card{
-    padding:12px;
-    border:1px solid #eee;
-    border-radius:12px;
-    background:#fafafa;
-    text-align:left;
-    margin-bottom:20px;
-}
-
-.success-account-head{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.success-account-avatar{
-    width:54px;
-    height:54px;
-    border-radius:50%;
-    object-fit:cover;
-    background:#eee;
-}
-
-.success-account-name{
-    font-size:15px;
-    font-weight:700;
-}
-
-.success-account-username{
-    font-size:12px;
-    font-weight:600;
-    margin-top:2px;
-}
-
-.history-list{
-    max-height:60vh;
-    overflow-y:auto;
-}
-
-.history-empty{
-    text-align:center;
-    color:#aaa;
-    padding:40px 0;
-}
-
-.history-item{
-    background:#fafafa;
-    border:1px solid #eee;
-    border-radius:12px;
-    padding:14px;
-    margin-bottom:10px;
-}
-
-.history-account-top{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.history-account-top img{
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    object-fit:cover;
-    background:#eee;
-}
-
-.history-account-name{
-    font-size:14px;
-    font-weight:700;
-}
-
-.history-account-username{
-    font-size:12px;
-    font-weight:600;
-}
+.lt2{color:#fff;font-size:14px;font-weight:600}
+#fv{display:none}
+.dh{background:linear-gradient(135deg,#161823,#2a2d3a);padding:30px 20px;text-align:center;color:#fff}
+.dhs{font-size:12px;opacity:.7;margin-bottom:8px;font-weight:500}
+.dha{font-size:28px;font-weight:900;letter-spacing:-.5px}
+.dha span:first-child{font-size:16px;font-weight:600;opacity:.7}
+.dlc{background:var(--card);margin:16px;border-radius:12px;padding:4px 16px;box-shadow:var(--sh)}
+.dli{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+.dli:last-child{border-bottom:none}
+.dll{color:var(--muted);font-weight:500;max-width:50%}
+.dlv{font-weight:700;text-align:right;max-width:50%}
+.sc{color:var(--ok);display:flex;align-items:center;gap:5px;font-size:12.5px}
+.fac{padding:16px 20px 32px}
+.fac .btn{width:100%;padding:14px}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--fg);color:#fff;padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:99999;box-shadow:0 4px 16px rgba(0,0,0,.2);animation:ti2 .3s ease,to2 .3s ease 2.5s forwards;max-width:90%;text-align:center}
+@keyframes ti2{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes to2{from{opacity:1}to{opacity:0}}
+@media(min-width:480px){body{padding:20px 0;background:#e8e8e8}.A{border-radius:20px;box-shadow:0 4px 24px rgba(0,0,0,.12);min-height:calc(100vh - 40px);overflow:hidden}}
 </style>
 </head>
-
 <body>
-
-<div class="container" id="mainPage">
-
-<header class="main-header">
-<button id="homeBackBtn">←</button>
-
-<div class="gift-slideshow" id="giftSlideshow">
-
-<div class="gift-slide active">
-<img class="gift-img" src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/a4c4dc437fd3a6632aba149769491f49.png~tplv-obj.webp" alt="Rose">
-<span class="gift-arrow">➔</span>
-<div class="gift-coin-row">
-<span class="gift-coin-num">5.000</span>
+<div class="A">
+<div id="mv" style="display:block">
+<header><div class="bb" onclick="toast('Home')">&#8592;</div><h1>LIVE rewards</h1><div class="mb">&#8942;</div></header>
+<div class="tc"><div class="tabs"><div class="tab on" id="t1" onclick="stab('a')">Available rewards<span>USD99,987,968.00</span></div><div class="tab" id="t2" onclick="stab('u')">Upcoming rewards<span>USD2,000,000.00</span></div></div></div>
+<section class="bs"><div class="bt" id="bti">Available rewards</div><div class="ba"><span class="c">USD</span><span class="i" id="mi">99,987,968</span><span class="d" id="md">.00</span></div></section>
+<div class="acts"><button class="btn bp" onclick="stv()">Transfer</button><button class="btn bs2" onclick="toast('Exchange coming soon')">Exchange</button></div>
+<div class="li"><div class="lr"><span>Daily transfer limit (Remain/Total)</span><span class="lv">$9.4M/$10.0M</span></div><a href="#" class="ll" onclick="event.preventDefault();toast('Verify identity')">How to increase transfer limit? &gt;</a></div>
+<div class="ts">
+<div class="th"><div class="tht">Transactions</div><div class="clr" onclick="chist()">Clear History</div></div>
+<div class="tfr"><div class="ms" style="position:relative"><input type="month" id="mp" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;padding:0" onchange="umonth()"><div class="mst"><span id="dm">Sep</span><span class="y" id="dy">2026</span></div><svg viewBox="0 0 512 512" fill="currentColor"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></div><div class="ss"><div class="si"><span class="sl">In:</span><span class="sv" id="si2">USD0.00</span></div><div class="si"><span class="sl">out:</span><span class="sv" id="so2">USD0.00</span></div></div></div>
+<div class="tl" id="tl2"><div class="es">no transactions yet</div></div>
+</div>
+</div>
+<div id="tv" style="display:none">
+<header style="background:#fff"><div class="bb" onclick="smv()">&#8592;</div><h1>Transfer</h1><div class="mb" style="font-size:14px;color:#8a8b91;border:1px solid #e0e0e0;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="toast('Enter recipient')">?</div></header>
+<div class="tb2">
+<div class="st"><span>Payment method</span><span class="mg" onclick="toast('Only TikTok transfer')">Manage</span></div>
+<div class="cd pm"><div class="mi"><svg viewBox="0 0 448 512" width="18" height="18" fill="currentColor"><path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"/></svg></div><div class="mn">Transfer name <span>(Username Details)</span></div><div style="color:#c0c0c0;font-weight:bold">&gt;</div></div>
+<div class="cd ig"><input type="text" id="ui" placeholder="@Enter TikTok username" autocomplete="off" oninput="dlu()"><button class="bp2" onclick="pclip()">paste</button></div>
+<div class="cd upc" id="pc" style="display:none"><img src="" alt="" class="pa" id="pav"><div class="pi"><div class="pn" id="pnk">-</div><div class="pl" id="pul">@username</div></div></div>
+<div class="lr" style="margin-bottom:12px;padding:0 4px"><span style="color:#8a8b91;font-weight:600">Daily transfer limit (Remain/Total)</span><span style="font-weight:800;color:#161823">$9.4M / $10.0M</span></div>
+<div class="cd"><div class="tah">Transfer amount</div><div class="air"><span>USD</span><input type="number" placeholder="0" id="ai" oninput="oamt()"><button class="ba2" onclick="sall()">All</button></div><div class="em" id="em2">insufficient balance</div></div>
+<div class="cd"><div class="tah" style="display:flex;align-items:center">Estimated amount you receive<div style="margin-left:4px;font-size:11px;border:1px solid #c0c0c0;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;cursor:help" onclick="toast('5% service fee')">?</div></div><div class="er" id="ere">USD 0.00</div></div>
+<div class="sf"><span style="color:#8a8b91;font-weight:600">Service fee</span><span style="font-weight:800" id="sfo">USD 0.00</span></div>
+<div class="tos">TikTok <span class="r">Terms of Service</span> and <b>Privacy Policy</b>. Payment transactions are processed by PIPO. <b>PIPO Privacy Policy</b></div>
+<button class="btn btd" id="btx" onclick="stx()">Transfer</button>
+</div>
+</div>
+<div id="mov" class="mo" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+<div class="mc" onclick="event.stopPropagation()">
+<div class="mh">Transfer Details</div>
+<div class="mpr"><img src="" alt="" id="mav"><div class="mpi"><div class="mpn" id="mnm">-</div><div class="mpid" id="mid">-</div></div></div>
+<div class="dr"><span>Transfer to</span><span class="dv" id="mto">-</span></div>
+<div class="dr"><span>Transfer amount</span><span class="dv" id="mam">-</span></div>
+<div class="dr"><span>Service fee</span><span class="dv" id="mfe">-</span></div>
+<div class="dr t"><span>Estimated receive</span><span class="dv" id="mre">-</span></div>
+<div class="ma"><button class="btn bp" onclick="ctx()">Confirm</button></div>
+</div>
+</div>
+<div id="lov" class="lo" style="display:none"><div class="sp"></div><div class="lt2">Processing...</div></div>
+<div id="fv">
+<header style="background:#fff"><div class="bb" onclick="btt()">&#8592;</div><h1>Transfer details</h1><div class="mb" style="visibility:hidden">&#8942;</div></header>
+<div class="dh"><div class="dhs">LIVE rewards transfer to TikTok</div><div class="dha"><span>USD</span> <span id="fga">0.00</span></div></div>
+<div class="dlc">
+<div class="dli"><div class="dll">Status</div><div class="dlv sc"><svg viewBox="0 0 512 512" width="16" height="16" fill="currentColor"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>Withdrawal complete</div></div>
+<div class="dli"><div class="dll">Payment method</div><div class="dlv" id="fme">-</div></div>
+<div class="dli"><div class="dll">Service fee</div><div class="dlv" id="ffe">-</div></div>
+<div class="dli"><div class="dll">Estimated receive</div><div class="dlv" id="fre" style="font-size:16px">-</div></div>
+<div class="dli"><div class="dll">Transfer time</div><div class="dlv" id="fti">-</div></div>
+<div class="dli"><div class="dll">Arrival time</div><div class="dlv">30 Minutes in arrival</div></div>
+<div class="dli"><div class="dll">Transaction ID</div><div class="dlv" id="ftx">-</div></div>
+</div>
+<div class="fac"><button class="btn bp" onclick="btt()">Transfer Again</button></div>
 </div>
 </div>
-
-<div class="gift-slide">
-<img class="gift-img" src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/eb77ead5c3abb6da6034d3cf6cfeb438~tplv-obj.webp" alt="Finger Heart">
-<span class="gift-arrow">➔</span>
-<div class="gift-coin-row">
-<span class="gift-coin-num">10.000</span>
-</div>
-</div>
-
-<div class="gift-slide">
-<img class="gift-img" src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/4e7ad6bdf0a1d860c538f38026d4e812~tplv-obj.webp" alt="I Love You">
-<span class="gift-arrow">➔</span>
-<div class="gift-coin-row">
-<span class="gift-coin-num">30.000</span>
-</div>
-</div>
-
-<div class="gift-slide">
-<img class="gift-img" src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/e0589e95a2b41970f0f30f6202f5fce6~tplv-obj.webp" alt="Perfume">
-<span class="gift-arrow">➔</span>
-<div class="gift-coin-row">
-<span class="gift-coin-num">500.000</span>
-</div>
-</div>
-
-<div class="gift-slide">
-<img class="gift-img" src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/79a02148079526539f7599150da9fd28.png~tplv-obj.webp" alt="Perfume">
-<span class="gift-arrow">➔</span>
-<div class="gift-coin-row">
-<span class="gift-coin-num">1.000.000</span>
-</div>
-</div>
-
-<div class="gift-slide">
-<img class="gift-img" src="https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/46fa70966d8e931497f5289060f9a794~tplv-obj.webp" alt="Perfume">
-<span class="gift-arrow">➔</span>
-<div class="gift-coin-row">
-<span class="gift-coin-num">2.500.000</span>
-</div>
-</div>
-
-</div>
-
-<div class="header-menu-wrap">
-<button class="header-menu-btn" id="menuBtn">☰</button>
-
-<div class="menu-dropdown" id="menuDropdown">
-<button id="menuRiwayat">📋 &nbsp; Riwayat</button>
-</div>
-</div>
-</header>
-
-<div class="content-wrapper">
-
-<nav class="top-nav">
-
-<img src="https://static.vecteezy.com/system/resources/previews/020/964/382/original/tiktok-circle-icon-for-web-design-free-png.png">
-
-<div class="top-target-box">
-
-<div class="top-target-input-row">
-<input
-id="targetUsernameInput"
-placeholder=""
-autocomplete="off"
-spellcheck="false"
->
-<span id="topTargetSpinner" class="top-target-spinner"></span>
-</div>
-
-<div id="targetStatus" class="top-target-status"></div>
-
-</div>
-</nav>
-
-<div id="targetCard" class="target-card">
-
-<div class="target-card-top">
-
-<img id="targetAvatar" class="target-avatar" alt="Foto profil">
-
-<div>
-<div id="targetName" class="target-name">-</div>
-<div id="targetUsername" class="target-username">-</div>
-</div>
-
-</div>
-</div>
-
-<div class="recharge-section">
-
-<h2>Isi Ulang</h2>
-
-<p>
-Hemat sekitar 25% berkat biaya layanan pihak ketiga yang lebih rendah.
-</p>
-
-<div class="coin-options">
-
-<button class="coin-option" data-coins="30" data-price="0.32">
-<div class="top-row">
-<img src="https://tikpopular.com/wp-content/coins.png">
-<span>30</span>
-</div>
-<p>$0.32</p>
-</button>
-
-<button class="coin-option" data-coins="350" data-price="3.70">
-<div class="top-row">
-<img src="https://tikpopular.com/wp-content/coins.png">
-<span>350</span>
-</div>
-<p>$3.70</p>
-</button>
-
-<button class="coin-option" data-coins="700" data-price="7.40">
-<div class="top-row">
-<img src="https://tikpopular.com/wp-content/coins.png">
-<span>700</span>
-</div>
-<p>$7.40</p>
-</button>
-
-<button class="coin-option" data-coins="1400" data-price="14.80">
-<div class="top-row">
-<img src="https://tikpopular.com/wp-content/coins.png">
-<span>1.400</span>
-</div>
-<p>$14.80</p>
-</button>
-
-<button class="coin-option" data-coins="3500" data-price="37.00">
-<div class="top-row">
-<img src="https://tikpopular.com/wp-content/coins.png">
-<span>3.500</span>
-</div>
-<p>$37.00</p>
-</button>
-
-<button class="coin-option custom-btn" id="customBtn">
-Khusus
-</button>
-
-</div>
-
-<div class="card">
-<img src="https://img.icons8.com/ios-filled/50/000000/handshake.png">
-<div>
-<h4>Undang & Dapat Hadiah</h4>
-<p>Cek fitur terbaru ini!</p>
-</div>
-</div>
-
-<div class="payment-logos">
-
-<img src="https://img.icons8.com/color/48/000000/visa.png">
-
-<img src="https://img.icons8.com/color/48/000000/paypal.png">
-
-</div>
-
-</div>
-</div>
-
-<footer>
-
-<div class="special-offer">
-<span>Penawaran khusus</span>
-<span>Dapat cashback 5% &gt;</span>
-</div>
-
-<button class="buy-button" id="buyButton">
-Beli $0.32
-</button>
-
-</footer>
-
-</div>
-
-
-<!-- CUSTOM -->
-
-<div class="overlay" id="customModal">
-
-<div class="modal-content-bottom">
-
-<header>
-<button class="back-btn" id="modalBackBtn">←</button>
-<h2 style="margin-left:30px;">Khusus</h2>
-</header>
-
-<div class="coin-input-box">
-<img src="https://tikpopular.com/wp-content/coins.png">
-<input id="coinAmountInput" value="0" readonly>
-</div>
-
-<p class="coin-hint">30 – 2.500.000</p>
-
-<p id="usdAmountDisplay">$0.00</p>
-
-<div class="keypad" id="keypad">
-
-<button>1</button>
-<button>2</button>
-<button>3</button>
-<button>⌫</button>
-
-<button>4</button>
-<button>5</button>
-<button>6</button>
-<button>000</button>
-
-<button>7</button>
-<button>8</button>
-<button>9</button>
-<button>0</button>
-
-</div>
-
-<div class="custom-modal-offer">
-<span>Penawaran khusus</span>
-<span>Dapat cashback 5% &gt;</span>
-</div>
-
-<div class="custom-total-row">
-<span>Total</span>
-<span id="customTotalAmount">$0.00</span>
-</div>
-
-<button class="recharge-btn" id="rechargeBtn">
-Isi Ulang
-</button>
-
-</div>
-</div>
-
-
-<!-- ORDER -->
-
-<div class="overlay" id="orderModal">
-
-<div class="modal">
-
-<header>
-<button class="back-btn" id="summaryBackBtn">←</button>
-<h2>Ringkasan Pesanan</h2>
-<div class="help-icon">?</div>
-</header>
-
-<div class="secure-payment">
-🔒 Pembayaran Aman
-</div>
-
-<div class="order-details">
-
-<div class="detail-row">
-<span>Akun</span>
-<span id="accountName"></span>
-</div>
-
-<div class="detail-row">
-<span id="summaryCoins"></span>
-<span id="summaryPrice"></span>
-</div>
-
-</div>
-
-<div class="payment-method-section">
-
-<h4>Metode Pembayaran</h4>
-
-<div class="payment-option selected" data-method="Ovo">
-
-<img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
-
-<span>Visa</span>
-<div class="dot"></div>
-
-</div>
-
-<div class="payment-option" data-method="Dana">
-
-<img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal">
-
-<span>PayPal</span>
-<div class="dot"></div>
-
-</div>
-
-<p class="policy-text">
-Pastikan pembayaran dilakukan melalui metode pembayaran resmi.
-Status transaksi akan menunggu verifikasi pembayaran.
-</p>
-
-</div>
-
-<div class="total-row">
-<span>Total</span>
-<span id="summaryTotal"></span>
-</div>
-
-<button class="pay-btn" id="payNowBtn">
-Lanjutkan Pembayaran
-</button>
-
-</div>
-</div>
-
-
-<!-- PROCESSING -->
-
-<div class="overlay" id="loaderModal">
-
-<div class="loader-container">
-
-<div class="tiktok-loader">
-<div class="dot red"></div>
-<div class="dot cyan"></div>
-</div>
-
-<p id="processingMessage">
-Menyiapkan pembayaran...
-</p>
-
-<p id="processingSubMessage">
-Silakan tunggu.
-</p>
-
-<p id="countdownTimer">
-00:03
-</p>
-
-</div>
-</div>
-
-
-<!-- PAYMENT STATUS -->
-
-<div class="overlay" id="successModal">
-
-<div class="success-container">
-
-<div class="success-icon">
-✓
-</div>
-
-<h1>Pembayaran Berhasil</h1>
-
-<div class="success-account-card">
-
-<div class="success-account-head">
-
-<img id="successAvatar" class="success-account-avatar">
-
-<div>
-
-<div id="successAccountName" class="success-account-name">
-Tamu
-</div>
-
-<div id="successAccountUsername" class="success-account-username">
-@tamu
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<button class="go-back-btn" id="goBackBtn">
-KEMBALI
-</button>
-
-</div>
-</div>
-
-
-<!-- HISTORY -->
-
-<div class="overlay" id="historyModal">
-
-<div class="modal">
-
-<header>
-
-<button class="back-btn" id="historyBackBtn">
-←
-</button>
-
-<h2>Riwayat Transaksi</h2>
-
-</header>
-
-<div class="history-list" id="historyList">
-
-<div class="history-empty">
-Belum ada transaksi.
-</div>
-
-</div>
-
-</div>
-</div>
-
-
 <script>
-/* =========================
-   GIFT SLIDESHOW
-========================= */
+var BAL=99987968,UBAL=2000000,FEE=0.05;
+var ct='a',txs=JSON.parse(localStorage.getItem('tkTx')||'[]'),fd=null,lt2=null;
+var cch={};
+var PH='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="#f0f0f0" width="100" height="100"/><text x="50" y="58" text-anchor="middle" fill="#bbb" font-size="32">?</text></svg>');
+function fusd(n){return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function gid(){var c='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',id='TK';for(var i=0;i<14;i++)id+=c[Math.floor(Math.random()*c.length)];return id}
+function toast(m){var e=document.querySelector('.toast');if(e)e.remove();var t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},2800)}
+function pick(o,ks,fb){for(var i=0;i<ks.length;i++){var v=o;var p=ks[i].split('.');for(var j=0;j<p.length;j++){if(v==null)break;v=v[p[j]]}if(v!==undefined&&v!==null&&v!=='')return v}return fb}
 
-(function(){
-    const slides=document.querySelectorAll(".gift-slide");
-    let current=0;
+function lku(raw){
+var cid=raw.trim().replace(/^@/,'').replace(/^https?:\/\/(?:www\.|m\.)?tiktok\.com\//i,'').split(/[/?#]/)[0].trim();
+if(!cid){hpc();fd=null;ubtn();return}
+var ck=cid.toLowerCase();
+if(cch[ck]){fd=cch[ck];apc(fd);ubtn();return}
+spc(cid);
+fetch('https://www.tikwm.com/api/user/info/',{method:'POST',cache:'no-store',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8','Accept':'application/json'},body:'unique_id='+encodeURIComponent(cid)}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(j){
+if(j.code!==undefined&&Number(j.code)!==0)throw new Error(j.msg||'API error');
+var root=j.data||j;
+var info=root.userInfo||root.user_info||{};
+var user=info.user||root.user||info||root;
+var un=String(pick(user,['uniqueId','unique_id','username'],'')).replace(/^@/,'').trim();
+if(!un)throw new Error('Username not found');
+var pd={uniqueId:un,nickname:String(pick(user,['nickname','name','display_name'],un)),avatar:String(pick(user,['avatarLarger','avatarMedium','avatarThumb','avatar','avatar_url'],'')),verified:Boolean(pick(user,['verified','isVerified','is_verified'],false))};
+cch[ck]=pd;fd=pd;apc(pd);ubtn();
+}).catch(function(e){epc(cid,e.message);fd=null;ubtn()})}
 
-    function nextSlide(){
-        const prev=slides[current];
-        prev.classList.remove("active");
-        prev.classList.add("exit");
+function spc(id){var c=document.getElementById('pc');c.style.display='flex';document.getElementById('pav').src=PH;document.getElementById('pnk').innerHTML='<div class="ps"><div class="msp"></div><span>Looking up...</span></div>';document.getElementById('pul').textContent=''}
+function epc(id,msg){var c=document.getElementById('pc');c.style.display='flex';document.getElementById('pav').src=PH;document.getElementById('pnk').textContent='@'+id;document.getElementById('pul').innerHTML='<span class="pnf">'+(msg||'User not found')+'</span>'}
+function apc(d){var c=document.getElementById('pc');c.style.display='flex';var av=document.getElementById('pav');if(d.avatar){av.src=d.avatar;av.onerror=function(){this.src=PH}}else{av.src=PH}var nh=d.nickname;if(d.verified)nh+='<span class="pv">&#10003;</span>';document.getElementById('pnk').innerHTML=nh;document.getElementById('pul').textContent='@'+d.uniqueId}
+function hpc(){document.getElementById('pc').style.display='none'}
+function dlu(){clearTimeout(lt2);var v=document.getElementById('ui').value.trim();if(v.length<1){hpc();fd=null;ubtn();return}lt2=setTimeout(function(){lku(v)},500)}
 
-        current=(current+1)%slides.length;
+function stab(t){ct=t;var a=document.getElementById('t1'),u=document.getElementById('t2'),b=document.getElementById('bti'),i=document.getElementById('mi'),d=document.getElementById('md'),bal=t==='a'?BAL:UBAL;if(t==='a'){a.classList.add('on');u.classList.remove('on')}else{u.classList.add('on');a.classList.remove('on')}b.textContent=t==='a'?'Available rewards':'Upcoming rewards';i.textContent=fusd(bal).split('.')[0];d.textContent='.'+fusd(bal).split('.')[1]}
 
-        const next=slides[current];
-        next.classList.remove("exit");
-        next.classList.add("active");
+function smv(){document.getElementById('mv').style.display='block';document.getElementById('tv').style.display='none';document.getElementById('fv').style.display='none';document.getElementById('mov').style.display='none';document.getElementById('lov').style.display='none';rtxs();document.getElementById('ui').value='';document.getElementById('ai').value='';hpc();fd=null;document.getElementById('ere').textContent='USD 0.00';document.getElementById('sfo').textContent='USD 0.00';document.getElementById('em2').classList.remove('sh');ubtn()}
+function stv(){document.getElementById('mv').style.display='none';document.getElementById('tv').style.display='block';document.getElementById('fv').style.display='none'}
 
-        setTimeout(()=>{
-            prev.classList.remove("exit");
-        },500);
-    }
-
-    setInterval(nextSlide,6000);
-})();
-
-
-/* =========================
-   TARGET DETECTION
-========================= */
-
-const input=document.getElementById("targetUsernameInput");
-const spinner=document.getElementById("topTargetSpinner");
-const statusBox=document.getElementById("targetStatus");
-const card=document.getElementById("targetCard");
-
-let detectedTarget=null;
-let targetTimer=null;
-let requestId=0;
-const cache={};
-
-function formatUSD(value){
-    return "$"+Number(value).toFixed(2);
+// PERBAIKAN TOTAL: Saat klik "Transfer Again", semua form dan variabel data target di-reset kosong otomatis
+function btt(){
+  document.getElementById('fv').style.display='none';
+  document.getElementById('tv').style.display='block';
+  document.getElementById('ui').value=''; // Kosongkan input username
+  document.getElementById('ai').value=''; // Kosongkan input amount
+  hpc(); // Hilangkan profil target lama
+  fd=null; // Hapus data target dari sistem agar harus lookup baru
+  document.getElementById('ere').textContent='USD 0.00';
+  document.getElementById('sfo').textContent='USD 0.00';
+  document.getElementById('em2').classList.remove('sh');
+  ubtn();
+  setTimeout(function(){document.getElementById('ui').focus()},100); // Auto fokus ke kolom username baru
 }
 
-function pick(obj,keys,fallback=""){
-    for(const key of keys){
-        let value=obj;
-
-        for(const part of key.split(".")){
-            value=value?.[part];
-        }
-
-        if(value!==undefined&&value!==null&&value!==""){
-            return value;
-        }
-    }
-
-    return fallback;
-}
-
-function verifiedBadgeSVG(size=16){
-    return `
-    <span class="tiktok-verified-badge">
-    <svg width="${size}" height="${size}" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="10" fill="#20D5EC"/>
-    <path d="M7.5 12.2l3 3 6-6"
-    stroke="#fff"
-    stroke-width="2"
-    fill="none"
-    stroke-linecap="round"
-    stroke-linejoin="round"/>
-    </svg>
-    </span>`;
-}
-
-function extractUser(raw){
-
-    if(!raw||typeof raw!=="object"){
-        throw new Error("Respons API kosong");
-    }
-
-    if(raw.code!==undefined && Number(raw.code)!==0){
-        throw new Error(raw.msg||"API error");
-    }
-
-    const root=raw.data||raw;
-    const info=root.userInfo||root.user_info||{};
-    const user=info.user||root.user||info||root;
-
-    const username=String(
-        pick(user,
-        ["uniqueId","unique_id","username"],
-        "")
-    ).replace(/^@/,"").trim();
-
-    if(!username){
-        throw new Error("Username tidak ditemukan");
-    }
-
-    return {
-        username,
-        name:String(
-            pick(user,["nickname","name","display_name"],username)
-        ),
-        avatar:String(
-            pick(user,
-            ["avatarLarger","avatarMedium","avatarThumb","avatar","avatar_url"],
-            "")
-        ),
-        verified:Boolean(
-            pick(user,["verified","isVerified","is_verified"],false)
-        )
-    };
-}
-
-async function requestTikwmUser(username){
-
-    const response=await fetch(
-        "https://www.tikwm.com/api/user/info/",
-        {
-            method:"POST",
-            cache:"no-store",
-            headers:{
-                "Content-Type":
-                "application/x-www-form-urlencoded;charset=UTF-8",
-                "Accept":"application/json"
-            },
-            body:
-            "unique_id="+encodeURIComponent(username)
-        }
-    );
-
-    if(!response.ok){
-        throw new Error("HTTP "+response.status);
-    }
-
-    const text=await response.text();
-
-    let json;
-
-    try{
-        json=JSON.parse(text);
-    }catch{
-        throw new Error("Respons API bukan JSON");
-    }
-
-    return extractUser(json);
-}
-
-function normalize(value){
-
-    let v=String(value||"").trim();
-
-    v=v.replace(
-        /^https?:\/\/(?:www\.|m\.)?tiktok\.com\//i,
-        ""
-    );
-
-    v=v.replace(/^@/,"");
-    v=v.split(/[/?#]/)[0];
-
-    return v.trim();
-}
-
-function renderTarget(data){
-
-    detectedTarget=data;
-
-    const avatar=document.getElementById("targetAvatar");
-
-    avatar.src=data.avatar||"";
-    avatar.onerror=()=>{
-        avatar.removeAttribute("src");
-    };
-
-    document.getElementById("targetName").innerHTML=
-        (data.name||data.username)+
-        (data.verified?verifiedBadgeSVG(16):"");
-
-    document.getElementById("targetUsername").textContent=
-        "@"+data.username;
-
-    card.classList.add("show");
-
-    statusBox.style.display="none";
-    spinner.classList.remove("show");
-}
-
-function resetTarget(){
-
-    detectedTarget=null;
-
-    input.value="";
-
-    card.classList.remove("show");
-
-    statusBox.textContent="";
-    statusBox.style.display="none";
-
-    spinner.classList.remove("show");
-
-    document.getElementById("targetName").textContent="-";
-    document.getElementById("targetUsername").textContent="-";
-}
-
-async function fetchTarget(username){
-
-    const id=++requestId;
-
-    if(cache[username]){
-        renderTarget(cache[username]);
-        return;
-    }
-
-    try{
-
-        const data=await requestTikwmUser(username);
-
-        if(id!==requestId)return;
-
-        cache[username]=data;
-
-        renderTarget(data);
-
-    }catch(error){
-
-        if(id!==requestId)return;
-
-        spinner.classList.remove("show");
-        card.classList.remove("show");
-
-        statusBox.textContent=
-            error.message||"Gagal mengambil data akun";
-
-        statusBox.style.color="#d93025";
-        statusBox.style.display="block";
-    }
-}
-
-function detectTarget(){
-
-    const username=normalize(input.value);
-
-    if(!username){
-        resetTarget();
-        return;
-    }
-
-    clearTimeout(targetTimer);
-
-    spinner.classList.add("show");
-
-    statusBox.textContent="";
-    statusBox.style.color="#888";
-    statusBox.style.display="block";
-
-    targetTimer=setTimeout(()=>{
-        fetchTarget(username);
-    },400);
-}
-
-input.addEventListener("input",detectTarget);
-
-input.addEventListener("paste",()=>{
-    setTimeout(detectTarget,50);
-});
-
-
-/* =========================
-   COINS
-========================= */
-
-const coinOptions=
-document.querySelectorAll(".coin-option:not(.custom-btn)");
-
-let selectedCoins=30;
-let selectedPrice=0.32;
-
-document.querySelector(
-    '.coin-option[data-coins="30"]'
-).classList.add("selected");
-
-function setBuyText(){
-    document.getElementById("buyButton").textContent=
-        "Beli "+formatUSD(selectedPrice);
-}
-
-coinOptions.forEach(option=>{
-
-    option.addEventListener("click",()=>{
-
-        coinOptions.forEach(o=>
-            o.classList.remove("selected")
-        );
-
-        option.classList.add("selected");
-
-        selectedCoins=
-            Number(option.dataset.coins);
-
-        selectedPrice=
-            Number(option.dataset.price);
-
-        setBuyText();
-    });
-});
-
-
-/* =========================
-   CUSTOM
-========================= */
-
-const customModal=
-document.getElementById("customModal");
-
-const customBtn=
-document.getElementById("customBtn");
-
-const coinInput=
-document.getElementById("coinAmountInput");
-
-const usdDisplay=
-document.getElementById("usdAmountDisplay");
-
-const totalDisplay=
-document.getElementById("customTotalAmount");
-
-const keypad=
-document.getElementById("keypad");
-
-let customRaw="";
-
-const MIN_COINS=30;
-const MAX_COINS=2500000;
-
-const COIN_RATE=0.010571;
-
-function formatCoins(value){
-
-    if(!value)return"0";
-
-    return Number(value).toLocaleString("id-ID");
-}
-
-function clampCustomValue(){
-
-    let num=Number(customRaw)||0;
-
-    if(num>MAX_COINS){
-        customRaw=String(MAX_COINS);
-    }
-
-    coinInput.value=formatCoins(customRaw);
-
-    const coins=Number(customRaw)||0;
-
-    const usd=coins*COIN_RATE;
-
-    usdDisplay.textContent=formatUSD(usd);
-
-    totalDisplay.textContent=formatUSD(usd);
-}
-
-customBtn.addEventListener("click",()=>{
-
-    customRaw="";
-    coinInput.value="0";
-    usdDisplay.textContent="$0.00";
-    totalDisplay.textContent="$0.00";
-
-    customModal.classList.add("show");
-});
-
-document.getElementById("modalBackBtn")
-.addEventListener("click",()=>{
-    customModal.classList.remove("show");
-});
-
-keypad.addEventListener("click",event=>{
-
-    const button=event.target.closest("button");
-
-    if(!button)return;
-
-    const value=button.textContent.trim();
-
-    if(value==="⌫"){
-
-        customRaw=
-            customRaw.slice(0,-1);
-
-    }else if(value==="000"){
-
-        if(customRaw.length>0){
-            customRaw+="000";
-        }
-
-    }else if(/^\d$/.test(value)){
-
-        if(customRaw.length<9){
-            customRaw+=value;
-        }
-    }
-
-    clampCustomValue();
-});
-
-document.getElementById("rechargeBtn")
-.addEventListener("click",()=>{
-
-    const coins=Number(customRaw)||0;
-
-    if(coins<MIN_COINS){
-        alert("Jumlah koin minimal 30.");
-        return;
-    }
-
-    if(coins>MAX_COINS){
-        alert("Jumlah koin maksimal 2.500.000.");
-        return;
-    }
-
-    if(!detectedTarget){
-        alert("Masukkan username target terlebih dahulu!");
-        return;
-    }
-
-    selectedCoins=coins;
-
-    selectedPrice=
-        Math.round(coins*COIN_RATE*100)/100;
-
-    coinOptions.forEach(o=>
-        o.classList.remove("selected")
-    );
-
-    setBuyText();
-
-    customModal.classList.remove("show");
-
-    startPaymentProcess();
-});
-
-
-/* =========================
-   LOADING / PROCESSING
-========================= */
-
-const loader=
-document.getElementById("loaderModal");
-
-function startPaymentProcess(){
-
-    loader.classList.add("show");
-
-    let seconds=3;
-
-    document.getElementById("countdownTimer")
-        .textContent="00:03";
-
-    document.getElementById("processingMessage")
-        .textContent=
-        "Menyiapkan pembayaran...";
-
-    const timer=setInterval(()=>{
-
-        seconds--;
-
-        document.getElementById("countdownTimer")
-            .textContent=
-            "00:0"+seconds;
-
-        if(seconds<=0){
-
-            clearInterval(timer);
-
-            loader.classList.remove("show");
-
-            showPaymentPending();
-        }
-
-    },1000);
-}
-
-
-/* =========================
-   ORDER
-========================= */
-
-const orderModal=
-document.getElementById("orderModal");
-
-let selectedPaymentMethod="Ovo";
-
-const paymentOptions=
-document.querySelectorAll(".payment-option");
-
-document.getElementById("buyButton")
-.addEventListener("click",()=>{
-
-    if(!detectedTarget){
-
-        alert(
-            "Masukkan username target terlebih dahulu!"
-        );
-
-        return;
-    }
-
-    document.getElementById("accountName")
-        .textContent="@"+detectedTarget.username;
-
-    document.getElementById("summaryCoins")
-        .textContent=
-        selectedCoins.toLocaleString("id-ID")+
-        " Koin";
-
-    document.getElementById("summaryPrice")
-        .textContent=
-        formatUSD(selectedPrice);
-
-    document.getElementById("summaryTotal")
-        .textContent=
-        formatUSD(selectedPrice);
-
-    orderModal.classList.add("show");
-});
-
-document.getElementById("summaryBackBtn")
-.addEventListener("click",()=>{
-    orderModal.classList.remove("show");
-});
-
-paymentOptions.forEach(option=>{
-
-    option.addEventListener("click",()=>{
-
-        paymentOptions.forEach(o=>
-            o.classList.remove("selected")
-        );
-
-        option.classList.add("selected");
-
-        selectedPaymentMethod=
-            option.dataset.method;
-    });
-});
-
-document.getElementById("payNowBtn")
-.addEventListener("click",()=>{
-
-    orderModal.classList.remove("show");
-
-    startPaymentProcess();
-});
-
-
-/* =========================
-   PAYMENT PENDING
-======================== */
-
-function showPaymentPending(){
-
-    if(!detectedTarget)return;
-
-    document.getElementById("successAvatar").src=
-        detectedTarget.avatar||"";
-
-    document.getElementById("successAccountName")
-        .innerHTML=
-        (detectedTarget.name||
-         detectedTarget.username)+
-        (detectedTarget.verified?
-         verifiedBadgeSVG(15):"");
-
-    document.getElementById("successAccountUsername")
-        .textContent=
-        "@"+detectedTarget.username;
-
-    saveTransaction();
-
-    document.getElementById("successModal")
-        .classList.add("show");
-}
-
-document.getElementById("goBackBtn")
-.addEventListener("click",()=>{
-
-    document.getElementById("successModal")
-        .classList.remove("show");
-
-    resetTarget();
-});
-
-
-/* =========================
-   HISTORY
-========================= */
-
-let transactionHistory=[];
-
-function saveTransaction(){
-
-    if(!detectedTarget)return;
-
-    transactionHistory.unshift({
-
-        username:detectedTarget.username,
-        name:detectedTarget.name,
-        avatar:detectedTarget.avatar,
-        verified:detectedTarget.verified
-
-    });
-
-    if(transactionHistory.length>50){
-        transactionHistory.pop();
-    }
-}
-
-function openHistory(){
-
-    const list=
-        document.getElementById("historyList");
-
-    list.innerHTML="";
-
-    if(!transactionHistory.length){
-
-        list.innerHTML=
-            '<div class="history-empty">'+
-            'Belum ada transaksi.'+
-            '</div>';
-
-    }else{
-
-        transactionHistory.forEach(tx=>{
-
-            const item=
-                document.createElement("div");
-
-            item.className="history-item";
-
-            item.innerHTML=`
-
-            <div class="history-account-top">
-
-                <img src="${tx.avatar||""}">
-
-                <div>
-
-                    <div class="history-account-name">
-                        ${tx.name||tx.username}
-                        ${tx.verified?
-                          verifiedBadgeSVG(14):""}
-                    </div>
-
-                    <div class="history-account-username">
-                        @${tx.username}
-                    </div>
-
-                </div>
-
-            </div>
-
-            `;
-
-            list.appendChild(item);
-        });
-    }
-
-    document.getElementById("historyModal")
-        .classList.add("show");
-}
-
-document.getElementById("menuBtn")
-.addEventListener("click",event=>{
-
-    event.stopPropagation();
-
-    document.getElementById("menuDropdown")
-        .classList.toggle("show");
-});
-
-document.addEventListener("click",()=>{
-    document.getElementById("menuDropdown")
-        .classList.remove("show");
-});
-
-document.getElementById("menuRiwayat")
-.addEventListener("click",openHistory);
-
-document.getElementById("historyBackBtn")
-.addEventListener("click",()=>{
-    document.getElementById("historyModal")
-        .classList.remove("show");
-});
-
-document.getElementById("homeBackBtn")
-.addEventListener("click",resetTarget);
-
-setBuyText();
-
+function pclip(){if(navigator.clipboard&&navigator.clipboard.readText){navigator.clipboard.readText().then(function(t){document.getElementById('ui').value=t;dlu()}).catch(function(){toast('Clipboard blocked')})}else toast('Not supported')}
+function oamt(){var r=parseFloat(document.getElementById('ai').value)||0,b=ct==='a'?BAL:UBAL;if(r>b)document.getElementById('em2').classList.add('sh');else document.getElementById('em2').classList.remove('sh');var f=r*FEE,rc=Math.max(0,r-f);document.getElementById('ere').textContent='USD '+fusd(rc);document.getElementById('sfo').textContent='USD '+fusd(f);ubtn()}
+function sall(){document.getElementById('ai').value=ct==='a'?BAL:UBAL;oamt()}
+function ubtn(){var btn=document.getElementById('btx'),u=document.getElementById('ui').value.trim(),a=parseFloat(document.getElementById('ai').value)||0,b=ct==='a'?BAL:UBAL;if(fd&&u.length>0&&a>0&&a<=b){btn.classList.add('bte');btn.classList.remove('btd')}else{btn.classList.remove('bte');btn.classList.add('btd')}}
+function stx(){var u=document.getElementById('ui').value.trim(),a=parseFloat(document.getElementById('ai').value)||0,b=ct==='a'?BAL:UBAL;if(!fd){toast('Enter & verify a username first');return}if(a<=0){toast('Enter an amount');return}if(a>b){toast('Insufficient balance');return}var du='@'+fd.uniqueId,f=a*FEE,r=a-f;document.getElementById('mto').textContent=du;document.getElementById('mam').textContent='USD '+fusd(a);document.getElementById('mfe').textContent='USD '+fusd(f);document.getElementById('mre').textContent='USD '+fusd(r);document.getElementById('mav').src=fd.avatar||PH;document.getElementById('mnm').textContent=fd.nickname;document.getElementById('mid').textContent=du;document.getElementById('mov').style.display='flex'}
+function ctx(){document.getElementById('mov').style.display='none';document.getElementById('lov').style.display='flex';var a=parseFloat(document.getElementById('ai').value)||0,f=a*FEE,r=a-f,u=document.getElementById('ui').value.trim(),du='@'+(fd?fd.uniqueId:u.replace(/^@/,''));setTimeout(function(){document.getElementById('lov').style.display='none';document.getElementById('tv').style.display='none';document.getElementById('fga').textContent=fusd(a);document.getElementById('fme').textContent='TikTok('+du+')';document.getElementById('ffe').textContent=fusd(f)+' USD';document.getElementById('fre').innerHTML='USD '+fusd(r);var now=new Date();document.getElementById('fti').textContent=now.toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});document.getElementById('ftx').textContent=gid();document.getElementById('fv').style.display='block';txs.unshift({id:gid(),type:'out',to:du,nickname:fd?fd.nickname:'',avatar:fd?fd.avatar:'',amount:a,fee:f,receive:r,date:now.toISOString()});localStorage.setItem('tkTx',JSON.stringify(txs))},2000)}
+function rtxs(){var l=document.getElementById('tl2');if(!txs.length){l.innerHTML='<div class="es">no transactions yet</div>';document.getElementById('si2').textContent='USD0.00';document.getElementById('so2').textContent='USD0.00';return}var tI=0,tO=0,h='';txs.forEach(function(tx){var d=new Date(tx.date),ds=d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+', '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});if(tx.type==='out'){tO+=tx.amount;var av=tx.avatar?'<img class="ta" src="'+tx.avatar+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="tx o" style="display:none"><svg viewBox="0 0 512 512" width="16" height="16" fill="currentColor"><path d="M16 240H404.7L272.5 107.5c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l176 176c9.4 9.4 9.4 24.6 0 33.9l-176 176c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L404.7 288H16c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/></svg></div>':'<div class="tx o"><svg viewBox="0 0 512 512" width="16" height="16" fill="currentColor"><path d="M16 240H404.7L272.5 107.5c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l176 176c9.4 9.4 9.4 24.6 0 33.9l-176 176c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L404.7 288H16c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/></svg></div>';h+='<div class="ti">'+av+'<div class="td"><div class="tt">Transfer to '+tx.to+'</div><div class="te">'+ds+'</div></div><div class="tm o">-USD'+fusd(tx.amount)+'</div></div>'}else{tI+=tx.amount;h+='<div class="ti"><div class="tx n"><svg viewBox="0 0 512 512" width="16" height="16" fill="currentColor"><path d="M496 272L320 448c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L418.7 288H16c-13.3 0-24-10.7-24-24s10.7-24 24-24h402.7L286.1 97.9c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l176 176c9.4 9.4 9.4 24.6 0 33.9z"/></svg></div><div class="td"><div class="tt">Received</div><div class="te">'+ds+'</div></div><div class="tm n">+USD'+fusd(tx.amount)+'</div></div>'}});l.innerHTML=h;document.getElementById('si2').textContent='USD'+fusd(tI);document.getElementById('so2').textContent='USD'+fusd(tO)}
+function chist(){if(!txs.length){toast('No history');return}txs=[];localStorage.setItem('tkTx','[]');rtxs();toast('History cleared')}
+function umonth(){var p=document.getElementById('mp');if(!p.value)return;var ym=p.value.split('-'),ms=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];document.getElementById('dm').textContent=ms[parseInt(ym[1])-1];document.getElementById('dy').textContent=ym[0]}
+rtxs();
 </script>
-
+</div>
 </body>
 </html>
