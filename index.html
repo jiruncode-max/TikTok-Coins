@@ -1052,6 +1052,7 @@ let detectedTarget=null;
 let targetTimer=null;
 let scanInterval=null;
 let requestId=0;
+let transactionHistory=[];
 const cache={};
 const coinsBalance={};
 
@@ -1271,13 +1272,20 @@ document.getElementById("keypad").addEventListener("click",e=>{
     clampCustom();
 });
 
+/* ===== UPDATE: Recharge (Custom) → LANGSUNG LOADING ===== */
 document.getElementById("rechargeBtn").addEventListener("click",()=>{
     const c=Number(customRaw)||0;
     if(c<30){alert("Minimum coins is 30.");return}
     if(c>2500000){alert("Maximum coins is 2.500.000.");return}
-    selCoins=c;selPrice=Math.round(c*0.01426*100)/100;
-    coinOpts.forEach(o=>o.classList.remove("selected"));setBuyText();
+    if(!detectedTarget){alert("Masukkan username target terlebih dahulu!");return}
+
+    selCoins=c;
+    selPrice=Math.round(c*0.01426*100)/100;
+    coinOpts.forEach(o=>o.classList.remove("selected"));
+    setBuyText();
+
     document.getElementById("customModal").classList.remove("show");
+    startPaymentLoading(); /* langsung loading, skip modal Order */
 });
 
 /* ORDER */
@@ -1299,26 +1307,36 @@ document.querySelectorAll(".payment-option").forEach(o=>{
     });
 });
 
-/* PAYMENT — loading 3 detik */
-document.getElementById("payNowBtn").addEventListener("click",()=>{
-    orderModal.classList.remove("show");
+/* ===== PAYMENT — loading 3 detik (dipakai Buy & Custom Recharge) ===== */
+let paymentTimer=null;
+
+function startPaymentLoading(){
+    if(paymentTimer) return; /* cegah dobel-klik */
+
     document.getElementById("loaderModal").classList.add("show");
 
     let seconds=3;
     document.getElementById("countdownTimer").textContent="00:0"+seconds;
     document.getElementById("processingMessage").textContent="Processing payment...";
-    document.getElementById("processingSubMessage").textContent="";
+    document.getElementById("processingSubMessage").textContent=
+        detectedTarget?("@"+detectedTarget.username+" • "+fmtCoins(selCoins)+" Coins"):"";
 
-    const timer=setInterval(()=>{
+    paymentTimer=setInterval(()=>{
         seconds--;
         document.getElementById("countdownTimer").textContent="00:0"+seconds;
 
         if(seconds<=0){
-            clearInterval(timer);
+            clearInterval(paymentTimer);
+            paymentTimer=null;
             document.getElementById("loaderModal").classList.remove("show");
             showPaymentSuccess();
         }
     },1000);
+}
+
+document.getElementById("payNowBtn").addEventListener("click",()=>{
+    orderModal.classList.remove("show");
+    startPaymentLoading();
 });
 
 function showPaymentSuccess(){
@@ -1351,8 +1369,6 @@ document.getElementById("goBackBtn").addEventListener("click",()=>{
 });
 
 /* HISTORY */
-let transactionHistory=[];
-
 const coinImg="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a";
 
 function openHistory(){
